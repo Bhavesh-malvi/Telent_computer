@@ -1,7 +1,7 @@
 {
-  "name": "student-management",
+  "name": "student-management-admin",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -41,6 +41,7 @@
     "globals": "^16.2.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.3",
+    "terser": "^5.43.1",
     "vite": "^7.0.0"
   }
 }

@@ -1,0 +1,916 @@
+/* StudentList Component Styles */
+
+.student-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* Loading State */
+.student-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Header Section */
+.student-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.student-header-content {
+  margin-bottom: 24px;
+}
+
+.student-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.student-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.student-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 140px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: white;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  color: white;
+}
+
+/* Filters Section */
+.student-filters {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-section {
+  flex: 1;
+}
+
+.search-input-wrapper {
+  position: relative;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  opacity: 0.6;
+  color: #6b7280;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filter-section {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 10px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.sort-button {
+  padding: 10px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sort-button:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+/* Error Message */
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.retry-button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.retry-button:hover {
+  background: #b91c1c;
+}
+
+/* Table Container */
+.student-table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* No Data State */
+.no-data {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.no-data-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-data h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+
+.no-data p {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Table Styles */
+.student-table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.student-table th,
+.student-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.student-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.student-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.delete-issue-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.action-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.issue-btn {
+  position: relative;
+}
+
+.edit-btn:hover {
+  color: #4CAF50;
+  transform: scale(1.1);
+}
+
+.delete-btn:hover {
+  color: #f44336;
+  transform: scale(1.1);
+}
+
+.issue-btn:hover {
+  color: #ff9800;
+  transform: scale(1.1);
+}
+
+.has-issues {
+  background-color: #fff3e0;
+}
+
+.bell-icon {
+  font-size: 1.2em;
+}
+
+.bell-icon.active {
+  color: #ff9800;
+  animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) infinite;
+  transform-origin: top;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0); }
+  20%, 60% { transform: rotate(8deg); }
+  40%, 80% { transform: rotate(-8deg); }
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* Profile Cell */
+.profile-cell {
+  justify-content: center;
+}
+
+.student-profile-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.student-profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.student-no-image {
+  font-size: 1.2rem;
+  opacity: 0.5;
+  color: #6b7280;
+}
+
+/* Info Cell */
+.info-cell {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1.5rem;
+}
+
+.student-name {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.student-id {
+  font-size: 1.1rem;
+  color: #888;
+  margin-top: 0.2rem;
+}
+
+/* Contact Cell */
+.contact-cell {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.student-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-icon {
+  font-size: 0.8rem;
+  color: #6b7280;
+  opacity: 0.7;
+}
+
+.contact-text {
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+/* Courses Cell */
+.courses-cell {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.student-courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.course-badge {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.no-courses {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Actions Cell */
+.actions-cell {
+  justify-content: flex-start;
+}
+
+.view-fee-button,
+.edit-button,
+.delete-button {
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.view-fee-button {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.view-fee-button:hover {
+  background: #fde68a;
+}
+
+.edit-button {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.edit-button:hover {
+  background: #bfdbfe;
+}
+
+.delete-button {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.delete-button:hover {
+  background: #fecaca;
+}
+
+/* Results Summary */
+.results-summary {
+  text-align: center;
+  padding: 16px;
+  color: #6b7280;
+  font-size: 0.9rem;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Delete Confirmation Modal */
+.delete-confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.delete-confirmation-modal .modal-content {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.delete-confirmation-modal h2 {
+  color: #e74c3c;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.delete-confirmation-modal h2::before {
+  content: '';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f071';
+  color: #e74c3c;
+}
+
+.delete-confirmation-modal p {
+  color: #666;
+  margin: 0 0 2rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.delete-confirmation-modal .modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.delete-confirmation-modal .cancel-button {
+  background: #95a5a6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.delete-confirmation-modal .cancel-button:hover {
+  background: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+.delete-confirmation-modal .delete-button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.delete-confirmation-modal .delete-button:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+.delete-confirmation-modal .delete-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Issue Dialog Styles */
+.issue-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.issue-dialog {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+}
+
+.issue-dialog h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.issue-dialog p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.issue-dialog-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.issue-dialog-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.issue-dialog-buttons .close-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.issue-dialog-buttons .status-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.issue-dialog-buttons .close-btn:hover {
+  background-color: #d0d0d0;
+}
+
+.issue-dialog-buttons .status-btn:hover {
+  background-color: #45a049;
+}
+
+.issue-dialog-buttons button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .student-list-container {
+    padding: 16px;
+  }
+  
+  .student-header {
+    padding: 24px;
+  }
+  
+  .student-title {
+    font-size: 2rem;
+  }
+  
+  .table-header,
+  .table-row {
+    grid-template-columns: 60px 1fr 1fr 1fr 100px;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-header {
+    padding: 20px;
+  }
+  
+  .student-title {
+    font-size: 1.8rem;
+  }
+  
+  .student-stats {
+    gap: 16px;
+  }
+  
+  .stat-card {
+    padding: 16px;
+    min-width: 120px;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .student-filters {
+    padding: 16px;
+  }
+  
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-select,
+  .sort-button {
+    width: 100%;
+  }
+  
+  .table-header,
+  .table-row {
+    grid-template-columns: 50px 1fr 1fr 1fr 80px;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+  
+  .header-cell {
+    font-size: 0.8rem;
+  }
+  
+  .student-name {
+    font-size: 0.9rem;
+  }
+  
+  .student-id {
+    font-size: 0.8rem;
+  }
+  
+  .contact-text {
+    font-size: 0.8rem;
+  }
+  
+  .course-badge {
+    font-size: 0.7rem;
+  }
+  
+  .table-body {
+    max-height: 500px;
+  }
+  
+  .student-table-container {
+    border-radius: 8px;
+  }
+  
+  .student-table th,
+  .student-table td {
+    padding: 8px 10px;
+  }
+  
+  .action-buttons {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-list-container {
+    padding: 12px;
+  }
+  
+  .student-header {
+    padding: 16px;
+  }
+  
+  .student-title {
+    font-size: 1.5rem;
+  }
+  
+  .student-subtitle {
+    font-size: 1rem;
+  }
+  
+  .student-stats {
+    gap: 12px;
+  }
+  
+  .stat-card {
+    padding: 12px;
+    min-width: 100px;
+  }
+  
+  .stat-number {
+    font-size: 1.2rem;
+  }
+  
+  .search-input-wrapper {
+    max-width: 100%;
+  }
+  
+  .student-profile-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .student-no-image {
+    font-size: 1rem;
+  }
+  
+  .view-fee-button,
+  .edit-button,
+  .delete-button {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+  
+  .table-header,
+  .table-row {
+    grid-template-columns: 40px 1fr 1fr 1fr 70px;
+    gap: 6px;
+    padding: 6px 8px;
+  }
+  
+  .header-cell {
+    font-size: 0.7rem;
+  }
+  
+  .student-name {
+    font-size: 0.85rem;
+  }
+  
+  .student-id {
+    font-size: 0.75rem;
+  }
+  
+  .contact-text {
+    font-size: 0.75rem;
+  }
+  
+  .course-badge {
+    font-size: 0.65rem;
+    padding: 1px 6px;
+  }
+  
+  .delete-confirmation-modal .modal-content {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .delete-confirmation-modal .modal-buttons {
+    flex-direction: column;
+  }
+  
+  .delete-confirmation-modal .cancel-button,
+  .delete-confirmation-modal .delete-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .table-header, .table-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    min-height: unset;
+  }
+  .header-cell, .table-cell {
+    padding: 0.7rem 0;
+    font-size: 1rem;
+  }
+  .student-profile-image, .student-no-image {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+  .student-info {
+    margin-left: 0.7rem;
+  }
+} 

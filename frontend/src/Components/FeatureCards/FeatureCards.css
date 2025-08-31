@@ -1,0 +1,176 @@
+.feature-cards-section {
+  width: 100%;
+  padding: 40px 0 0 0;
+  display: flex;
+  justify-content: center;
+  background: #fff;
+}
+
+.feature-cards-row {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  width: 350px;
+  border-radius: 28px;
+  overflow: visible;
+  background: transparent;
+  box-shadow: 0 8px 32px rgba(37,97,167,0.10), 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation-duration: 1.1s;
+  animation-fill-mode: both;
+  margin-bottom: 32px;
+}
+
+.feature-card.middle {
+  margin-top: 30px;
+}
+
+.feature-card-img {
+  width: 350px;
+  height: 220px;
+  border-radius: 28px 28px 0 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.feature-card-content {
+  background: #fff;
+  border-radius: 0 0 28px 28px;
+  box-shadow: none;
+  padding: 36px 24px 36px 24px;
+  margin-top: -30px;
+  z-index: 2;
+  text-align: center;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-card-orange {
+  background: #f58220;
+  color: #fff;
+}
+.feature-card-orange h3,
+.feature-card-orange p {
+  color: #fff;
+}
+.feature-card-orange .feature-card-icon svg {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  font-size: 1.08rem;
+  margin-bottom: 28px;
+}
+
+.feature-card-btn {
+  background: #2561a7;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  width: 56px;
+  height: 56px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(37,97,167,0.10);
+}
+.feature-card-btn span {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature-card-btn:hover {
+  background: #3b5998;
+}
+
+/* Animations */
+@keyframes slideInLeftBottomToRightTop {
+  from { opacity: 0; transform: translate(-100px, 100px) scale(0.95); }
+  to { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(120px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRightBottomToLeftTop {
+  from { opacity: 0; transform: translate(100px, 100px) scale(0.95); }
+  to { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+
+.slide-in-diag,
+.slide-in-up,
+.slide-in-diag-reverse {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.feature-card.animate.slide-in-diag {
+  animation-name: slideInLeftBottomToRightTop;
+  opacity: 1;
+  pointer-events: auto;
+}
+.feature-card.animate.slide-in-up {
+  animation-name: slideInUp;
+  opacity: 1;
+  pointer-events: auto;
+}
+.feature-card.animate.slide-in-diag-reverse {
+  animation-name: slideInRightBottomToLeftTop;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 1100px) {
+  .feature-cards-row {
+    gap: 20px;
+  }
+  .feature-card, .feature-card-img {
+    width: 95vw;
+    max-width: 370px;
+  }
+}
+
+@media (max-width: 700px) {
+  .feature-cards-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-card, .feature-card-img {
+    width: 98vw;
+    max-width: 370px;
+  }
+  .feature-card-content {
+    padding: 28px 10px 28px 10px;
+  }
+}
+
+.feature-cards-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 100px;
+  margin-bottom: 32px;
+  color: #232a36;
+} 

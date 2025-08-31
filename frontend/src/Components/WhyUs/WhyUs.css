@@ -1,0 +1,109 @@
+.whyus-section {
+  background: #fafafa;
+  padding: 60px 0 40px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.whyus-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+.whyus-subtitle {
+  color: #f58220;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.whyus-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.whyus-desc {
+  font-size: 1.3rem;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  color: #222;
+}
+
+.whyus-points-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.whyus-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 0;
+  text-align: left;
+  min-width: 260px;
+  max-width: 420px;
+  flex: 1 1 320px;
+}
+
+.whyus-points li {
+  font-size: 1.15rem;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  color: #111;
+}
+
+.whyus-icon {
+  color: #2561a7;
+  font-size: 1.3rem;
+  margin-right: 12px;
+}
+
+.whyus-btn {
+  background: #2561a7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 48px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+.whyus-btn:hover {
+  background: #3b5998;
+}
+
+@media (max-width: 900px) {
+  .whyus-title {
+    font-size: 2rem;
+  }
+  .whyus-container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .whyus-points-row {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    max-width: 100%;
+  }
+  .whyus-points {
+    min-width: 0;
+    width: 100%;
+    max-width: 400px;
+  }
+} 

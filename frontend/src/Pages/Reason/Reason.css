@@ -1,0 +1,87 @@
+.ReasonBanner {
+  position: relative;
+  width: 100vw;
+  min-height: 400px;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: url('/assets/img/banner2.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.ReasonBanner__overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0, 60, 150, 0.5);
+  background-image: url('/assets/img/backgroundoverlay1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.ReasonBanner__content {
+  position: relative;
+  color: #fff;
+  text-align: left;
+  max-width: 800px;
+  padding: 40px 30px;
+  z-index: 3;
+  margin-right: 25rem;
+}
+
+.ReasonBanner__content h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  line-height: 1.1;
+  text-align: left;
+  margin-right: 0;
+}
+
+.ReasonBanner__content p {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+/* Footer full width fix */
+.tcit-footer, .footer-top-bg, .footer-bottom {
+  width: 100vw !important;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .ReasonBanner {
+    min-height: 180px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+  }
+  .ReasonBanner__content {
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .ReasonBanner__content h1 {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .ReasonBanner__content p {
+    font-size: 0.7rem;
+  }
+}

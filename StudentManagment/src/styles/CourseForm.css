@@ -1,0 +1,152 @@
+.course-form-container {
+  max-width: 500px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+}
+
+.course-form-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #007bff;
+}
+
+.course-form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-form-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.course-form-group input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+.course-form-group input:focus {
+  border: 1.5px solid #007bff;
+  outline: none;
+}
+
+.course-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.course-form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.course-form-actions button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.course-form-actions button:disabled {
+  background: #b3d7ff;
+  cursor: not-allowed;
+}
+
+.course-image-upload-area,
+.course-pdf-upload-area {
+  border: 2px dashed rgb(0, 123, 255);
+  border-radius: 8px;
+  text-align: center;
+  background: rgb(244, 248, 255);
+  cursor: pointer;
+  height: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-pdf-upload-area span {
+  display: block;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .course-form-group {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .course-form-container {
+    padding: 16px 4vw;
+    margin: 16px 0;
+  }
+  .course-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .course-form-group[style] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .upload-row {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .upload-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
+
+.back-button {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-button:hover {
+  background: #e9ecef;
+  color: #495057;
+  border-color: #adb5bd;
+}
+
+.back-button:active {
+  transform: translateY(1px);
+} 

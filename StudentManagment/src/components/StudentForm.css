@@ -1,0 +1,85 @@
+.marksheet-full-img {
+  height: 100% !important;
+  width: 100% !important;
+  display: block;
+  -webkit-user-select: none;
+  object-fit: contain;
+} 
+
+/* Hide action buttons and controls while printing */
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .screen-only { display: none !important; }
+  @page { size: A4; margin: 12mm; }
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-area {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    page-break-inside: auto;
+  }
+  /* Show summary view in print; form hidden via .screen-only */
+  .print-area *, .print-area img, .print-area iframe {
+    max-width: 100% !important;
+  }
+  /* Ensure images render crisply in print */
+  img { image-rendering: auto; }
+  /* Force image visibility in print (ensure images don't collapse) */
+  .print-area img { display: inline-block !important; visibility: visible !important; }
+  /* Prefer natural page breaks; avoid breaking exactly on titles */
+  .print-area h1, .print-area h2, .print-area h3 { page-break-inside: avoid; }
+  /* Ensure form controls print clearly */
+  input, select, textarea {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    background: #fff !important;
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+  }
+  input[type="radio"], input[type="checkbox"] { accent-color: #000 !important; }
+  /* Print-only student photo tweaks */
+  .print-photo {
+    display: inline-block !important;
+    visibility: visible !important;
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    aspect-ratio: 1 / 1;
+  }
+  /* Slightly larger text for print fields */
+  .print-summary-box { font-size: 14px; }
+  .print-field-row { font-size: 14px; padding: 8px 12px; }
+}
+
+/* Default visibility on screen */
+.print-only { display: none; }
+
+/* Summary boxed container for print */
+.print-summary-box {
+  border: none;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+/* Individual field rows with separate borders */
+.print-field-row {
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+.print-field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.print-field-label { font-weight: 600; }

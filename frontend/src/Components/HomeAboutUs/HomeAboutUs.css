@@ -1,0 +1,111 @@
+/* This file was renamed from AboutUs.css to HomeAboutUs.css */
+
+.aboutus-cta-section {
+  background: #fafafa;
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.aboutus-cta-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 48px;
+  margin: 0 24px;
+}
+
+.aboutus-cta-content {
+  flex: 1 1 0;
+  max-width: 480px;
+  text-align: left;
+}
+
+.aboutus-cta-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  color: #181818;
+  line-height: 1.15;
+}
+
+.aboutus-cta-desc {
+  font-size: 1.25rem;
+  color: #222;
+  margin-bottom: 36px;
+  line-height: 1.5;
+}
+
+.aboutus-cta-btn {
+  background: #d17a43;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 38px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.aboutus-cta-btn:hover {
+  background: #b05e2e;
+}
+
+.aboutus-cta-image-wrap {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.aboutus-cta-logo-overlay {
+  position: absolute;
+  left: 44px;
+  bottom: 100px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.13);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}
+
+.aboutus-cta-logo {
+  width: 105px;
+  height: 105px;
+  object-fit: contain;
+  display: block;
+}
+
+.aboutus-cta-image {
+  width: 500px;
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+}
+
+@media (max-width: 900px) {
+  .aboutus-cta-container {
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  .aboutus-cta-content {
+    max-width: 100%;
+    text-align: left;
+  }
+  .aboutus-cta-image {
+    width: 100%;
+    max-width: 100%;
+  }
+  .aboutus-cta-logo-overlay {
+    display: none;
+  }
+} 

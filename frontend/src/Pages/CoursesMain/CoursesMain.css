@@ -1,0 +1,200 @@
+@import '../../Components/Courses/Courses.css';
+
+.CoursesMainBanner {
+  position: relative;
+  width: 100vw;
+  min-height: 420px;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: url('/assets/img/banner5.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.CoursesMainBanner__overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0, 60, 150, 0.45);
+  background-image: url('/assets/img/backgroundoverlay1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 2;
+}
+
+.CoursesMainBanner__content {
+  position: relative;
+  color: #fff;
+  text-align: left;
+  max-width: 900px;
+  padding: 60px 60px 60px 80px;
+  z-index: 3;
+}
+
+.CoursesMainBanner__content h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 32px;
+  line-height: 1.1;
+}
+
+.CoursesMainBanner__content p {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  max-width: 700px;
+}
+
+@media (max-width: 900px) {
+  .CoursesMainBanner__content {
+    padding: 32px 10px;
+    max-width: 98vw;
+    text-align: center;
+  }
+  .CoursesMainBanner__content h1 {
+    font-size: 1.5rem;
+  }
+  .CoursesMainBanner__content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .CoursesMainBanner {
+    min-height: 180px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+  }
+  .CoursesMainBanner__content h1 {
+    font-size: 1rem;
+  }
+  .CoursesMainBanner__content p {
+    font-size: 0.7rem;
+  }
+}
+
+.CoursesMain__courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 2rem;
+  padding: 3rem 2vw;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+}
+
+.CoursesMain__courses-grouped {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+  padding: 3rem 2vw;
+}
+
+.CoursesMain__courses-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.CoursesMain__card {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 370px;
+  cursor: pointer;
+}
+.CoursesMain__card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+}
+.CoursesMain__card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.CoursesMain__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.CoursesMain__card-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.35em 0.9em;
+  border-radius: 0.7em;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.13);
+}
+.CoursesMain__card-content {
+  padding: 1.3rem 1.2rem 1.5rem 1.2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.CoursesMain__card-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: #1e293b;
+}
+.CoursesMain__card-desc {
+  font-size: 1rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .CoursesMain__courses-grouped {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    padding: 1.5rem 0.5rem;
+    max-width: 100%;
+  }
+  .CoursesMain__courses-row {
+    display: contents;
+  }
+  .CoursesMain__card {
+    max-width: 100%;
+    width: 100%;
+    flex-basis: unset;
+    margin: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .CoursesMain__courses-grouped {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.2rem 0.2rem;
+  }
+}
+
+.course-card-modern {
+  cursor: pointer;
+}

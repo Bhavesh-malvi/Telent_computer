@@ -1,0 +1,325 @@
+.manage-chapter-container {
+  width: 91%;
+  max-width: 100%;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  padding: 24px 28px 32px 28px;
+}
+.manage-chapter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.manage-chapter-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #4f46e5;
+}
+.add-chapter-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-chapter-btn:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6d28d9 100%);
+}
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.chapter-item:last-child {
+  border-bottom: none;
+}
+.chapter-order {
+  font-weight: 700;
+  color: #667eea;
+  min-width: 32px;
+}
+.chapter-name {
+  font-size: 1.05rem;
+  color: #374151;
+}
+.chapter-edit-btn, .chapter-delete-btn {
+  margin-left: 12px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chapter-edit-btn {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+.chapter-edit-btn:hover {
+  background: #c7d2fe;
+}
+.chapter-delete-btn {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.chapter-delete-btn:hover {
+  background: #fecaca;
+} 
+
+/* AddTopicDialog modal styles */
+.add-topic-dialog-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-topic-dialog {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(76,110,245,0.13);
+  padding: 28px 32px 22px 32px;
+  min-width: 450px;
+  max-width: 450px;
+  width: 100%;
+  position: relative;
+  animation: fadeInScale 0.2s;
+  border: 1.5px solid #e0e7ff;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.add-topic-dialog h3 {
+  margin-top: 0;
+  margin-bottom: 22px;
+  font-size: 1.35rem;
+  text-align: center;
+  color: #4f46e5;
+  letter-spacing: 0.5px;
+}
+
+.add-topic-dialog form > div {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-topic-dialog label {
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: #3730a3;
+  letter-spacing: 0.2px;
+}
+
+.add-topic-dialog input[type="text"],
+.add-topic-dialog input[type="url"] {
+  padding: 9px 12px;
+  border: 1.5px solid #bdbdbd;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  transition: border 0.18s, box-shadow 0.18s;
+  outline: none;
+  background: #f8fafc;
+  margin-bottom: 2px;
+}
+.add-topic-dialog input[type="text"]:focus,
+.add-topic-dialog input[type="url"]:focus {
+  border: 1.5px solid #4f46e5;
+  box-shadow: 0 0 0 2px #e0e7ff;
+  background: #fff;
+}
+
+.add-topic-dialog .dialog-actions {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.add-topic-dialog button {
+  padding: 8px 22px;
+  border: none;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.08);
+}
+.add-topic-dialog button[type="button"] {
+  background: #aaa;
+}
+.add-topic-dialog button:disabled {
+  background: #b0b0b0;
+  cursor: not-allowed;
+}
+.add-topic-dialog button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a67d8 0%, #6d28d9 100%);
+  box-shadow: 0 4px 16px rgba(102,126,234,0.16);
+}
+
+.add-topic-dialog .error {
+  color: #d32f2f;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  text-align: center;
+  font-weight: 500;
+} 
+
+.chapter-addtopic-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.08);
+}
+.chapter-addtopic-btn:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6d28d9 100%);
+  box-shadow: 0 4px 16px rgba(102,126,234,0.16);
+} 
+
+.chapter-table {
+  width: 100%;
+  border-collapse: collapse;
+} 
+
+.chapter-table th, .chapter-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1rem;
+}
+.chapter-table th {
+  background: #f3f4f6;
+  color: #4f46e5;
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+.chapter-table tr:last-child td {
+  border-bottom: none;
+}
+.chapter-table td {
+  vertical-align: middle;
+} 
+
+.chapter-row.expanded {
+  background: #f3f4f6 !important;
+  box-shadow: 0 2px 12px rgba(79,70,229,0.07);
+  transition: background 0.18s, box-shadow 0.18s;
+}
+.chapter-topics-row {
+  transition: height 0.3s cubic-bezier(0.4,0,0.2,1), background 0.18s;
+  overflow: hidden;
+}
+.chapter-topics-anim {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.2s;
+  background: #f8fafc;
+  padding: 0 10px;
+}
+.chapter-topics-anim.has-topics {
+  /* When expanded, padding is set inline via style */
+}
+.chapter-topics-row td {
+  /* Remove default padding, handled by .chapter-topics-anim */
+  padding: 0 !important;
+  background: transparent;
+  border: none;
+}
+.chapter-topics-list {
+  margin-top: 2px;
+}
+.chapter-topics-list strong {
+  color: #4f46e5;
+  font-size: 1.07rem;
+  margin-bottom: 8px;
+  display: block;
+}
+.chapter-topics-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.chapter-topic-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 6px 0;
+}
+.chapter-topic-item:last-child {
+  margin-bottom: 0;
+}
+.topic-name {
+  font-weight: 500;
+  color: #3730a3;
+}
+.topic-pdf-link {
+  color: #1976d2;
+  text-decoration: underline;
+  font-size: 0.98rem;
+  margin-left: 6px;
+}
+.topic-edit-btn, .topic-delete-btn {
+  margin-left: 10px;
+  padding: 3px 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.93rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.topic-edit-btn {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+.topic-edit-btn:hover {
+  background: #c7d2fe;
+}
+.topic-delete-btn {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.topic-delete-btn:hover {
+  background: #fecaca;
+} 
+
+.chapter-topics-row,
+.chapter-topics-row td,
+.chapter-topics-anim {
+  position: static !important;
+  z-index: auto !important;
+} 

@@ -1,0 +1,88 @@
+.birthday-wrapper {
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 16px;
+  background: linear-gradient(135deg, #a4508b 0%, #f7666f 100%);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.birthday-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+}
+
+.birthday-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 18px;
+  min-width: 220px;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s;
+}
+.birthday-card:hover {
+  box-shadow: 0 4px 16px rgba(0,123,255,0.10);
+}
+.birthday-card-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid #e3e8ee;
+  background: #f1f5fa;
+}
+.birthday-card-name {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.birthday-card-phone {
+  color: #007bff;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 6px 0;
+}
+.birthday-card-no-img {
+  color: #aaa;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+  .birthday-wrapper {
+    padding: 6px;
+  }
+  .birthday-grid {
+    gap: 12px;
+    justify-content: center;
+  }
+  .birthday-card {
+    min-width: 140px;
+    max-width: 100%;
+    padding: 10px 4px;
+  }
+  .birthday-card-img {
+    width: 48px;
+    height: 48px;
+  }
+  .birthday-card-name {
+    font-size: 15px;
+  }
+  .birthday-card-phone {
+    font-size: 13px;
+  }
+}
+
+.student-list-table {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  overflow: hidden;
+} 

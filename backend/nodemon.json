@@ -1,0 +1,29 @@
+{
+  "watch": [
+    "*.js",
+    "Routes/",
+    "Controllers/",
+    "Model/",
+    "config/",
+    "services/"
+  ],
+  "ignore": [
+    "whatsapp-sessions/",
+    "whatsapp-sessions/**/*",
+    "node_modules/",
+    "*.log",
+    "uploads/",
+    "temp/",
+    "**/*.ldb",
+    "**/*.log",
+    "**/*.tmp",
+    "**/*.blob"
+  ],
+  "ext": "js,json",
+  "delay": "2000",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "restartable": "rs",
+  "legacyWatch": true
+}

@@ -1,0 +1,506 @@
+.student-form-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+.student-form-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #007bff;
+}
+
+.student-form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-form-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.student-form-group input,
+.student-form-group select {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+.student-form-group input:focus,
+.student-form-group select:focus {
+  border: 1.5px solid #007bff;
+  outline: none;
+}
+
+.student-form-actions {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.student-form-actions button {
+  width: 100%;
+  height: 44px;
+  font-size: 16px;
+  border-radius: 6px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+
+.student-form-actions button:hover {
+  background: #0056b3;
+}
+
+.student-form-success {
+  color: #28a745;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.student-form-error {
+  color: #dc3545;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.student-form-fee {
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 8px;
+}
+
+.student-form-installments {
+  background: #f4f8ff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.student-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.student-form-flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.student-form-container form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.student-form-group {
+  flex: 1;
+}
+
+.student-form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #007bff;
+  border-radius: 6px;
+  background: #f4f8ff;
+  font-size: 15px;
+  color: #222;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.student-form-group select:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 0 2px #cce0ff;
+}
+
+.student-form-group input[type="checkbox"] {
+  accent-color: #007bff;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  margin-right: 6px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.student-form-group input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 2px #cce0ff;
+}
+
+@media (max-width: 600px) {
+  .student-form-container {
+    padding: 16px 4vw;
+    margin: 16px 0;
+  }
+  .student-form-actions button {
+    width: 100%;
+    padding: 12px 0;
+  }
+  .student-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .student-form-group[style] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-form-flex-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .student-form-group {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .student-form-container form {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  .student-form-flex-row {
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+  .student-form-group, .student-form-actions {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 16px;
+  }
+}
+
+/* Modern StudentForm Styles */
+
+.student-form-modern-container {
+  max-width: 1200px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.10);
+  padding: 0 0 32px 0;
+}
+
+.student-form-modern-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 18px 18px 0 0;
+  padding: 32px 40px 24px 40px;
+  color: white;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.10);
+}
+
+.student-form-modern-icon {
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+.student-form-modern-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.01em;
+}
+
+.student-form-modern-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  margin: 0;
+}
+
+.student-form-modern-form {
+  padding: 32px 40px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.student-form-modern-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px 32px;
+}
+
+.student-form-modern-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.student-form-modern-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 1rem;
+}
+
+.student-form-modern-group input {
+  padding: 10px 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f8fafc;
+  transition: border 0.2s;
+}
+
+.student-form-modern-group input:focus {
+  border: 2px solid #667eea;
+  outline: none;
+}
+
+.student-form-modern-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.student-form-modern-password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  cursor: pointer;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+.student-form-modern-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 18px;
+}
+
+.student-form-modern-image-upload {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.student-form-modern-upload-area {
+  border: 2px dashed #667eea;
+  border-radius: 10px;
+  padding: 18px 0;
+  text-align: center;
+  background: #f4f8ff;
+  cursor: pointer;
+  min-height: 90px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.2s, background 0.2s;
+}
+
+.student-form-modern-upload-area:hover {
+  border-color: #764ba2;
+  background: #eef2ff;
+}
+
+.student-form-modern-image-preview {
+  max-width: 100%;
+  max-height: 70px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.student-form-modern-upload-placeholder {
+  color: #667eea;
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.student-form-modern-courses {
+  flex: 2.2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.student-form-modern-courses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.student-form-modern-course-badge {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1.5px solid #c7d2fe;
+  transition: background 0.2s, border 0.2s;
+}
+
+.student-form-modern-course-badge input[type="checkbox"] {
+  accent-color: #667eea;
+  margin-right: 4px;
+}
+
+.student-form-modern-course-badge:hover {
+  background: #c7d2fe;
+  border-color: #a5b4fc;
+}
+
+.student-form-modern-installments {
+  flex: 2.2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.student-form-modern-installments-table {
+  background: #f4f8ff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 2px;
+  overflow-x: auto;
+}
+
+.student-form-modern-installments-table table {
+  width: 100%;
+  font-size: 0.98rem;
+  border-collapse: collapse;
+}
+
+.student-form-modern-installments-table th,
+.student-form-modern-installments-table td {
+  text-align: left;
+  padding: 4px 8px;
+}
+
+.student-form-modern-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.student-form-modern-actions button {
+  width: 320px;
+  max-width: 100%;
+  height: 48px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.student-form-modern-actions button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.18);
+}
+
+.student-form-modern-actions button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 1100px) {
+  .student-form-modern-container {
+    max-width: 99vw;
+  }
+  .student-form-modern-form {
+    padding: 32px 12px 0 12px;
+  }
+  .student-form-modern-header {
+    padding: 32px 12px 24px 12px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .student-form-modern-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .student-form-modern-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .student-form-modern-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .student-form-modern-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .student-form-modern-group,
+  .student-form-modern-actions {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .student-form-modern-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .student-form-modern-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 24px 20px;
+  }
+  .student-form-modern-icon {
+    font-size: 2rem;
+  }
+  .student-form-modern-title {
+    font-size: 1.8rem;
+  }
+  .student-form-modern-subtitle {
+    font-size: 1rem;
+  }
+  .student-form-modern-form {
+    padding: 24px 20px 0 20px;
+  }
+  .student-form-modern-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .student-form-modern-actions button {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+} 

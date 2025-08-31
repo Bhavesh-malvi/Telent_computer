@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: tcit-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: RENDER_URL
+        value: https://tcit-backend.onrender.com
+    healthCheckPath: /api/health
+    autoDeploy: true
+    numInstances: 1
+    disk:
+      name: sessions
+      mountPath: /opt/render/project/src/temp-whatsapp-sessions
+      sizeGB: 1

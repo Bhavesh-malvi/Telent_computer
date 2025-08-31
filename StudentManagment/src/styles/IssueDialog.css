@@ -1,0 +1,147 @@
+.issue-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.issue-dialog {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.issue-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.issue-dialog-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.issue-dialog-content {
+  margin-bottom: 20px;
+}
+
+.issue-detail {
+  margin-bottom: 15px;
+}
+
+.issue-detail strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.issue-detail p {
+  margin: 0;
+  color: #333;
+}
+
+.issue-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.issue-status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.issue-status.in-progress {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.issue-status.solved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.issue-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-button.progress {
+  background-color: #007bff;
+  color: white;
+}
+
+.action-button.solved {
+  background-color: #28a745;
+  color: white;
+}
+
+.action-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Bell Animation */
+@keyframes shake {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(10deg); }
+  50% { transform: rotate(0); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0); }
+}
+
+.bell-icon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.bell-icon.active {
+  color: #dc3545;
+  animation: shake 0.5s ease-in-out infinite;
+} 

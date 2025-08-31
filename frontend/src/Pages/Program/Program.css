@@ -1,0 +1,202 @@
+.program-banner {
+  position: relative;
+  width: 100vw;
+  min-height: 400px;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: url('/assets/img/banner1.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.program-banner-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0, 60, 150, 0.5);
+  background-image: url('/assets/img/backgroundoverlay1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.program-banner-content {
+  position: relative;
+  color: #fff;
+  text-align: left;
+  max-width: 800px;
+  padding: 40px 30px;
+  margin-right: 27rem;  
+  z-index: 3;
+}
+
+.program-banner-title {
+  color: #fff;
+  font-size: 56px;
+  font-weight: 700;
+  text-align: left;
+  z-index: 5;
+}
+
+.tcit-banner-logo {
+  position: absolute;
+  left: 50%;
+  bottom: -50px;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background: #fff;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  z-index: 10;
+}
+
+/* Main Content */
+.program-main-content {
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+  gap: 32px;
+}
+.program-content-section { flex: 7; padding-right: 40px; }
+.program-main-img { width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; }
+.program-main-title { margin-top: 24px; }
+.program-desc-title { margin-top: 32px; margin-bottom: 8px; }
+.program-desc-text { font-size: 18px; line-height: 1.7; }
+.program-form-wrapper {
+  flex: 3;
+  position: sticky;
+  top: 40px;
+  align-self: flex-start;
+  height: fit-content;
+}
+.program-form {
+  background: #1565c0;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.program-form-title { margin-bottom: 16px; font-size: 24px; font-weight: 700; text-align: center; color: #fff; }
+.program-form-input { padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; margin-bottom: 0; }
+.program-form-btn { margin-top: 10px; padding: 12px; border-radius: 6px; background: #f26b1d; color: #fff; font-weight: 700; font-size: 18px; border: none; cursor: pointer; }
+.program-form-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+.program-form-message {
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.program-form-message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.program-form-message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+@media (max-width: 900px) {
+  .program-banner-title {
+    font-size: 2rem;
+    margin-left: 24px;
+    text-align: left;
+  }
+  .program-banner,
+  .program-banner-bg,
+  .program-banner-overlay,
+  .program-banner-overlay-img{
+    height: 220px;
+    min-height: 180px;
+  }
+
+  .program-banner-content {
+    margin-right: 0;
+  }
+
+  .program-main-content {
+    flex-direction: column !important;
+    padding: 8px 0;
+    gap: 18px;
+  }
+  .program-main-content > div {
+    padding-right: 0 !important;
+    width: 100% !important;
+    padding: 0;
+  }
+  .program-content-section {
+    padding: 10px 8px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .program-main-title {
+    font-size: 1.3rem;
+    margin-top: 14px;
+  }
+  .program-desc-title {
+    font-size: 1.05rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+  }
+  .program-desc-text {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .program-form {
+    padding: 12px;
+    border-radius: 10px;
+  }
+  .program-form-wrapper {
+    position: static !important;
+    width: 100% !important;
+    align-self: stretch;
+    margin-top: 0;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .program-main-content form {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .tcit-banner-logo {
+    display: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .program-banner {
+    min-height: 180px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+  }
+  .program-banner-title {
+    font-size: 1rem;
+  }
+  .program-main-content {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+} 

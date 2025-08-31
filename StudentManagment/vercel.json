@@ -2,8 +2,7 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "env": {
-    "VITE_ENABLE_AUTO_LOGOUT": "true",
-    "VITE_INACTIVITY_TIMEOUT": "1800000"
-  }
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install"
 } 

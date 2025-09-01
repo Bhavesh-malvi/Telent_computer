@@ -41,6 +41,9 @@
     "qrcode": "^1.5.4",
     "qrcode-terminal": "^0.12.0",
     "socket.io": "^4.8.1",
-    "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js"
+    "whatsapp-web.js": "^1.23.0"
   }
 }
+
+
+// "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js"

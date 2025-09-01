@@ -351,11 +351,12 @@ httpServer.listen(PORT, async () => {
     console.log('⚠️ Failed to start old automatic reminder service:', error.message);
   }
   
-  // Start new auto message scheduler
+  // Start new auto message scheduler (DISABLED - manual initialization required)
   try {
-    await autoMessageScheduler.initialize();
-    await autoMessageScheduler.startAllSchedules();
-    console.log('✅ New auto message scheduler started');
+    // await autoMessageScheduler.initialize();
+    // await autoMessageScheduler.startAllSchedules();
+    console.log('⚠️ Auto message scheduler DISABLED (manual initialization required)');
+    console.log('📱 Please use "Connect WhatsApp" button to initialize WhatsApp');
   } catch (error) {
     console.log('⚠️ Failed to start new auto message scheduler:', error.message);
   }

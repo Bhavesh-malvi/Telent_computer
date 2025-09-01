@@ -19,11 +19,17 @@ Error: Cannot find module @rollup/rollup-win32-x64-msvc
 ## Solution Implemented
 
 ### 1. Updated `package.json`
-Added Node.js version specification to use Node.js 22.x:
+Added Node.js version specification and cross-env build script:
 ```json
 {
   "engines": {
     "node": "22.x"
+  },
+  "scripts": {
+    "build": "cross-env ROLLUP_USE_JS=true vite build"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
 ```
@@ -53,7 +59,7 @@ ROLLUP_USE_JS=true
 ```
 
 ### 3. Updated `vercel.json`
-Enhanced the Vercel configuration to handle the dependency issue and force Rollup JS fallback:
+Simplified Vercel configuration:
 ```json
 {
   "rewrites": [
@@ -62,8 +68,7 @@ Enhanced the Vercel configuration to handle the dependency issue and force Rollu
   "build": {
     "env": {
       "NODE_OPTIONS": "--max-old-space-size=4096",
-      "NPM_FLAGS": "--no-optional",
-      "ROLLUP_USE_JS": "true"
+      "NPM_FLAGS": "--no-optional"
     }
   },
   "installCommand": "npm install --no-optional",
@@ -72,41 +77,20 @@ Enhanced the Vercel configuration to handle the dependency issue and force Rollu
 }
 ```
 
-### 4. Created Custom Build Script
-Created a Node.js build script that ensures the environment variable is set properly:
-
-**`build.js` (Node.js script):**
-```javascript
-#!/usr/bin/env node
-process.env.ROLLUP_USE_JS = 'true';
-import { build } from 'vite';
-await build();
-```
-
-### 5. Updated Package Scripts
-Updated package.json scripts to use the custom build script:
-```json
-{
-  "scripts": {
-    "build": "node build.js",
-    "build:vercel": "bash build.sh"
-  }
-}
-```
-
-### 6. Upgraded Dependencies
-Updated Rollup and Vite to latest versions that support Node.js 22:
+### 4. Clean Install
+Performed clean installation to ensure latest dependencies:
 ```bash
-npm install rollup@latest vite@latest --save-dev
+rm -rf node_modules package-lock.json
+npm install
 ```
 
-### 7. Created `.vercelignore`
+### 5. Created `.vercelignore`
 Added a comprehensive `.vercelignore` file to exclude unnecessary files from deployment.
 
 ## Why This Works
 1. **Node.js Version**: Using Node.js 22.x as required by Vercel's current policy.
-2. **Environment Variable Set Early**: The `build.js` script sets `ROLLUP_USE_JS=true` before importing Vite.
-3. **Multiple Environment Variable Approaches**: We set `ROLLUP_USE_JS=true` in multiple places to ensure it's available during build.
+2. **Cross-Platform Environment Variables**: `cross-env` ensures `ROLLUP_USE_JS=true` works on all platforms.
+3. **Direct Vite Build**: Simple and reliable build command without complex scripts.
 4. **Selective Exclusion**: We exclude only the problematic `canvas` dependency while keeping other optional dependencies that are needed.
 5. **Vercel Configuration**: The `--no-optional` flag in the install command ensures canvas is not installed during deployment.
 
@@ -121,14 +105,20 @@ The project should now deploy successfully on Vercel without both the canvas dep
 
 ## Key Changes for Node.js 22 Compatibility
 1. **Engines**: Set to `"node": "22.x"`
-2. **Rollup**: Upgraded to latest version with Node.js 22 support
-3. **Environment Variable**: `ROLLUP_USE_JS=true` forces JS fallback
-4. **Custom Build Script**: Node.js script ensures environment variable is set before Vite loads
-5. **Vite**: Upgraded to latest version for better compatibility
+2. **Build Script**: `cross-env ROLLUP_USE_JS=true vite build`
+3. **Cross-Platform**: Works on Windows, Linux, and macOS
+4. **Simple**: No complex build scripts or environment variable issues
+5. **Reliable**: Direct Vite build with environment variable set
 
-## Build Script Solution
-The `build.js` script is the primary solution because:
-- It sets the environment variable before any modules are loaded
-- It works on both Windows and Unix systems
-- It's more reliable than shell scripts for cross-platform compatibility
-- It directly calls Vite's build function, avoiding npm script loops
+## Final Solution Summary
+The simplest and most effective solution is:
+- Use `cross-env` to set `ROLLUP_USE_JS=true`
+- Call `vite build` directly
+- Exclude canvas dependency
+- Use Node.js 22.x
+
+This approach is:
+- ✅ **Simple**: One line build script
+- ✅ **Cross-Platform**: Works everywhere
+- ✅ **Reliable**: No complex scripts or loops
+- ✅ **Vercel-Ready**: Optimized for deployment

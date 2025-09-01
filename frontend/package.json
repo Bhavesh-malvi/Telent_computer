@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "node build.js",
+    "build": "cross-env ROLLUP_USE_JS=true vite build",
     "build:vercel": "bash build.sh",
     "build:fallback": "node build.js",
     "lint": "eslint .",

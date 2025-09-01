@@ -1,7 +1,7 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import "./FeatureCards.css";
-import { cards } from "../../../public/assets/assets";
+import { cards } from "../../assets/assets";
 
 
 

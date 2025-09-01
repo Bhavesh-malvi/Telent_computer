@@ -1,5 +1,5 @@
 import React from 'react';
-import { reasons } from '../../../public/assets/assets';
+import { reasons } from '../../assets/assets';
 import './ReasonSection.css';
 
 const ReasonSection = () => {

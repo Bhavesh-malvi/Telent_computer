@@ -1,10 +1,10 @@
-import img1 from "./img/card1.webp";
-import img2 from "./img/card2.webp";
-import img3 from "./img/card3.webp";
-import icon1 from "./img/icon1.png";
-import icon2 from "./img/icon2.png";
-import icon3 from "./img/icon3.png";
-
+// Import images from public folder
+const img1 = "/assets/img/card1.webp";
+const img2 = "/assets/img/card2.webp";
+const img3 = "/assets/img/card3.webp";
+const icon1 = "/assets/img/icon1.png";
+const icon2 = "/assets/img/icon2.png";
+const icon3 = "/assets/img/icon3.png";
 
 export const cards = [
     {
@@ -30,14 +30,15 @@ export const cards = [
     }
 ];
 
-import reason1 from "./img/reason1.jpg";
-import reason2 from "./img/reason2.png";
-import reason3 from "./img/reason3.png";
-import reason4 from "./img/reason4.png";
-import reason5 from "./img/reason5.jpg";
-import reason6 from "./img/reason6.jpg";
-import reason7 from "./img/reason7.jpg";
-import reason8 from "./img/reason8.jpg";
+// Import reason images from public folder
+const reason1 = "/assets/img/reason1.jpg";
+const reason2 = "/assets/img/reason2.png";
+const reason3 = "/assets/img/reason3.png";
+const reason4 = "/assets/img/reason4.png";
+const reason5 = "/assets/img/reason5.jpg";
+const reason6 = "/assets/img/reason6.jpg";
+const reason7 = "/assets/img/reason7.jpg";
+const reason8 = "/assets/img/reason8.jpg";
 
 export const reasons = [
     {

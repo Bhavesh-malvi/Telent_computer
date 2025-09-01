@@ -1,11 +1,11 @@
-import React from "react";
-import "./HomeHeroSection.css";
-
+import React from 'react';
+// import videoBg from "../../assets/img/NewHomeVideo.mp4";
+import './HomeHeroSection.css';
 
 const HomeHeroSection = () => {
   return (
     <div className="hero-container">
-      <video className="hero-bg-video" src="/src/assets/img/NewHomeVideo.mp4" autoPlay loop muted playsInline />
+      <video className="hero-bg-video" src="/assets/img/NewHomeVideo.mp4" autoPlay loop muted playsInline />
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <h4>WELCOME TO TALENT COMPUTER INSTITUTE</h4>

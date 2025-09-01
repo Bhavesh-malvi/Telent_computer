@@ -3,17 +3,17 @@ import './AboutContent.css';
 
 const aboutData = [
   {
-    img: '/src/assets/img/our-story.jpg',
+            img: '/assets/img/our-story.jpg',
     title: 'Our Stories',
     desc: `TCIT offers Administrative & Software Development courses based on today's hottest technologies, including PHP, Python, JAVA, .NET, Wordpress, Magento, Tally, D.T.P and many more Technologies.`
   },
   {
-    img: '/src/assets/img/mission.jpg',
+            img: '/assets/img/mission.jpg',
     title: 'Our Mission',
     desc: `To nurture talent in vibrant minds and to provide conducive environment for faculty and students and turn them in to dynamic & result oriented professionals of global stature.`
   },
   {
-    img: '/src/assets/img/vision.jpg',
+            img: '/assets/img/vision.jpg',
     title: 'Our Vision',
     desc: `To be widely recognized as one of the best and most innovative center of relevant and high quality Information Technology and Business programs.`
   }
@@ -84,7 +84,7 @@ export default function AboutContent() {
           ))}
         </ul>
         <div className="about-whychoose-img-wrap">
-          <img src="/src/assets/img/aboutbanner.jpg" alt="Why Choose Us" className="about-whychoose-img" />
+          <img src="/assets/img/aboutbanner.jpg" alt="Why Choose Us" className="about-whychoose-img" />
         </div>
       </div>
     </section>

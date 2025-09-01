@@ -1,6 +1,34 @@
 import React from 'react';
 import './Admissions.css';
-import { Steps } from '../../../public/assets/assets.js';
+
+// Define Steps array directly in the component
+const Steps = [
+    {
+        num: "01",
+        title: "Kick-Start With the Application Form",
+        desc: "Begin your transformation by providing us with insights into your background, aspirations, and dedication to learning so we can help you choose the right path for you..No jargon, just a straightforward process."
+    },
+    {
+        num: "02",
+        title: "Your Academic Journey",
+        desc: "Tell us about the training and experience that's brought you where you are and where you aim to go!"
+    },
+    {
+        num: "03",
+        title: "Design Your Future: Choose Your Program",
+        desc: "Dive deep into our unique career solutions and pick what aligns best with your goals. Not sure which one? Our career, admissions, and financial advisors  are here to assist."
+    },
+    {
+        num: "04",
+        title: "Share Your Story",
+        desc: "Life is more than just grades and courses. Share any additional information, experiences, or circumstances that you feel should be considered. We value individual stories as they mold unique IT professionals.",
+    },
+    {
+        num: "05",
+        title: "Your Education: Invest in Yourself",
+        desc: "As a Title IV accredited institution various forms of public and private financial aid are available to our students. Let's see what you qualify for and get you started stress, and hassle free. For those who qualify. Accredited by the Accrediting Council for Continuing Education & Training (ACCET)."
+    }
+];
 
 // Add IT-Ready section below the banner
 const ITReadySection = () => (

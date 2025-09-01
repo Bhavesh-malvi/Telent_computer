@@ -6,7 +6,7 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  background: url('/assets/img/banner1.png') center/cover no-repeat;
+  background: url('../../assets/img/banner1.png') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +20,7 @@
   width: 100vw;
   height: 100%;
   background: rgba(0, 60, 150, 0.5);
-  background-image: url('/assets/img/backgroundoverlay1.png');
+  background-image: url('../../assets/img/backgroundoverlay1.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

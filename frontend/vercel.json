@@ -5,7 +5,8 @@
   "build": {
     "env": {
       "NODE_OPTIONS": "--max-old-space-size=4096",
-      "NPM_FLAGS": "--no-optional"
+      "NPM_FLAGS": "--no-optional",
+      "ROLLUP_USE_JS": "true"
     }
   },
   "installCommand": "npm install --no-optional",

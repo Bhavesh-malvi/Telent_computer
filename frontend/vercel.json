@@ -10,6 +10,6 @@
     }
   },
   "installCommand": "npm install --no-optional",
-  "buildCommand": "npm run build",
+  "buildCommand": "bash build.sh",
   "framework": "vite"
 }

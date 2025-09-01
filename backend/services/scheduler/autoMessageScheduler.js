@@ -24,8 +24,11 @@ class AutoMessageScheduler {
       
       // Check if WhatsApp is ready
       if (!whatsappConnectionService.isReady) {
-        console.log('⚠️ WhatsApp not ready, initializing...');
-        await whatsappConnectionService.initialize();
+        console.log('⚠️ WhatsApp not ready, initializing with retry...');
+        const result = await whatsappConnectionService.initializeWithRetry();
+        if (!result.success) {
+          console.error('❌ WhatsApp initialization failed in scheduler:', result.error);
+        }
       }
 
       this.isInitialized = true;

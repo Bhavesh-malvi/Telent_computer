@@ -24,18 +24,25 @@ const whatsappController = {
       
       if (forceNewQR) {
         try {
-          await whatsappConnectionService.initialize();
+          const result = await whatsappConnectionService.initializeWithRetry();
+          if (!result.success) {
+            console.error('❌ Force QR initialization failed:', result.error);
+          }
         } catch (error) {
-          // Continue anyway, don't fail the request
+          console.error('❌ Error in force QR initialization:', error);
         }
       } else {
-        // Always start with fresh initialization to ensure new QR
+        // Use alternative initialization method for better stability
         try {
-          await whatsappConnectionService.initialize(); // Always force new QR for fresh start
+          const result = await whatsappConnectionService.initializeWithRetry();
+          if (!result.success) {
+            console.error('❌ WhatsApp initialization failed:', result.error);
+          }
         } catch (error) {
+          console.error('❌ Error in WhatsApp initialization:', error);
           // Fallback to normal initialization
           whatsappConnectionService.initialize().catch(error => {
-            // Background initialization failed
+            console.error('❌ Background initialization failed:', error);
           });
         }
       }
@@ -43,7 +50,7 @@ const whatsappController = {
       // Return success immediately
       res.json({
         success: true,
-        message: forceNewQR ? 'New QR generation started' : 'Fresh WhatsApp initialization started',
+        message: forceNewQR ? 'New QR generation started with retry' : 'WhatsApp initialization started with retry',
         status: whatsappConnectionService.getStatus()
       });
     } catch (error) {

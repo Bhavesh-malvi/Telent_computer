@@ -52,7 +52,7 @@ class WhatsAppConnectionService extends EventEmitter {
     const puppeteerConfig = {
       headless: true,
       args: [
-        // Render-specific optimizations
+        // Minimal args for Render free plan stability
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
@@ -91,7 +91,7 @@ class WhatsAppConnectionService extends EventEmitter {
         '--disable-software-rasterizer',
         '--disable-file-system-watcher',
         '--memory-pressure-off',
-        '--max_old_space_size=512',
+        '--max_old_space_size=256',
         '--disable-features=site-per-process',
         '--disable-site-isolation-trials',
         '--disable-features=NetworkService',
@@ -115,20 +115,71 @@ class WhatsAppConnectionService extends EventEmitter {
         '--disable-features=BlinkGenPropertyTrees',
         '--disable-features=site-per-process',
         '--disable-site-isolation-trials',
-        // Render-specific optimizations
+        // Render-specific optimizations for stability
         '--single-process',
         '--no-zygote',
-        '--safebrowsing-disable-auto-update'
+        '--safebrowsing-disable-auto-update',
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-renderer-backgrounding',
+        '--disable-features=TranslateUI',
+        '--disable-ipc-flooding-protection',
+        '--disable-hang-monitor',
+        '--disable-prompt-on-repost',
+        '--disable-domain-reliability',
+        '--disable-component-extensions-with-background-pages',
+        '--disable-background-networking',
+        '--disable-client-side-phishing-detection',
+        '--disable-features=TranslateUI,BlinkGenPropertyTrees',
+        '--disable-component-update',
+        '--disable-features=AudioServiceOutOfProcess,MediaRouter',
+        '--force-color-profile=srgb',
+        '--metrics-recording-only',
+        '--password-store=basic',
+        '--use-mock-keychain',
+        '--disable-blink-features=AutomationControlled',
+        '--disable-features=VizDisplayCompositor',
+        '--disable-gpu-sandbox',
+        '--disable-software-rasterizer',
+        '--disable-file-system-watcher',
+        '--memory-pressure-off',
+        '--max_old_space_size=256',
+        '--disable-features=site-per-process',
+        '--disable-site-isolation-trials',
+        '--disable-features=NetworkService',
+        '--disable-features=NetworkServiceLogging',
+        '--disable-features=VizDisplayCompositor',
+        '--disable-features=AudioServiceOutOfProcess',
+        '--disable-features=MediaRouter',
+        '--disable-features=TranslateUI',
+        '--disable-features=BlinkGenPropertyTrees',
+        '--disable-features=site-per-process',
+        '--disable-site-isolation-trials',
+        '--disable-features=TranslateUI,BlinkGenPropertyTrees',
+        '--disable-component-update',
+        '--disable-features=AudioServiceOutOfProcess,MediaRouter',
+        '--disable-features=VizDisplayCompositor',
+        '--disable-features=NetworkService',
+        '--disable-features=NetworkServiceLogging',
+        '--disable-features=AudioServiceOutOfProcess',
+        '--disable-features=MediaRouter',
+        '--disable-features=TranslateUI',
+        '--disable-features=BlinkGenPropertyTrees',
+        '--disable-features=site-per-process',
+        '--disable-site-isolation-trials'
       ],
-      timeout: 180000, // 3 minutes (increased for Render)
-      protocolTimeout: 180000, // 3 minutes (increased for Render)
+      timeout: 300000, // 5 minutes (increased for Render)
+      protocolTimeout: 300000, // 5 minutes (increased for Render)
       ignoreDefaultArgs: ['--disable-extensions'],
       handleSIGINT: false,
       handleSIGTERM: false,
       handleSIGHUP: false,
       // Render-specific settings
       executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
-      ignoreHTTPSErrors: true
+      ignoreHTTPSErrors: true,
+      // Additional stability settings
+      waitForInitialPage: false,
+      defaultViewport: { width: 1280, height: 720 }
     };
 
     this.client = new Client({
@@ -266,7 +317,7 @@ class WhatsAppConnectionService extends EventEmitter {
       // Add timeout and better error handling (increased for Render free plan)
       const initPromise = this.client.initialize();
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Initialization timeout')), 240000); // 4 minutes
+        setTimeout(() => reject(new Error('Initialization timeout')), 360000); // 6 minutes
       });
       
       await Promise.race([initPromise, timeoutPromise]);
@@ -296,8 +347,8 @@ class WhatsAppConnectionService extends EventEmitter {
         this.isInitialized = false;
         
         // Increased wait time for Render free plan
-        console.log('⏳ Waiting 10 seconds before retry...');
-        await new Promise(resolve => setTimeout(resolve, 10000));
+        console.log('⏳ Waiting 15 seconds before retry...');
+        await new Promise(resolve => setTimeout(resolve, 15000));
         
         // Limit retries to prevent infinite loop
         if (this.connectionRetries < 3) {
@@ -446,8 +497,8 @@ class WhatsAppConnectionService extends EventEmitter {
       await this.cleanupOldSessions();
       
       // Wait before creating new client
-      console.log('⏳ Waiting 5 seconds before creating new client...');
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      console.log('⏳ Waiting 10 seconds before creating new client...');
+      await new Promise(resolve => setTimeout(resolve, 10000));
       
       // Create new client with fresh session
       await this.createClient();
@@ -456,7 +507,7 @@ class WhatsAppConnectionService extends EventEmitter {
       // Initialize with extended timeout
       const initPromise = this.client.initialize();
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('QR regeneration timeout')), 300000); // 5 minutes
+        setTimeout(() => reject(new Error('QR regeneration timeout')), 360000); // 6 minutes
       });
       
       await Promise.race([initPromise, timeoutPromise]);
@@ -486,6 +537,50 @@ class WhatsAppConnectionService extends EventEmitter {
         message: 'Failed to regenerate QR code'
       };
     }
+  }
+
+  // Alternative initialization method for Render free plan
+  async initializeWithRetry() {
+    const maxAttempts = 5;
+    let attempt = 0;
+    
+    while (attempt < maxAttempts) {
+      attempt++;
+      console.log(`🔄 Initialization attempt ${attempt}/${maxAttempts}...`);
+      
+      try {
+        await this.initialize();
+        console.log('✅ Initialization successful!');
+        return { success: true, message: 'WhatsApp initialized successfully' };
+      } catch (error) {
+        console.error(`❌ Attempt ${attempt} failed:`, error.message);
+        
+        if (attempt < maxAttempts) {
+          console.log(`⏳ Waiting 20 seconds before next attempt...`);
+          await new Promise(resolve => setTimeout(resolve, 20000));
+          
+          // Clean up before next attempt
+          if (this.client) {
+            try {
+              await this.client.destroy();
+            } catch (destroyError) {
+              console.error('❌ Error destroying client:', destroyError);
+            }
+            this.client = null;
+          }
+          
+          this.isReady = false;
+          this.isInitialized = false;
+        }
+      }
+    }
+    
+    console.error('❌ All initialization attempts failed');
+    return { 
+      success: false, 
+      error: 'All initialization attempts failed',
+      message: 'WhatsApp initialization failed after multiple attempts'
+    };
   }
 
   // Force ready status check

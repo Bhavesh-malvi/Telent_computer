@@ -2,10 +2,14 @@
 import fetch from 'node-fetch';
 
 const KEEP_ALIVE_INTERVAL = 10 * 60 * 1000; // 10 minutes
-const RENDER_URL = process.env.RENDER_URL || 'https://tcit-backend.onrender.com';
+const RENDER_URL = process.env.RENDER_URL || 'https://telent-computer.onrender.com';
 
 console.log('🔄 Keep-alive script started...');
 console.log(`📡 Target URL: ${RENDER_URL}`);
+
+// Monitor memory usage
+const memUsage = process.memoryUsage();
+console.log(`📊 Memory usage: ${Math.round(memUsage.heapUsed / 1024 / 1024)}MB / ${Math.round(memUsage.heapTotal / 1024 / 1024)}MB`);
 
 async function pingServer() {
   try {
@@ -49,8 +53,15 @@ async function pingServer() {
         console.log(`❌ Alternative endpoint failed: ${altError.message}`);
       }
     }
-  } catch (error) {
-    console.error(`❌ Failed to ping server: ${error.message}`);
+      } catch (error) {
+      console.error(`❌ Failed to ping server: ${error.message}`);
+      console.log(`🔍 Error details: ${error.code || 'Unknown error code'}`);
+      
+      // Don't crash the keep-alive service on network errors
+      if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+        console.log(`⚠️ Network error detected, will retry in next cycle`);
+        return;
+      }
     
     // Try alternative endpoints on error
     try {

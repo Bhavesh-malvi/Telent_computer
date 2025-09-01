@@ -2,11 +2,6 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "build": {
     "env": {
       "NODE_OPTIONS": "--max-old-space-size=4096",

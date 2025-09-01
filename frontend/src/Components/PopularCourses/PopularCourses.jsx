@@ -6,19 +6,19 @@ const courses = [
   {
     id: "mern",
     title: "MERN Stack",
-    img: "/assets/img/mern.jpg",
+    img: "/src/assets/img/mern.jpg",
     desc: "Master MongoDB, Express.js, React, and Node.js to build robust full-stack web applications."
   },
   {
     id: "java",
     title: "Java Full Stack",
-    img: "/assets/img/javafullstack.webp",
+    img: "/src/assets/img/javafullstack.webp",
     desc: "Become a Java Full Stack Developer by learning front-end and back-end technologies with Java."
   },
   {
     id: "python",
     title: "Python Full Stack",
-    img: "/assets/img/pythonfullstack.jpg",
+    img: "/src/assets/img/pythonfullstack.jpg",
     desc: "Learn Python for both front-end and back-end development, including Django and modern JS frameworks."
   }
 ];

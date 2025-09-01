@@ -49,11 +49,11 @@ const Courses = () => {
             <div className="course-card-modern-left">
               <div className="course-img-modern-wrap">
                 <img 
-                  src={course.image || '/assets/img/course1.jpeg'} 
+                  src={course.image || '/src/assets/img/course1.jpeg'} 
                   alt={course.title} 
                   className="course-img-modern"
                   onError={(e) => {
-                    e.target.src = '/assets/img/course1.jpeg';
+                    e.target.src = '/src/assets/img/course1.jpeg';
                   }}
                 />
                 <div className="course-badge-modern">{course.badge}</div>

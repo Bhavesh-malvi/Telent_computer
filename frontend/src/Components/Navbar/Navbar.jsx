@@ -15,7 +15,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-logo">
         <NavLink to="/">
-          <img src="/assets/img/TCIT Logo png.png" alt="Logo" />
+          <img src="/src/assets/img/TCIT Logo png.png" alt="Logo" />
         </NavLink>
       </div>
       <div className={`navbar-links ${open ? "active" : ""}`}>

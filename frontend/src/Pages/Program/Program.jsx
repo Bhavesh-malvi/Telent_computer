@@ -6,7 +6,7 @@ import "./Program.css";
 const programDetails = {
   mern: {
     title: "MERN Stack",
-    img: "/assets/img/mern.jpg",
+    img: "/src/assets/img/mern.jpg",
     subTitles: [
       "Overview of MERN Stack",
       "Career Opportunities with MERN",
@@ -24,7 +24,7 @@ const programDetails = {
   },
   java: {
     title: "Java Full Stack",
-    img: "/assets/img/javafullstack.webp",
+    img: "/src/assets/img/javafullstack.webp",
     subTitles: [
       "What is Java Full Stack?",
       "Career Growth in Java Full Stack",
@@ -42,7 +42,7 @@ const programDetails = {
   },
   python: {
     title: "Python Full Stack",
-    img: "/assets/img/pythonfullstack.jpg",
+    img: "/src/assets/img/pythonfullstack.jpg",
     subTitles: [
       "Introduction to Python Full Stack",
       "Industry Applications of Python Full Stack",

@@ -14,9 +14,9 @@ const HomeAboutUs = () => (
         <a href="/contact"><button className="aboutus-cta-btn">GET STARTED</button></a>
       </div>
       <div className="aboutus-cta-image-wrap">
-        <img src="/assets/img/programmers.jpg" alt="Programmers working together" className="aboutus-cta-image" />
+        <img src="/src/assets/img/programmers.jpg" alt="Programmers working together" className="aboutus-cta-image" />
         <div className="aboutus-cta-logo-overlay">
-          <img src="/assets/img/logo.png" alt="Logo" className="aboutus-cta-logo" />
+          <img src="/src/assets/img/logo.png" alt="Logo" className="aboutus-cta-logo" />
         </div>
       </div>
     </div>

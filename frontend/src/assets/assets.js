@@ -163,7 +163,7 @@ export const Steps = [
     {
         num: "02",
         title: "Your Academic Journey",
-        desc: "Tell us about the training and experience that’s brought you where you are and where you aim to go!"
+        desc: "Tell us about the training and experience that's brought you where you are and where you aim to go!"
     },
     {
         num: "03",
@@ -179,6 +179,6 @@ export const Steps = [
     {
         num: "05",
         title: "Your Education: Invest in Yourself",
-        desc: "As a Title IV accredited institution various forms of public and private financial aid are available to our students. Let’s see what you qualify for and get you started stress, and hassle free. For those who qualify. Accredited by the Accrediting Council for Continuing Education & Training (ACCET)."
+        desc: "As a Title IV accredited institution various forms of public and private financial aid are available to our students. Let's see what you qualify for and get you started stress, and hassle free. For those who qualify. Accredited by the Accrediting Council for Continuing Education & Training (ACCET)."
     }
 ];

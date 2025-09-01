@@ -26,8 +26,8 @@ const Footer = () => (
           Talent Computer provides training in different language like C, C++, Python, Php, React, Angular, Web design, DBMS & other Technologies. Talent Computer Training institute offers students an innovative way to learn Technology.
         </p>
         <div className="footer-social">
-          <a href="#" aria-label="Facebook"><FaFacebookF /></a>
-          <a href="#" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.facebook.com/talentcomputeracademy.ahd" aria-label="Facebook"><FaFacebookF /></a>
+          <a href="https://www.instagram.com/talent.computer" aria-label="Instagram"><FaInstagram /></a>
         </div>
       </div>
       <div className="footer-section contact">

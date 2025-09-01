@@ -94,7 +94,7 @@ class WelcomeMessageService {
    */
   async safeSendMessage(phoneNumber, message, student) {
     try {
-      console.log(`🔍 Validating number: ${phoneNumber}`);
+      console.log(`🔍 Validating number: ${phoneNumber.replace(/(\d{4})(\d{4})(\d{3})/, '$1****$3')}`);
       
       const client = whatsappConnectionService.getClient();
       if (!client) {
@@ -190,11 +190,11 @@ class WelcomeMessageService {
   validateStudentData(student) {
     console.log('🔍 Validating student data:', {
       hasStudent: !!student,
-      name: student?.name,
-      studentId: student?.studentId,
-      contactNo: student?.contactNo,
-      phone: student?.phone,
-      selectedCourses: student?.selectedCourses,
+      name: student?.name ? 'Present' : 'Missing',
+      studentId: student?.studentId ? 'Present' : 'Missing',
+      contactNo: student?.contactNo ? 'Present' : 'Missing',
+      phone: student?.phone ? 'Present' : 'Missing',
+      selectedCourses: student?.selectedCourses ? `${student.selectedCourses.length} courses` : 'Missing',
       enquiryType: student?.enquiryType
     });
 

@@ -710,7 +710,7 @@ const studentController = {
       // Initialize variables for payment processing
       let paidBy = collectedBy || 'Unknown';
       let paymentDateTime = '';
-      console.log(`🔍 Debug - collectedBy: ${collectedBy}, paidBy: ${paidBy}`);
+      console.log(`🔍 Debug - Payment processed successfully`);
       
             if (totalPaid > 0) {
           // Use provided collectedBy or fallback to current user
@@ -767,7 +767,7 @@ const studentController = {
         // Update totalDue after payment
         const currentTotalPaid = student.paymentHistory.reduce((sum, payment) => sum + payment.amount, 0);
         student.totalDue = student.totalFees - currentTotalPaid;
-        console.log(`🔍 Debug - After payment processing, paidBy: ${paidBy}`);
+        console.log(`🔍 Debug - Payment processing completed`);
       } else {
         // No payment recorded, totalPaid: 0
         console.log(`🔍 Debug - No payment recorded, paidBy: ${paidBy}`);

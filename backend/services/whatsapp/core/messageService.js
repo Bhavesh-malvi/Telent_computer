@@ -25,7 +25,7 @@ class WhatsAppMessageService {
         phone = "91" + phone;
       }
 
-      console.log(`📱 Sending message to ${phone}`);
+      console.log(`📱 Sending message to ${phone.replace(/(\d{4})(\d{4})(\d{3})/, '$1****$3')}`);
 
       // Validate number with WhatsApp using getNumberId
       const numberId = await client.getNumberId(phone);

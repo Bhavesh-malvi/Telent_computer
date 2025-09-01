@@ -9,7 +9,7 @@ class FeePaymentMessageService {
   // ✅ Safe message sending with number validation
   async safeSendMessage(contactNo, message, options = {}) {
     try {
-      console.log(`🔍 Validating number: ${contactNo}`);
+      console.log(`🔍 Validating number: ${contactNo.replace(/(\d{4})(\d{4})(\d{3})/, '$1****$3')}`);
       
       const client = this.messageService.connectionService.getClient();
       if (!client) {
@@ -33,7 +33,7 @@ class FeePaymentMessageService {
         };
       }
 
-      console.log(`✅ Number validated: ${numberId._serialized}`);
+      console.log(`✅ Number validated successfully`);
       
       // ✅ STRONG SOLUTION: Send message with extra safety
       try {

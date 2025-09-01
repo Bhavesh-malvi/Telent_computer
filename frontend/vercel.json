@@ -1,14 +1,5 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "build": {
-    "env": {
-      "NODE_OPTIONS": "--max-old-space-size=4096",
-      "NPM_FLAGS": "--no-optional"
-    }
-  },
-  "installCommand": "npm install --no-optional",
-  "buildCommand": "npm run build",
-  "framework": "vite"
+  ]
 }

@@ -52,6 +52,7 @@ class WhatsAppConnectionService extends EventEmitter {
     const puppeteerConfig = {
       headless: true,
       args: [
+        // Render-specific optimizations
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
@@ -113,14 +114,21 @@ class WhatsAppConnectionService extends EventEmitter {
         '--disable-features=TranslateUI',
         '--disable-features=BlinkGenPropertyTrees',
         '--disable-features=site-per-process',
-        '--disable-site-isolation-trials'
+        '--disable-site-isolation-trials',
+        // Render-specific optimizations
+        '--single-process',
+        '--no-zygote',
+        '--safebrowsing-disable-auto-update'
       ],
-      timeout: 60000, // 60 seconds (increased for Render)
-      protocolTimeout: 60000, // 60 seconds (increased for Render)
+      timeout: 120000, // 2 minutes (increased for Render)
+      protocolTimeout: 120000, // 2 minutes (increased for Render)
       ignoreDefaultArgs: ['--disable-extensions'],
       handleSIGINT: false,
       handleSIGTERM: false,
-      handleSIGHUP: false
+      handleSIGHUP: false,
+      // Render-specific settings
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+      ignoreHTTPSErrors: true
     };
 
     this.client = new Client({
@@ -266,6 +274,30 @@ class WhatsAppConnectionService extends EventEmitter {
       console.log('✅ WhatsApp client initialization completed');
     } catch (error) {
       console.error('❌ Error in WhatsApp initialization:', error);
+      
+      // Enhanced error recovery for Render
+      if (error.message.includes('Protocol error') || error.message.includes('Target closed')) {
+        console.log('🔄 Protocol error detected, attempting recovery...');
+        
+        // Clean up and retry once
+        if (this.client) {
+          try {
+            await this.client.destroy();
+          } catch (destroyError) {
+            console.error('❌ Error destroying client:', destroyError);
+          }
+          this.client = null;
+        }
+        
+        this.isReady = false;
+        this.isInitialized = false;
+        
+        // Wait before retry
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        
+        console.log('🔄 Retrying WhatsApp initialization...');
+        return this.initialize();
+      }
       
       // Clean up on error
       if (this.client) {

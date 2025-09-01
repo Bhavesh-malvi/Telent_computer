@@ -43,12 +43,12 @@ class WhatsAppMessageService {
         try {
           console.log(`📤 Attempt ${retryCount + 1}/${maxRetries} - Sending to ${phone}`);
           
-          // Add delay before sending (helps with chat loading)
-          if (retryCount > 0) {
-            const delay = retryCount * 2000; // 2s, 4s, 6s delays
-            console.log(`⏳ Waiting ${delay}ms before retry...`);
-            await new Promise(resolve => setTimeout(resolve, delay));
-          }
+                // Add delay before sending (helps with chat loading)
+      if (retryCount > 0) {
+        const delay = retryCount * 3000; // 3s, 6s, 9s delays (increased for Render)
+        console.log(`⏳ Waiting ${delay}ms before retry...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
           
           sentMessage = await client.sendMessage(numberId._serialized, message);
           console.log(`✅ Message sent successfully to ${phone} on attempt ${retryCount + 1}`);
@@ -97,7 +97,7 @@ class WhatsAppMessageService {
     console.log(`📱 Sending ${messages.length} bulk messages...`);
     
     const results = [];
-    const delayBetweenMessages = options.delayBetweenMessages || 2000; // 2 seconds delay
+    const delayBetweenMessages = options.delayBetweenMessages || 3000; // 3 seconds delay (increased for Render)
 
     for (let i = 0; i < messages.length; i++) {
       const messageData = messages[i];

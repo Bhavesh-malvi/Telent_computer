@@ -12,6 +12,7 @@ class WhatsAppConnectionService extends EventEmitter {
     this.maxRetries = 3;
     this.retryDelay = 5000;
     this.sessionCounter = 0;
+    this.clientReadyTimeout = 30000; // 30 seconds for client ready check
   }
 
   // Get unique session path
@@ -114,8 +115,8 @@ class WhatsAppConnectionService extends EventEmitter {
         '--disable-features=site-per-process',
         '--disable-site-isolation-trials'
       ],
-      timeout: 30000,
-      protocolTimeout: 30000,
+      timeout: 60000, // 60 seconds (increased for Render)
+      protocolTimeout: 60000, // 60 seconds (increased for Render)
       ignoreDefaultArgs: ['--disable-extensions'],
       handleSIGINT: false,
       handleSIGTERM: false,
@@ -254,10 +255,10 @@ class WhatsAppConnectionService extends EventEmitter {
       await this.createClient();
       await this.setupEventHandlers();
       
-      // Add timeout and better error handling
+      // Add timeout and better error handling (increased for Render free plan)
       const initPromise = this.client.initialize();
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Initialization timeout')), 60000);
+        setTimeout(() => reject(new Error('Initialization timeout')), 180000); // 3 minutes
       });
       
       await Promise.race([initPromise, timeoutPromise]);
@@ -427,10 +428,10 @@ class WhatsAppConnectionService extends EventEmitter {
         return null;
       }
       
-      // Add timeout to prevent hanging
+      // Add timeout to prevent hanging (increased for Render free plan)
       const statePromise = this.client.getState();
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('State check timeout')), 5000);
+        setTimeout(() => reject(new Error('State check timeout')), 15000); // 15 seconds
       });
       
       const state = await Promise.race([statePromise, timeoutPromise]);

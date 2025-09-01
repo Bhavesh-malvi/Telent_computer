@@ -120,8 +120,8 @@ class WhatsAppConnectionService extends EventEmitter {
         '--no-zygote',
         '--safebrowsing-disable-auto-update'
       ],
-      timeout: 120000, // 2 minutes (increased for Render)
-      protocolTimeout: 120000, // 2 minutes (increased for Render)
+      timeout: 180000, // 3 minutes (increased for Render)
+      protocolTimeout: 180000, // 3 minutes (increased for Render)
       ignoreDefaultArgs: ['--disable-extensions'],
       handleSIGINT: false,
       handleSIGTERM: false,
@@ -266,7 +266,7 @@ class WhatsAppConnectionService extends EventEmitter {
       // Add timeout and better error handling (increased for Render free plan)
       const initPromise = this.client.initialize();
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Initialization timeout')), 180000); // 3 minutes
+        setTimeout(() => reject(new Error('Initialization timeout')), 240000); // 4 minutes
       });
       
       await Promise.race([initPromise, timeoutPromise]);
@@ -275,11 +275,14 @@ class WhatsAppConnectionService extends EventEmitter {
     } catch (error) {
       console.error('❌ Error in WhatsApp initialization:', error);
       
-      // Enhanced error recovery for Render
-      if (error.message.includes('Protocol error') || error.message.includes('Target closed')) {
-        console.log('🔄 Protocol error detected, attempting recovery...');
+      // Enhanced error recovery for Render free plan
+      if (error.message.includes('Protocol error') || 
+          error.message.includes('Target closed') || 
+          error.message.includes('browser has disconnected') ||
+          error.message.includes('Navigation failed')) {
+        console.log('🔄 Browser disconnection error detected, attempting recovery...');
         
-        // Clean up and retry once
+        // Clean up and retry with increased delays
         if (this.client) {
           try {
             await this.client.destroy();
@@ -292,11 +295,19 @@ class WhatsAppConnectionService extends EventEmitter {
         this.isReady = false;
         this.isInitialized = false;
         
-        // Wait before retry
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        // Increased wait time for Render free plan
+        console.log('⏳ Waiting 10 seconds before retry...');
+        await new Promise(resolve => setTimeout(resolve, 10000));
         
-        console.log('🔄 Retrying WhatsApp initialization...');
-        return this.initialize();
+        // Limit retries to prevent infinite loop
+        if (this.connectionRetries < 3) {
+          this.connectionRetries++;
+          console.log(`🔄 Retrying WhatsApp initialization (attempt ${this.connectionRetries}/3)...`);
+          return this.initialize();
+        } else {
+          console.error('❌ Max retries reached, giving up...');
+          throw new Error('Max initialization retries reached due to browser disconnection issues');
+        }
       }
       
       // Clean up on error
@@ -408,6 +419,73 @@ class WhatsAppConnectionService extends EventEmitter {
   // Get QR code
   getQRCode() {
     return this.qrCode;
+  }
+
+  // Force QR regeneration with better error handling
+  async regenerateQR() {
+    try {
+      console.log('🔄 Force regenerating QR code...');
+      
+      // Clean up existing client
+      if (this.client) {
+        try {
+          await this.client.destroy();
+        } catch (error) {
+          console.error('❌ Error destroying client during QR regeneration:', error);
+        }
+        this.client = null;
+      }
+      
+      // Reset states
+      this.isReady = false;
+      this.isInitialized = false;
+      this.qrCode = null;
+      this.connectionRetries = 0;
+      
+      // Clean up sessions
+      await this.cleanupOldSessions();
+      
+      // Wait before creating new client
+      console.log('⏳ Waiting 5 seconds before creating new client...');
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      // Create new client with fresh session
+      await this.createClient();
+      await this.setupEventHandlers();
+      
+      // Initialize with extended timeout
+      const initPromise = this.client.initialize();
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('QR regeneration timeout')), 300000); // 5 minutes
+      });
+      
+      await Promise.race([initPromise, timeoutPromise]);
+      
+      console.log('✅ QR code regeneration completed');
+      return { success: true, message: 'QR code regenerated successfully' };
+      
+    } catch (error) {
+      console.error('❌ Error regenerating QR code:', error);
+      
+      // Clean up on error
+      if (this.client) {
+        try {
+          await this.client.destroy();
+        } catch (destroyError) {
+          console.error('❌ Error destroying client:', destroyError);
+        }
+        this.client = null;
+      }
+      
+      this.isReady = false;
+      this.isInitialized = false;
+      
+      return { 
+        success: false, 
+        error: error.message,
+        message: 'Failed to regenerate QR code'
+      };
+    }
   }
 
   // Force ready status check

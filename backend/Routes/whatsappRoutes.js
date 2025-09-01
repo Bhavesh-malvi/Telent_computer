@@ -8,6 +8,7 @@ router.get('/status', whatsappController.getWhatsAppStatus);
 router.get('/birthday-wishes-status', whatsappController.getBirthdayWishesStatus);
 router.get('/reminder-settings', whatsappController.getReminderSettings);
 router.post('/initialize', whatsappController.initializeWhatsApp);
+router.post('/regenerate-qr', whatsappController.regenerateQR);
 router.post('/disconnect', whatsappController.disconnectWhatsApp);
 router.post('/force-disconnect', whatsappController.forceDisconnectWhatsApp);
 

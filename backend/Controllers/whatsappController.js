@@ -79,6 +79,36 @@ const whatsappController = {
     }
   },
 
+  // Regenerate QR code with enhanced error handling
+  regenerateQR: async (req, res) => {
+    try {
+      console.log('🔄 QR regeneration requested...');
+      
+      const result = await whatsappConnectionService.regenerateQR();
+      
+      if (result.success) {
+        res.json({
+          success: true,
+          message: result.message,
+          status: whatsappConnectionService.getStatus()
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: result.message,
+          error: result.error
+        });
+      }
+    } catch (error) {
+      console.error('❌ Error in regenerateQR:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error regenerating QR code',
+        error: error.message
+      });
+    }
+  },
+
   // Send WhatsApp reminders
   sendWhatsAppReminders: async (req, res) => {
     try {

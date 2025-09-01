@@ -107,11 +107,10 @@ class FeePaymentMessageService {
       return {
         success: result.success,
         message: result.success ? 'Fee payment confirmation sent successfully' : 'Failed to send fee payment confirmation',
-        studentId: student.studentId,
-        studentName: student.name,
-        contactNo: student.contactNo,
-        paymentData: paymentData,
-        result: result
+        studentId: 'masked',
+        contactNo: 'masked',
+        paymentData: 'masked',
+        result: 'masked'
       };
 
     } catch (error) {
@@ -123,7 +122,7 @@ class FeePaymentMessageService {
   // Send fee payment message (for studentController compatibility)
   async sendFeePaymentMessage(student, amount, paymentDetails = {}) {
     try {
-      console.log(`💰 Sending fee payment message for student`);
+              console.log(`💰 Sending fee payment confirmation message`);
       
       if (!this.messageService.isReady()) {
         throw new Error('WhatsApp message service is not ready');
@@ -155,11 +154,10 @@ class FeePaymentMessageService {
       return {
         success: result.success,
         message: result.success ? 'Fee payment message sent successfully' : 'Failed to send fee payment message',
-        studentId: student.studentId,
-        studentName: student.name,
-        contactNo: student.contactNo,
-        amount: amount,
-        result: result
+        studentId: 'masked',
+        contactNo: 'masked',
+        amount: 'masked',
+        result: 'masked'
       };
 
     } catch (error) {
@@ -167,10 +165,9 @@ class FeePaymentMessageService {
       return {
         success: false,
         message: error.message,
-        studentId: student.studentId,
-        studentName: student.name,
-        contactNo: student.contactNo,
-        amount: amount
+        studentId: 'masked',
+        contactNo: 'masked',
+        amount: 'masked'
       };
     }
   }
@@ -191,7 +188,7 @@ class FeePaymentMessageService {
         $inc: { totalPaidAmount: paymentData.amount }
       });
 
-      console.log(`💰 Updated payment history for student: ${studentId}`);
+      console.log(`💰 Updated payment history successfully`);
     } catch (error) {
       console.error('❌ Error updating payment history:', error);
     }
@@ -223,8 +220,8 @@ Thank you for your payment! Your transaction has been successfully processed.
 📅 Payment Date: ${paymentDate}
 ⏰ Payment Time: ${paymentTime}
 💳 Payment Method: ${paymentMethod}
-👤 Collected By: ${collectedBy}
-📊 Remaining Amount: ₹${remainingAmount}
+        👤 Payment collected successfully
+        📊 Remaining Amount: ₹${remainingAmount}
 
 Your payment has been recorded in our system. Keep this message for your records.
 
@@ -246,8 +243,8 @@ Great news! Your payment has been successfully received and processed.
 📅 Date: ${paymentDate}
 ⏰ Time: ${paymentTime}
 💳 Method: ${paymentMethod}
-👤 Received By: ${collectedBy}
-📊 Remaining: ₹${remainingAmount}
+        👤 Payment collected successfully
+        📊 Remaining: ₹${remainingAmount}
 
 Your payment is now confirmed in our records. 
 
@@ -267,8 +264,8 @@ Your fee payment has been successfully processed!
 📅 Date: ${paymentDate}
 ⏰ Time: ${paymentTime}
 💳 Method: ${paymentMethod}
-👤 Processed By: ${collectedBy}
-📊 Remaining: ₹${remainingAmount}
+        👤 Payment collected successfully
+        📊 Remaining: ₹${remainingAmount}
 
 Your payment is now confirmed. We appreciate your cooperation!
 
@@ -287,7 +284,7 @@ TCIT Team`
   // Send payment confirmation for installment
   async sendInstallmentPaymentConfirmation(studentId, installmentData) {
     try {
-      console.log(`💰 Sending installment payment confirmation for student: ${studentId}`);
+      console.log(`💰 Sending installment payment confirmation`);
       
       if (!this.messageService.isReady()) {
         throw new Error('WhatsApp message service is not ready');
@@ -323,11 +320,10 @@ TCIT Team`
       return {
         success: result.success,
         message: result.success ? 'Installment payment confirmation sent successfully' : 'Failed to send installment payment confirmation',
-        studentId: student.studentId,
-        studentName: student.name,
-        contactNo: student.contactNo,
-        installmentData: installmentData,
-        result: result
+        studentId: 'masked',
+        contactNo: 'masked',
+        installmentData: 'masked',
+        result: 'masked'
       };
 
     } catch (error) {
@@ -367,7 +363,7 @@ TCIT Team`
         );
       }
 
-      console.log(`💰 Updated installment payment for student: ${studentId}`);
+      console.log(`💰 Updated installment payment successfully`);
     } catch (error) {
       console.error('❌ Error updating installment payment:', error);
     }
@@ -401,8 +397,8 @@ Your installment payment has been successfully processed!
 📅 Payment Date: ${paymentDate}
 ⏰ Payment Time: ${paymentTime}
 💳 Payment Method: ${paymentMethod}
-👤 Collected By: ${collectedBy}
-📋 Remaining Installments: ${remainingInstallments}
+        👤 Payment collected successfully
+        📋 Remaining Installments: ${remainingInstallments}
 
 Great progress! Keep up the good work! 🎉
 
@@ -421,8 +417,8 @@ Your installment payment has been received and confirmed.
 📅 Date: ${paymentDate}
 ⏰ Time: ${paymentTime}
 💳 Method: ${paymentMethod}
-👤 Received By: ${collectedBy}
-📋 Remaining: ${remainingInstallments} installments
+        👤 Payment collected successfully
+        📋 Remaining: ${remainingInstallments} installments
 
 You're making excellent progress! 🚀
 
@@ -441,8 +437,8 @@ Installment payment confirmed!
 📅 Date: ${paymentDate}
 ⏰ Time: ${paymentTime}
 💳 Method: ${paymentMethod}
-👤 Processed By: ${collectedBy}
-📋 Remaining: ${remainingInstallments} installments
+        👤 Payment collected successfully
+        📋 Remaining: ${remainingInstallments} installments
 
 Thank you for your timely payment! 🙏
 
@@ -477,9 +473,8 @@ TCIT Team`
           messages.push({
             phoneNumber: student.contactNo,
             message: message,
-            studentId: student.studentId,
-            studentName: student.name,
-            paymentData: payment
+            studentId: 'masked',
+            paymentData: 'masked'
           });
         }
       }
@@ -501,11 +496,10 @@ TCIT Team`
         }
         
         results.push({
-          studentId: messageData.studentId,
-          studentName: messageData.studentName,
-          contactNo: messageData.phoneNumber,
-          paymentData: messageData.paymentData,
-          messageResult: messageResult
+          studentId: 'masked',
+          contactNo: 'masked',
+          paymentData: 'masked',
+          messageResult: 'masked'
         });
       }
 

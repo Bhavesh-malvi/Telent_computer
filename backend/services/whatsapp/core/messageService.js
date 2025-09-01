@@ -30,7 +30,7 @@ class WhatsAppMessageService {
       // Validate number with WhatsApp using getNumberId
       const numberId = await client.getNumberId(phone);
       if (!numberId) {
-        console.error(`❌ Number ${phone} is not registered on WhatsApp`);
+        console.error(`❌ Number is not registered on WhatsApp`);
         return { success: false, error: "Number not registered on WhatsApp" };
       }
 
@@ -41,7 +41,7 @@ class WhatsAppMessageService {
       
       while (retryCount < maxRetries) {
         try {
-          console.log(`📤 Attempt ${retryCount + 1}/${maxRetries} - Sending to ${phone}`);
+          console.log(`📤 Attempt ${retryCount + 1}/${maxRetries} - Sending message`);
           
                 // Add delay before sending (helps with chat loading)
       if (retryCount > 0) {
@@ -51,7 +51,7 @@ class WhatsAppMessageService {
       }
           
           sentMessage = await client.sendMessage(numberId._serialized, message);
-          console.log(`✅ Message sent successfully to ${phone} on attempt ${retryCount + 1}`);
+          console.log(`✅ Message sent successfully on attempt ${retryCount + 1}`);
           break;
           
         } catch (sendError) {
@@ -76,18 +76,18 @@ class WhatsAppMessageService {
       return { 
         success: true, 
         message: sentMessage,
-        phoneNumber: phone,
-        messageId: sentMessage?.id?._serialized || null,
-        timestamp: new Date().toISOString()
+                 phoneNumber: 'masked',
+                          messageId: 'masked',
+         timestamp: 'masked'
       };
 
     } catch (err) {
-      console.error(`❌ Failed to send message to ${contactNo}:`, err);
+             console.error(`❌ Failed to send message:`, err);
       return { 
         success: false, 
         error: err.message,
-        phoneNumber: contactNo,
-        timestamp: new Date().toISOString()
+                 phoneNumber: 'masked',
+                   timestamp: 'masked'
       };
     }
   }
@@ -103,7 +103,7 @@ class WhatsAppMessageService {
       const messageData = messages[i];
       
       try {
-        console.log(`📤 Sending message ${i + 1}/${messages.length} to ${messageData.phoneNumber}`);
+        console.log(`📤 Sending message ${i + 1}/${messages.length}`);
         
         const result = await this.sendMessage(
           messageData.phoneNumber, 
@@ -127,9 +127,9 @@ class WhatsAppMessageService {
         results.push({
           index: i,
           success: false,
-          phoneNumber: messageData.phoneNumber,
+                     phoneNumber: 'masked',
           error: error.message,
-          timestamp: new Date().toISOString()
+          timestamp: 'masked'
         });
       }
     }

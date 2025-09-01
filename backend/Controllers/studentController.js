@@ -620,10 +620,10 @@ const studentController = {
           }
             })
             .catch(error => {
-              console.error(`❌ Error in welcome message for ${student.name}:`, error.message);
+              console.error(`❌ Error in welcome message:`, error.message);
             });
         } catch (error) {
-          console.error(`❌ Error sending welcome message to ${student.name}:`, error.message);
+          console.error(`❌ Error sending welcome message:`, error.message);
           // Don't fail the update if welcome message fails
         }
       }
@@ -777,8 +777,8 @@ const studentController = {
       // Send fee payment confirmation message
       if (totalPaid > 0) {
         try {
-          console.log(`💰 Fee payment of ₹${totalPaid.toLocaleString('en-IN')} received for student`);
-          console.log(`👤 Collected By: ${paidBy || 'Unknown'}`);
+                  console.log(`💰 Fee payment received successfully`);
+        console.log(`👤 Payment collected successfully`);
           
           // Send fee payment message using new service
           const feePaymentService = (await import('../services/messages/feePaymentMessageService.js')).default;
@@ -795,10 +795,10 @@ const studentController = {
           }
             })
             .catch(error => {
-              console.error(`❌ Error in fee payment message for ${student.name}:`, error.message);
+              console.error(`❌ Error in fee payment message:`, error.message);
             });
         } catch (error) {
-          console.error(`❌ Error sending fee payment message to ${student.name}:`, error.message);
+          console.error(`❌ Error sending fee payment message:`, error.message);
           // Don't fail the payment if message fails
         }
       }

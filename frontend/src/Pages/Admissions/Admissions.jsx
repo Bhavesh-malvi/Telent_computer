@@ -1,6 +1,7 @@
 import React from 'react';
 import './Admissions.css';
 import { Steps } from '../../assets/assets';
+import myCCImg from '../../assets/img/MyCC.png';
 
 // Define Steps array directly in the component
 
@@ -14,7 +15,7 @@ const ITReadySection = () => (
       <p>Our mission? To empower YOU. We bring you more than just theoretical knowledge; we pave your path to tangible success in the dynamic realm of Information Technology. Your potential, combined with our dedicated education and support, is the perfect recipe for success.</p>
     </div>
     <div className="AdmissionsITReady__img-wrap">
-      <img src="/assets/img/MyCC.png" alt="Students learning IT" className="AdmissionsITReady__img" />
+      <img src={myCCImg} alt="Students learning IT" className="AdmissionsITReady__img" />
     </div>
   </section>
 );

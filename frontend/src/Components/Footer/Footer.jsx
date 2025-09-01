@@ -1,14 +1,14 @@
 import React from "react";
 import './Footer.css';
-// import navLogo from '../../assets/img/nav_logo_white.png';
-// import footerTopBg from '../../assets/img/footer-top-bg.png';
+import navLogo from '../../assets/img/TCIT Logo png.png';
+import footerTopBg from '../../assets/img/footer-top-bg.png';
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => (
   <footer className="tcit-footer">
     {/* Top Blue Section */}
-            <div className="footer-top-bg" style={{ backgroundImage: `url('/assets/img/footer-top-bg.png')` }}>
+            <div className="footer-top-bg" style={{ backgroundImage: `url(${footerTopBg})` }}>
       <div className="footer-top-content">
         <h2 className="footer-top-title">Start your new life today!</h2>
         <p className="footer-top-desc">
@@ -21,7 +21,7 @@ const Footer = () => (
     {/* Main Footer Section */}
     <div className="footer-main">
       <div className="footer-section about">
-        <img src="/assets/img/TCIT Logo png.png" alt="TCIT Logo" className="footer-nav-logo" />
+        <img src={navLogo} alt="TCIT Logo" className="footer-nav-logo" />
         <p>
           Talent Computer provides training in different language like C, C++, Python, Php, React, Angular, Web design, DBMS & other Technologies. Talent Computer Training institute offers students an innovative way to learn Technology.
         </p>

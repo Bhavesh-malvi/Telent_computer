@@ -1,24 +1,27 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import mernImg from "../../assets/img/mern.jpg";
+import javaImg from "../../assets/img/javafullstack.webp";
+import pythonImg from "../../assets/img/pythonfullstack.jpg";
 import "./PopularCourses.css";
 
 const courses = [
   {
     id: "mern",
     title: "MERN Stack",
-            img: "/assets/img/mern.jpg",
+            img: mernImg,
     desc: "Master MongoDB, Express.js, React, and Node.js to build robust full-stack web applications."
   },
   {
     id: "java",
     title: "Java Full Stack",
-            img: "/assets/img/javafullstack.webp",
+            img: javaImg,
     desc: "Become a Java Full Stack Developer by learning front-end and back-end technologies with Java."
   },
   {
     id: "python",
     title: "Python Full Stack",
-            img: "/assets/img/pythonfullstack.jpg",
+            img: pythonImg,
     desc: "Learn Python for both front-end and back-end development, including Django and modern JS frameworks."
   }
 ];

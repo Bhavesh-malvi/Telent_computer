@@ -1,7 +1,7 @@
 import React from "react";
 import "./HomeAboutUs.css";
-// import programmersImg from "../../assets/img/programmers.jpg";
-// import logoImg from "../../assets/img/logo.png";
+import programmersImg from "../../assets/img/programmers.jpg";
+import logoImg from "../../assets/img/logo.png";
 
 const HomeAboutUs = () => (
   <section className="aboutus-cta-section">
@@ -14,9 +14,9 @@ const HomeAboutUs = () => (
         <a href="/contact"><button className="aboutus-cta-btn">GET STARTED</button></a>
       </div>
       <div className="aboutus-cta-image-wrap">
-        <img src="/assets/img/programmers.jpg" alt="Programmers working together" className="aboutus-cta-image" />
+        <img src={programmersImg} alt="Programmers working together" className="aboutus-cta-image" />
         <div className="aboutus-cta-logo-overlay">
-                      <img src="/assets/img/logo.png" alt="Logo" className="aboutus-cta-logo" />
+                      <img src={logoImg} alt="Logo" className="aboutus-cta-logo" />
         </div>
       </div>
     </div>

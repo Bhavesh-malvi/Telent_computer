@@ -4,17 +4,29 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./PopularLanguages.css";
 
+// Import images
+import javascript from "../../assets/img/javascript.png";
+import python from "../../assets/img/python.png";
+import java from "../../assets/img/java.png";
+import cpp from "../../assets/img/cpp.png";
+import php from "../../assets/img/php.png";
+import sql from "../../assets/img/sql.png";
+import vuejs from "../../assets/img/vuejs.png";
+import mongodb from "../../assets/img/mongodb.png";
+import nodejs from "../../assets/img/nodejs.png";
+import react from "../../assets/img/react.png";
+
 const languages = [
-      { img: '/assets/img/javascript.png', title: "JavaScript" },
-      { img: '/assets/img/python.png', title: "Python" },
-      { img: '/assets/img/java.png', title: "Java" },
-      { img: '/assets/img/cpp.png', title: "C++" },
-      { img: '/assets/img/php.png', title: "PHP" },
-      { img: '/assets/img/sql.png', title: "SQL" },
-      { img: '/assets/img/vuejs.png', title: "Vue.js" },
-      { img: '/assets/img/mongodb.png', title: "MongoDB" },
-      { img: '/assets/img/nodejs.png', title: "Node.js" },
-      { img: '/assets/img/react.png', title: "React" },
+      { img: javascript, title: "JavaScript" },
+      { img: python, title: "Python" },
+      { img: java, title: "Java" },
+      { img: cpp, title: "C++" },
+      { img: php, title: "PHP" },
+      { img: sql, title: "SQL" },
+      { img: vuejs, title: "Vue.js" },
+      { img: mongodb, title: "MongoDB" },
+      { img: nodejs, title: "Node.js" },
+      { img: react, title: "React" },
 ];
 
 const sliderSettings = {

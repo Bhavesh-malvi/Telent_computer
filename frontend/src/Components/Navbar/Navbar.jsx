@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
-// import logo from "../../assets/img/nav_logo.png";
+import logo from "../../assets/img/TCIT Logo png.png";
 import { NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -15,7 +15,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-logo">
         <NavLink to="/">
-          <img src="/assets/img/TCIT Logo png.png" alt="Logo" />
+          <img src={logo} alt="Logo" />
         </NavLink>
       </div>
       <div className={`navbar-links ${open ? "active" : ""}`}>

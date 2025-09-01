@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Courses.css";
 import { API_URL } from "../../config/api";
 import axios from "axios";
-
+import fallbackImg from "../../assets/img/course1.jpeg";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -49,11 +49,11 @@ const Courses = () => {
             <div className="course-card-modern-left">
               <div className="course-img-modern-wrap">
                 <img 
-                  src={course.image || '/assets/img/course1.jpeg'} 
+                  src={course.image || fallbackImg} 
                   alt={course.title} 
                   className="course-img-modern"
                   onError={(e) => {
-                    e.target.src = '/assets/img/course1.jpeg';
+                    e.target.src = fallbackImg;
                   }}
                 />
                 <div className="course-badge-modern">{course.badge}</div>

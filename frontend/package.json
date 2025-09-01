@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "bash build.sh",
+    "build": "node build.js",
+    "build:vercel": "bash build.sh",
     "build:fallback": "node build.js",
     "lint": "eslint .",
     "preview": "vite preview",

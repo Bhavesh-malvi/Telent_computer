@@ -67,22 +67,15 @@ Enhanced the Vercel configuration to handle the dependency issue and force Rollu
     }
   },
   "installCommand": "npm install --no-optional",
-  "buildCommand": "bash build.sh",
+  "buildCommand": "npm run build",
   "framework": "vite"
 }
 ```
 
-### 4. Created Custom Build Scripts
-Created multiple build scripts to ensure the environment variable is set properly:
+### 4. Created Custom Build Script
+Created a Node.js build script that ensures the environment variable is set properly:
 
-**`build.sh` (Shell script for Vercel):**
-```bash
-#!/bin/bash
-export ROLLUP_USE_JS=true
-npm run build
-```
-
-**`build.js` (Node.js script as fallback):**
+**`build.js` (Node.js script):**
 ```javascript
 #!/usr/bin/env node
 process.env.ROLLUP_USE_JS = 'true';
@@ -90,19 +83,30 @@ import { build } from 'vite';
 await build();
 ```
 
-### 5. Upgraded Dependencies
+### 5. Updated Package Scripts
+Updated package.json scripts to use the custom build script:
+```json
+{
+  "scripts": {
+    "build": "node build.js",
+    "build:vercel": "bash build.sh"
+  }
+}
+```
+
+### 6. Upgraded Dependencies
 Updated Rollup and Vite to latest versions that support Node.js 22:
 ```bash
 npm install rollup@latest vite@latest --save-dev
 ```
 
-### 6. Created `.vercelignore`
+### 7. Created `.vercelignore`
 Added a comprehensive `.vercelignore` file to exclude unnecessary files from deployment.
 
 ## Why This Works
 1. **Node.js Version**: Using Node.js 22.x as required by Vercel's current policy.
-2. **Multiple Environment Variable Approaches**: We set `ROLLUP_USE_JS=true` in multiple places to ensure it's available during build.
-3. **Custom Build Scripts**: Shell script and Node.js script ensure the environment variable is set before Rollup loads.
+2. **Environment Variable Set Early**: The `build.js` script sets `ROLLUP_USE_JS=true` before importing Vite.
+3. **Multiple Environment Variable Approaches**: We set `ROLLUP_USE_JS=true` in multiple places to ensure it's available during build.
 4. **Selective Exclusion**: We exclude only the problematic `canvas` dependency while keeping other optional dependencies that are needed.
 5. **Vercel Configuration**: The `--no-optional` flag in the install command ensures canvas is not installed during deployment.
 
@@ -119,10 +123,12 @@ The project should now deploy successfully on Vercel without both the canvas dep
 1. **Engines**: Set to `"node": "22.x"`
 2. **Rollup**: Upgraded to latest version with Node.js 22 support
 3. **Environment Variable**: `ROLLUP_USE_JS=true` forces JS fallback
-4. **Custom Build Scripts**: Multiple approaches to ensure environment variable is set
+4. **Custom Build Script**: Node.js script ensures environment variable is set before Vite loads
 5. **Vite**: Upgraded to latest version for better compatibility
 
-## Build Script Hierarchy
-1. **Primary**: `bash build.sh` (for Vercel's Linux environment)
-2. **Fallback**: `node build.js` (if shell script fails)
-3. **Direct**: `vite build` (if environment variable is set elsewhere)
+## Build Script Solution
+The `build.js` script is the primary solution because:
+- It sets the environment variable before any modules are loaded
+- It works on both Windows and Unix systems
+- It's more reliable than shell scripts for cross-platform compatibility
+- It directly calls Vite's build function, avoiding npm script loops

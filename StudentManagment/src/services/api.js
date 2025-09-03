@@ -77,18 +77,27 @@ const startInactivityTimer = () => {
   }, INACTIVITY_TIMEOUT);
 };
 
-// Reset inactivity timer on user activity
+// Reset inactivity timer on user activity (with debounce)
+let resetTimerId = null;
 const resetInactivityTimer = () => {
   if (isLoggedIn) {
-    startInactivityTimer();
-    // Mark user as active in session
-    sessionStorage.setItem('isActive', 'true');
-    console.log('🔧 User activity detected, timer reset');
+    // Clear existing reset timer
+    if (resetTimerId) {
+      clearTimeout(resetTimerId);
+    }
+    
+    // Debounce reset to prevent excessive calls
+    resetTimerId = setTimeout(() => {
+      startInactivityTimer();
+      // Mark user as active in session
+      sessionStorage.setItem('isActive', 'true');
+      console.log('🔧 User activity detected, timer reset (debounced)');
+    }, 1000); // Wait 1 second before resetting
   }
 };
 
-// Track user activity events
-const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+// Track user activity events (optimized to prevent excessive resets)
+const activityEvents = ['click', 'keypress']; // Removed sensitive events like mousemove, scroll
 
 // Initialize activity monitoring
 export const initializeActivityMonitoring = async () => {

@@ -13,6 +13,7 @@ class WhatsAppConnectionService extends EventEmitter {
     this.retryDelay = 5000;
     this.sessionCounter = 0;
     this.clientReadyTimeout = 30000; // 30 seconds for client ready check
+    this.isInitializing = false; // Flag to prevent multiple simultaneous initializations
   }
 
   // Get unique session path
@@ -187,7 +188,11 @@ class WhatsAppConnectionService extends EventEmitter {
         clientId: 'tcit-whatsapp-client',
         dataPath: this.getSessionPath()
       }),
-      puppeteer: puppeteerConfig
+      puppeteer: puppeteerConfig,
+      // ✅ DISABLE CACHE TO FIX LocalWebCache.persist ERROR
+      webVersionCache: {
+        type: "none" // Disable cache completely
+      }
     });
     
     console.log('✅ WhatsApp client created successfully');
@@ -302,25 +307,40 @@ class WhatsAppConnectionService extends EventEmitter {
       console.log('🔄 Starting WhatsApp client initialization...');
       
       // Clean up old sessions first
+      console.log('🧹 Cleaning up old sessions...');
       await this.cleanupOldSessions();
+      console.log('✅ Old sessions cleaned up');
       
       if (this.client) {
+        console.log('🔌 Disconnecting existing client...');
         await this.disconnect();
+        console.log('✅ Existing client disconnected');
       }
       
       // Reset session counter for new session
       this.sessionCounter = 0;
+      console.log('🔄 Session counter reset');
       
+      console.log('🔧 Creating new WhatsApp client...');
       await this.createClient();
+      console.log('✅ Client created, setting up event handlers...');
       await this.setupEventHandlers();
+      console.log('✅ Event handlers setup completed');
       
-      // Add timeout and better error handling (increased for Render free plan)
+      // Add timeout and better error handling (optimized for Render free plan)
+      console.log('🔄 Starting client initialization...');
       const initPromise = this.client.initialize();
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Initialization timeout')), 360000); // 6 minutes
+        setTimeout(() => reject(new Error('Initialization timeout - client taking too long')), 120000); // 2 minutes
       });
       
-      await Promise.race([initPromise, timeoutPromise]);
+      try {
+        await Promise.race([initPromise, timeoutPromise]);
+        console.log('✅ Client initialization promise resolved');
+      } catch (timeoutError) {
+        console.error('⏰ Initialization timeout:', timeoutError.message);
+        throw timeoutError;
+      }
       
       console.log('✅ WhatsApp client initialization completed');
     } catch (error) {
@@ -541,18 +561,32 @@ class WhatsAppConnectionService extends EventEmitter {
 
   // Alternative initialization method for Render free plan
   async initializeWithRetry() {
+    // Prevent multiple simultaneous initialization calls
+    if (this.isInitializing) {
+      console.log('⚠️ Initialization already in progress, skipping...');
+      return { success: false, message: 'Initialization already in progress' };
+    }
+    
+    // If already ready, don't initialize again
+    if (this.isReady && this.client) {
+      console.log('✅ WhatsApp already ready, skipping initialization');
+      return { success: true, message: 'WhatsApp already ready' };
+    }
+    
+    this.isInitializing = true;
     const maxAttempts = 5;
     let attempt = 0;
     
-    while (attempt < maxAttempts) {
-      attempt++;
-      console.log(`🔄 Initialization attempt ${attempt}/${maxAttempts}...`);
-      
-      try {
-        await this.initialize();
-        console.log('✅ Initialization successful!');
-        return { success: true, message: 'WhatsApp initialized successfully' };
-      } catch (error) {
+    try {
+      while (attempt < maxAttempts) {
+        attempt++;
+        console.log(`🔄 Initialization attempt ${attempt}/${maxAttempts}...`);
+        
+        try {
+          await this.initialize();
+          console.log('✅ Initialization successful!');
+          return { success: true, message: 'WhatsApp initialized successfully' };
+        } catch (error) {
         console.error(`❌ Attempt ${attempt} failed:`, error.message);
         
         if (attempt < maxAttempts) {
@@ -573,14 +607,17 @@ class WhatsAppConnectionService extends EventEmitter {
           this.isInitialized = false;
         }
       }
+      }
+      
+      console.error('❌ All initialization attempts failed');
+      return { 
+        success: false, 
+        error: 'All initialization attempts failed',
+        message: 'WhatsApp initialization failed after multiple attempts'
+      };
+    } finally {
+      this.isInitializing = false; // Reset flag when done
     }
-    
-    console.error('❌ All initialization attempts failed');
-    return { 
-      success: false, 
-      error: 'All initialization attempts failed',
-      message: 'WhatsApp initialization failed after multiple attempts'
-    };
   }
 
   // Force ready status check

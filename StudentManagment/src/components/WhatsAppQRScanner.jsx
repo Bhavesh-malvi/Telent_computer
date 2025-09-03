@@ -298,8 +298,8 @@ const WhatsAppQRScanner = ({ isOpen, onClose }) => {
 
       console.log('🚀 Starting QR generation...');
 
-      // Call backend to initialize WhatsApp and get QR code
-      const response = await fetch(getApiUrl(getEndpoint('WHATSAPP', 'INITIALIZE')) + '?forceNewQR=true', {
+      // Call backend to initialize WhatsApp and get QR code (only once)
+      const response = await fetch(getApiUrl(getEndpoint('WHATSAPP', 'INITIALIZE')), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

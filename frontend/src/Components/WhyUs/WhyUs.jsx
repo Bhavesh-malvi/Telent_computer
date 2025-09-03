@@ -1,5 +1,6 @@
 import React from "react";
 import "./WhyUs.css";
+import {Link} from 'react-router-dom'
 
 const leftPoints = [
   "In-Demand IT Certifications Tailored for You",
@@ -37,7 +38,7 @@ const WhyUs = () => (
           ))}
         </ul>
       </div>
-      <a href="/why-choose-us"><button className="whyus-btn">LEARN MORE</button></a>
+      <Link href="/why-choose-us"><button className="whyus-btn">LEARN MORE</button></Link>
     </div>
   </section>
 );

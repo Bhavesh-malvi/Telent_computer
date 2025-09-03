@@ -3,6 +3,7 @@ import "./Courses.css";
 import { API_URL } from "../../config/api";
 import axios from "axios";
 import fallbackImg from "../../assets/img/course1.jpeg";
+import { Link } from "react-router-dom";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -67,7 +68,7 @@ const Courses = () => {
         ))}
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
-        <a href="/courses"><button className="view-more-courses-btn">View More Courses</button></a>
+        <Link href="/courses"><button className="view-more-courses-btn">View More Courses</button></Link>
       </div>
     </section>
     )}

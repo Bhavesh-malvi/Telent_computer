@@ -157,17 +157,17 @@ const ContactInfo = () => (
     <h2 className="ContactInfo__heading">Contact Info</h2>
     <div className="ContactInfo__section">
       <b>Head Office</b>
-      <div>Raj Ratan Complex, Rajendra Park Char Rasta<br />
-      Nr. Kaka Bhaji Pav, Odhav, Ahmedabad - 382415</div>
+      <div>206, Radhe Chambers (Above SBI Bank),<br />
+          Next to HP Petrol Pump,<br />
+          Karnavati - Nirant Road, Vastral, Ahmedabad - 382418</div>
       <a href="tel:+919904365650">+91-9904-365650</a><br />
-      <span>tcit.ahmedabad@gmail.com</span>
+      <span>tcit.vastral@gmail.com</span>
     </div>
     <div className="ContactInfo__section">
       <b>Vastral Branch</b>
       <div><b>Address 1:</b><br />
-        206, Radhe Chambers (Above SBI Bank),<br />
-        Next to HP Petrol Pump,<br />
-        Karnavati - Nirant Road, Vastral, Ahmedabad - 382418<br />
+        Raj Ratan Complex, Rajendra Park Char Rasta<br />
+        Nr. Kaka Bhaji Pav, Odhav, Ahmedabad - 382415<br />
         <a href="tel:+919904365650">+91-9904-365650</a> <a href="tel:+916351332238">+91-6351-332238</a>
       </div>
       <div><b>Address 2:</b><br />

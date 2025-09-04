@@ -37,7 +37,7 @@ function App() {
   useEffect(() => {
     if (isLoggedIn && !isValidatingToken) {
       // Initialize Socket.IO client
-      const socket = io('http://localhost:5000', {
+      const socket = io('https://telent-computer.onrender.com', {
         transports: ['polling', 'websocket'],
         withCredentials: true,
         timeout: 20000,

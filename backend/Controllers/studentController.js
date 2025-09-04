@@ -5,9 +5,7 @@ import generateInstallments from '../utils/generateInstallments.js';
 import cloudinary from '../config/cloudinary.js';
 import Issue from '../Model/Issue.js';
 import ExcelJS from 'exceljs';
-// Removed old service imports - using new modular services instead
-import autoMessageScheduler from '../services/scheduler/autoMessageScheduler.js';
-import welcomeMessageService from '../services/welcomeMessageService.js';
+
 
 const studentController = {
   // Return next available form number (numeric, sequential)
@@ -306,30 +304,9 @@ const studentController = {
           console.log(`🎉 New admission confirmed for student`);
           
           // Send welcome message asynchronously (don't block the response)
-          welcomeMessageService.sendWelcomeMessage(student)
-            .then(result => {
-              if (result.success) {
-                console.log(`✅ Welcome message sent successfully to student (${student.studentId})`);
-              } else {
-                console.log(`⚠️ Welcome message failed for student (${student.studentId}): ${result.message}`);
-              }
-            })
-            .catch(error => {
-              console.error(`❌ Error in welcome message for student:`, error.message);
-            });
+          // Welcome message disabled
 
-          // Send real-time admission confirmation asynchronously
-          autoMessageScheduler.sendAdmissionConfirmationRealTime(student._id)
-            .then(result => {
-              if (result && result.success) {
-                console.log(`✅ Admission confirmation sent successfully to student`);
-              } else {
-                console.log(`⚠️ Admission confirmation failed for student`);
-              }
-            })
-            .catch(error => {
-              console.error(`❌ Error in admission confirmation for student:`, error.message);
-            });
+          // Send real-time admission confirmation asynchronously (disabled)
         } catch (error) {
           console.error(`❌ Error sending messages to student:`, error.message);
           // Don't fail the registration if messages fail
@@ -844,21 +821,15 @@ const studentController = {
       const todayEnd = new Date();
       todayEnd.setHours(23, 59, 59, 999);
 
-      const BirthdayWish = (await import('../Model/BirthdayWish.js')).default;
-      const todayWishes = await BirthdayWish.find({
-        studentId: { $in: birthdayStudents.map(s => s._id) },
-        wishDate: {
-          $gte: todayStart,
-          $lte: todayEnd
-        }
-      });
+      // Birthday wishes tracking removed
+      const todayWishes = [];
 
       // Add wish status to each student
       const studentsWithWishStatus = birthdayStudents.map(student => {
         const wish = todayWishes.find(w => w.studentId.toString() === student._id.toString());
         return {
           ...student.toObject(),
-          wishStatus: wish ? wish.status : 'pending'
+          wishStatus: 'pending'
         };
       });
 

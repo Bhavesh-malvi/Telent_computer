@@ -33,39 +33,9 @@ const API_CONFIG = {
       AVAILABLE_FILTERS: '/api/dashboard/available-filters'
     },
     
-    // WhatsApp endpoints
-    WHATSAPP: {
-      INITIALIZE: '/api/whatsapp/initialize',
-      STATUS: '/api/whatsapp/status',
-      SEND_REMINDERS: '/api/whatsapp/send-reminders',
-      TEST_REMINDERS: '/api/whatsapp/test-reminders',
-      TEST_AUTOMATIC_REMINDERS: '/api/whatsapp/test-automatic-reminders',
-      DISCONNECT: '/api/whatsapp/disconnect',
-      FORCE_DISCONNECT: '/api/whatsapp/force-disconnect',
-      FORCE_NEW_QR: '/api/whatsapp/initialize',
-      GET_REMINDER_SETTINGS: '/api/whatsapp/reminder-settings',
-      UPDATE_REMINDER_SETTINGS: '/api/whatsapp/reminder-settings',
-      BIRTHDAY_WISHES_STATUS: '/api/whatsapp/birthday-wishes-status',
-      TEST_BIRTHDAY_WISHES: '/api/whatsapp/test-birthday-wishes'
-    },
+    // WhatsApp endpoints removed
     
-    // Auto Messages endpoints (new system)
-    AUTO_MESSAGES: {
-      WHATSAPP_INITIALIZE: '/api/auto-messages/whatsapp/initialize',
-      WHATSAPP_STATUS: '/api/auto-messages/whatsapp/status',
-      WHATSAPP_QR_CODE: '/api/auto-messages/whatsapp/qr-code',
-      WHATSAPP_DISCONNECT: '/api/auto-messages/whatsapp/disconnect',
-      FEE_REMINDERS_SEND: '/api/auto-messages/fee-reminders/send',
-      FEE_REMINDERS_STATUS: '/api/auto-messages/fee-reminders/status',
-      BIRTHDAY_WISHES_SEND: '/api/auto-messages/birthday-wishes/send',
-      BIRTHDAY_WISHES_STATUS: '/api/auto-messages/birthday-wishes/status',
-      ADMISSION_CONFIRMATIONS_SEND: '/api/auto-messages/admission-confirmations/send',
-      ADMISSION_CONFIRMATIONS_STATUS: '/api/auto-messages/admission-confirmations/status',
-      FEE_PAYMENT_SEND: '/api/auto-messages/fee-payment/send',
-      FEE_PAYMENT_STATUS: '/api/auto-messages/fee-payment/status',
-      ALL_SERVICES_STATUS: '/api/auto-messages/status',
-      TEST_MESSAGE: '/api/auto-messages/test-message'
-    },
+    // Auto Messages endpoints removed
     
     // Auto Message Settings endpoints
     AUTO_MESSAGE_SETTINGS: {

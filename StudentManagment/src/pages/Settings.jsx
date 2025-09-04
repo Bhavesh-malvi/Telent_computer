@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { User, Lock, Bell, Smartphone, LogOut, Settings as SettingsIcon, Mail, Eye, EyeOff } from 'lucide-react';
+import { User, Lock, Bell, Settings as SettingsIcon, Mail, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
-import WhatsAppQRScanner from '../components/WhatsAppQRScanner';
+// WhatsApp UI removed
 import API_CONFIG, { getApiUrl, getEndpoint } from '../config/apiConfig.js';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile');
-  const [showWhatsAppDialog, setShowWhatsAppDialog] = useState(false);
-  const [whatsappStatus, setWhatsappStatus] = useState({
-    isConnected: false,
-    isInitialized: false,
-    hasSession: false,
-    isActive: false
-  });
-  const [isLoading, setIsLoading] = useState(false);
+  // WhatsApp UI removed
   const [autoMessageSettings, setAutoMessageSettings] = useState({
     feeReminderTime: '10:00',
     feeReminderGapDays: 1,
@@ -33,124 +26,12 @@ const Profile = () => {
   const [isLoadingOtp, setIsLoadingOtp] = useState(false);
   const [isLoadingPasswordUpdate, setIsLoadingPasswordUpdate] = useState(false);
 
-  // Check WhatsApp status on component mount (only once)
+  // Initialize settings on component mount
   useEffect(() => {
-    checkWhatsAppStatus();
     loadAutoMessageSettings();
   }, []);
 
-  // Socket.IO listener for real-time WhatsApp status updates
-  useEffect(() => {
-    // Check if Socket.IO is available (from global window object)
-    if (window.io) {
-      try {
-        const socket = window.io('https://telent-computer.onrender.com', {
-          withCredentials: true,
-          transports: ['websocket', 'polling']
-        });
-        
-        console.log('🔌 Attempting Socket.IO connection...');
-        
-        // Connection events
-        socket.on('connect', () => {
-          console.log('🎉 Socket.IO connected successfully!');
-        });
-        
-        socket.on('connect_error', (error) => {
-          console.log('❌ Socket.IO connection error:', error);
-        });
-        
-        // Listen for WhatsApp ready event
-        socket.on('whatsapp-ready', (data) => {
-          console.log('🎉 WhatsApp ready event received in Settings:', data);
-          
-          // Update WhatsApp status to connected
-          setWhatsappStatus(prev => ({
-            ...prev,
-            isConnected: true,
-            isInitialized: true,
-            hasSession: true,
-            isActive: true
-          }));
-          
-          // Show success toast
-          toast.success(data.message || 'WhatsApp connected successfully!');
-        });
-        
-        // Listen for general WhatsApp status updates
-        socket.on('whatsapp-status', (data) => {
-          console.log('📱 WhatsApp status update in Settings:', data);
-          
-          if (data.status === 'connected') {
-            // Update WhatsApp status to connected
-            setWhatsappStatus(prev => ({
-              ...prev,
-              isConnected: true,
-              isInitialized: true,
-              hasSession: true,
-              isActive: true
-            }));
-            
-            // Show success toast
-            toast.success(data.message || 'WhatsApp connected successfully!');
-          } else if (data.status === 'disconnected') {
-            // Update WhatsApp status to disconnected
-            setWhatsappStatus(prev => ({
-              ...prev,
-              isConnected: false,
-              isInitialized: false,
-              hasSession: false,
-              isActive: false
-            }));
-            
-            // Show disconnect toast
-            toast.info(data.message || 'WhatsApp disconnected');
-          } else if (data.status === 'qr-ready') {
-            // Update WhatsApp status to QR ready
-            setWhatsappStatus(prev => ({
-              ...prev,
-              isConnected: false,
-              isInitialized: true,
-              hasSession: false,
-              isActive: false
-            }));
-            
-            // Show QR code toast
-            toast.info('QR code generated! Please scan with WhatsApp.');
-            console.log('📱 QR code received:', data.qrCode);
-          }
-        });
-
-        // Listen for specific QR code generation event
-        socket.on('qr-code-generated', (data) => {
-          console.log('📱 QR code generated event received in Settings:', data);
-          
-          // Update WhatsApp status to QR ready
-          setWhatsappStatus(prev => ({
-            ...prev,
-            isConnected: false,
-            isInitialized: true,
-            hasSession: false,
-            isActive: false
-          }));
-          
-          // Show QR code toast
-          toast.info('New QR code available! Please scan with WhatsApp.');
-          console.log('📱 New QR code received:', data.qrCode);
-        });
-        
-        // Cleanup socket connection
-        return () => {
-          console.log('🔌 Disconnecting Socket.IO...');
-          socket.disconnect();
-        };
-      } catch (error) {
-        console.error('❌ Socket.IO setup error:', error);
-      }
-    } else {
-      console.log('⚠️ Socket.IO not available, using manual status checks');
-    }
-  }, []);
+  // WhatsApp Socket.IO removed
 
   const loadAutoMessageSettings = async () => {
     try {
@@ -200,96 +81,11 @@ const Profile = () => {
     }
   };
 
-  const checkWhatsAppStatus = async () => {
-    try {
-      console.log('🔍 Checking WhatsApp status...');
-      const response = await fetch(getApiUrl(getEndpoint('WHATSAPP', 'STATUS')));
-      const data = await response.json();
-      
-      console.log('WhatsApp status response:', data);
-      
-      if (data.success) {
-        const newStatus = {
-          isConnected: data.status?.isReady || false,
-          isInitialized: data.status?.isInitialized || false,
-          hasSession: data.sessionStatus?.hasSession || false,
-          isActive: data.sessionStatus?.isActive || false
-        };
-        
-        console.log('Setting WhatsApp status:', newStatus);
-        setWhatsappStatus(newStatus);
-        
-        if (newStatus.isConnected) {
-          console.log('✅ WhatsApp is connected - should show "Change Connected WhatsApp" button');
-        } else {
-          console.log('❌ WhatsApp is not connected - should show "Connect Your WhatsApp" button');
-        }
-      } else {
-        console.error('Failed to get WhatsApp status:', data);
-      }
-    } catch (error) {
-      console.error('Error checking WhatsApp status:', error);
-      setWhatsappStatus({
-        isConnected: false,
-        isInitialized: false,
-        hasSession: false,
-        isActive: false
-      });
-    }
-  };
+  // WhatsApp status checks removed
 
-  const handleWhatsAppConnect = () => {
-    setShowWhatsAppDialog(true);
-  };
+  
 
-  const handleWhatsAppDisconnect = async () => {
-    console.log('🛑 User initiated WhatsApp disconnect...');
-    setIsLoading(true);
-    
-    try {
-      console.log('Current WhatsApp status:', whatsappStatus);
-      
-      // Make request to force disconnect WhatsApp (manual disconnect)
-      const response = await fetch(getApiUrl(getEndpoint('WHATSAPP', 'FORCE_DISCONNECT')), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        console.log('✅ WhatsApp manually disconnected successfully');
-        toast.success('WhatsApp disconnected successfully. You will need to scan QR code to reconnect.');
-        
-        // Update status immediately
-        setWhatsappStatus({
-          isConnected: false,
-          isReady: false,
-          isInitialized: false
-        });
-        
-        // Check status after disconnecting
-        console.log('Checking WhatsApp status after clearing...');
-        await checkWhatsAppStatus();
-      } else {
-        console.error('❌ Failed to disconnect WhatsApp:', data);
-        toast.error(data.message || 'Failed to disconnect WhatsApp');
-      }
-    } catch (error) {
-      console.error('❌ Error disconnecting WhatsApp:', error);
-      toast.error('Failed to disconnect WhatsApp');
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  const handleWhatsAppDialogClose = () => {
-    setShowWhatsAppDialog(false);
-    // Check status after dialog closes
-    setTimeout(checkWhatsAppStatus, 1000);
-  };
 
   // Password update functions
   const handleUpdatePassword = async () => {
@@ -572,25 +368,7 @@ const Profile = () => {
               <p className="text-gray-600">Manage your profile and system settings</p>
             </div>
             
-            {/* WhatsApp Button in Top-Right Corner */}
-            {whatsappStatus.isConnected ? (
-              <button
-                onClick={handleWhatsAppDisconnect}
-                disabled={isLoading}
-                className="flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
-              >
-                <LogOut className={`text-sm ${isLoading ? 'animate-spin' : ''}`} />
-                <span>{isLoading ? 'Disconnecting...' : 'Change Connected WhatsApp'}</span>
-              </button>
-            ) : (
-              <button
-                onClick={handleWhatsAppConnect}
-                className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-              >
-                <Smartphone className="text-sm" />
-                <span>Connect Your WhatsApp</span>
-              </button>
-            )}
+            {/* WhatsApp UI removed */}
           </div>
         </div>
 
@@ -674,7 +452,7 @@ const Profile = () => {
                </div>
                <div>
                  <h2 className="text-xl font-semibold text-gray-900">Automatic Message Settings</h2>
-                 <p className="text-sm text-gray-600">Configure automatic WhatsApp messages for reminders and birthday wishes</p>
+                 <p className="text-sm text-gray-600">Configure automatic reminders and birthday wishes</p>
                </div>
              </div>
 
@@ -789,12 +567,7 @@ const Profile = () => {
         </div>
       )}
 
-      {/* WhatsApp QR Scanner Dialog */}
-      <WhatsAppQRScanner
-        isOpen={showWhatsAppDialog}
-        onClose={handleWhatsAppDialogClose}
-        onSuccess={checkWhatsAppStatus}
-      />
+      {/* WhatsApp UI removed */}
     </div>
   );
 };

@@ -1,40 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, Clock, AlertTriangle, CreditCard, DollarSign, Calendar, MessageCircle, Loader2 } from 'lucide-react';
-import API_CONFIG, { getApiUrl, getEndpoint } from '../../config/apiConfig.js';
+import React from 'react';
+import { CheckCircle, Clock, AlertTriangle, DollarSign, Calendar } from 'lucide-react';
 
 const DailyPayments = ({ dailyPayments, pendingPayments }) => {
-  const [whatsappStatus, setWhatsappStatus] = useState({ isReady: false, isInitialized: false });
 
   const todayRevenue = dailyPayments.reduce((sum, payment) => sum + payment.amount, 0);
   const pendingRevenue = pendingPayments.reduce((sum, payment) => sum + payment.amount, 0);
   const overduePendingPayments = pendingPayments.filter(p => p.status.startsWith('Overdue'));
 
-  // Students eligible for WhatsApp reminders (1+ months due or 2+ months overdue)
-  const eligibleForReminders = pendingPayments.filter(p => 
-    p.status.includes('Due') || p.status.includes('Overdue')
-  );
 
-  // Check WhatsApp status on component load (only once)
-  useEffect(() => {
-    const checkWhatsAppStatus = async () => {
-      try {
-        const response = await fetch(getApiUrl(getEndpoint('WHATSAPP', 'STATUS')));
-        const data = await response.json();
-        
-        if (data.success) {
-          setWhatsappStatus(data.status);
-        }
-      } catch (error) {
-        console.error('Error checking WhatsApp status:', error);
-        // Set default status on error
-        setWhatsappStatus({ isReady: false, isInitialized: false });
-      }
-    };
-    
-    checkWhatsAppStatus();
-  }, []);
-
-  // WhatsApp Status Check (Automatic System)
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -141,58 +114,8 @@ const DailyPayments = ({ dailyPayments, pendingPayments }) => {
           </div>
         </div>
 
-        {/* WhatsApp Automatic Reminder Section */}
-        {eligibleForReminders.length > 0 && (
-          <div className="mb-4 p-4 bg-green-50 rounded-lg border border-green-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="font-medium text-green-900 flex items-center space-x-2">
-                  <MessageCircle className="h-4 w-4" />
-                  <span>Automatic WhatsApp Reminders</span>
-                </h4>
-                <p className="text-sm text-green-700 mt-1">
-                  {eligibleForReminders.length} students eligible for automatic reminders
-                </p>
-                <p className="text-xs text-green-600 mt-1">
-                  ⏰ Daily reminders at 10:00 AM • 5-day gap between reminders
-                </p>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="text-sm text-green-700 font-medium">
-                  🤖 Automatic
-                </div>
-                {!whatsappStatus.isReady && (
-                  <div className="text-sm text-orange-600">
-                    ⚠️ WhatsApp not connected
-                  </div>
-                )}
-              </div>
-            </div>
+      
             
-            {/* Status Indicators */}
-            <div className="mt-3 flex space-x-4 text-xs">
-              <div className={`flex items-center space-x-1 ${whatsappStatus.isInitialized ? 'text-green-600' : 'text-gray-400'}`}>
-                <div className={`w-2 h-2 rounded-full ${whatsappStatus.isInitialized ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-                <span>WhatsApp Ready</span>
-              </div>
-              <div className="flex items-center space-x-1 text-green-600">
-                <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                <span>Auto System Active</span>
-              </div>
-              <div className="flex items-center space-x-1 text-blue-600">
-                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                <span>Daily at 10:00 AM</span>
-              </div>
-            </div>
-
-            {/* Info Display */}
-            <div className="mt-3 p-2 bg-white rounded border">
-              <p className="text-xs text-gray-600">
-                ✅ Automatic system running • Only eligible students will receive reminders • 5-day gap maintained
-              </p>
-            </div>
-          </div>
-        )}
 
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {pendingPayments.map((payment, index) => (

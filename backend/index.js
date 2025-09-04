@@ -14,27 +14,16 @@ import contactRoutes from './Routes/contactRoutes.js';
 import issueRoutes from './Routes/issueRoutes.js';
 import chapterRoutes from './Routes/chapterRoutes.js';
 import dashboardRoutes from './Routes/dashboardRoutes.js';
-import whatsappRoutes from './Routes/whatsappRoutes.js';
-import whatsappController from './Controllers/whatsappController.js';
 import staffRoutes from './Routes/staffRoutes.js';
-import welcomeMessageRoutes from './Routes/welcomeMessageRoutes.js';
-import feePaymentMessageRoutes from './Routes/feePaymentMessageRoutes.js';
+// Removed WhatsApp-related routes
 import reminderSettingsRoutes from './Routes/reminderSettingsRoutes.js';
-import autoMessageRoutes from './Routes/autoMessageRoutes.js';
-import schedulerRoutes from './Routes/schedulerRoutes.js';
-import autoMessageSettingsRoutes from './Routes/autoMessageSettingsRoutes.js';
 
 import mongoose from 'mongoose';
 
 // Import models to register them
 import './Model/studentCourse.js';
 
-// Import automatic reminder service
-import automaticReminderService from './services/automaticReminderService.js';
-// Import automatic birthday wishes service
-import automaticBirthdayWishes from './services/automaticBirthdayWishes.js';
-// Import new auto message scheduler
-import autoMessageScheduler from './services/scheduler/autoMessageScheduler.js';
+// Removed WhatsApp automation services
 
 const app = express();
 const httpServer = createServer(app);
@@ -130,15 +119,7 @@ io.on('connection', (socket) => {
     });
   });
   
-  // WhatsApp status updates
-  socket.on('whatsapp-status-request', () => {
-    const whatsappStatus = {
-      isReady: false, // Updated to use new service
-      isInitialized: false, // Updated to use new service
-      timestamp: new Date().toISOString()
-    };
-    socket.emit('whatsapp-status-update', whatsappStatus);
-  });
+  // WhatsApp status events removed
 });
 
 // Connect to MongoDB
@@ -188,27 +169,12 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/issues', issueRoutes);
 app.use('/api/chapters', chapterRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-// WhatsApp routes (public and protected)
-app.use('/api/whatsapp', whatsappRoutes);
 app.use('/api/staff', staffRoutes);
-
-// Welcome message routes
-app.use('/api/welcome-messages', welcomeMessageRoutes);
-
-// Fee payment message routes
-app.use('/api/fee-payment-messages', feePaymentMessageRoutes);
 
 // Reminder settings routes
 app.use('/api/reminder-settings', reminderSettingsRoutes);
 
-// Auto message routes
-app.use('/api/auto-messages', autoMessageRoutes);
-
-// Scheduler routes
-app.use('/api/scheduler', schedulerRoutes);
-
-// Auto message settings routes
-app.use('/api/auto-message-settings', autoMessageSettingsRoutes);
+// Removed auto-messaging routes
 
 // Root route
 app.get('/', (req, res) => {
@@ -228,10 +194,7 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
     memory: process.memoryUsage(),
-    whatsapp: {
-      isReady: false, // Updated to use new service
-      isInitialized: false // Updated to use new service
-    }
+    // WhatsApp removed
   });
 });
 
@@ -313,7 +276,7 @@ const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
   
-  // Wait for database connection before initializing WhatsApp
+  // Wait for database connection
   console.log('⏳ Waiting for database connection...');
   let dbConnected = false;
   let attempts = 0;
@@ -322,7 +285,7 @@ httpServer.listen(PORT, async () => {
   while (!dbConnected && attempts < maxAttempts) {
     if (mongoose.connection.readyState === 1) {
       dbConnected = true;
-      console.log('✅ Database connected, proceeding with WhatsApp initialization');
+      console.log('✅ Database connected');
     } else {
       attempts++;
       console.log(`⏳ Database not ready, attempt ${attempts}/${maxAttempts}...`);
@@ -331,42 +294,10 @@ httpServer.listen(PORT, async () => {
   }
   
   if (!dbConnected) {
-    console.log('⚠️ Database connection timeout, initializing WhatsApp anyway');
+    console.log('⚠️ Database connection timeout');
   }
   
-  // Initialize WhatsApp service after database is ready
-  try {
-      // WhatsApp service is now handled by the new connection service
-  console.log('✅ WhatsApp service initialization skipped (using new connection service)');
-    console.log('📱 WhatsApp service initialized (manual connection required)');
-  } catch (error) {
-    console.log('⚠️ Failed to initialize WhatsApp service:', error.message);
-  }
-  
-  // Start automatic reminder service (old system) - DISABLED
-  try {
-    // await automaticReminderService.start();
-    console.log('⚠️ Old automatic reminder service DISABLED (using new system)');
-  } catch (error) {
-    console.log('⚠️ Failed to start old automatic reminder service:', error.message);
-  }
-  
-  // Start new auto message scheduler (DISABLED - manual initialization required)
-  try {
-    // await autoMessageScheduler.initialize();
-    // await autoMessageScheduler.startAllSchedules();
-    console.log('⚠️ Auto message scheduler DISABLED (manual initialization required)');
-    console.log('📱 Please use "Connect WhatsApp" button to initialize WhatsApp');
-  } catch (error) {
-    console.log('⚠️ Failed to start new auto message scheduler:', error.message);
-  }
-  
-  // Start automatic birthday wishes service (now handled by automaticReminderService)
-  try {
-    console.log('🎂 Birthday wishes now managed by automatic reminder service');
-  } catch (error) {
-    // Failed to start automatic birthday wishes service
-  }
+  // Removed WhatsApp auto services
   
   // Start keep-alive service to prevent sleep
   try {
@@ -385,13 +316,7 @@ global.__io = io;
 process.on('unhandledRejection', (err) => {
   console.error('❌ Unhandled Promise Rejection:', err);
   
-  // Check if it's a WhatsApp EBUSY error - don't restart server
-  if (err.message && (err.message.includes('EBUSY') || err.message.includes('resource busy'))) {
-    console.log('⚠️ WhatsApp EBUSY error detected, but continuing without server restart...');
-    console.log('⚠️ WhatsApp session will need manual reconnection');
-    console.log('⚠️ This is a file locking issue, not a critical server error');
-    return; // Don't restart server
-  }
+  // Continue running for non-critical errors
   
   // For other critical errors, close server & exit process
   console.error('❌ Critical error detected, shutting down server...');
@@ -402,13 +327,7 @@ process.on('unhandledRejection', (err) => {
 process.on('uncaughtException', (err) => {
   console.error('❌ Uncaught Exception:', err);
   
-  // Check if it's a WhatsApp EBUSY error - don't restart server
-  if (err.message && (err.message.includes('EBUSY') || err.message.includes('resource busy'))) {
-    console.log('⚠️ WhatsApp EBUSY error detected, but continuing without server restart...');
-    console.log('⚠️ WhatsApp session will need manual reconnection');
-    console.log('⚠️ This is a file locking issue, not a critical server error');
-    return; // Don't restart server
-  }
+  // Continue running for non-critical errors
   
   // For other critical errors, close server & exit process
   console.error('❌ Critical error detected, shutting down server...');

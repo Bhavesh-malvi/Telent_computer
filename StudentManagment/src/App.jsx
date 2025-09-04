@@ -37,7 +37,7 @@ function App() {
   useEffect(() => {
     if (isLoggedIn && !isValidatingToken) {
       // Initialize Socket.IO client
-      const socket = io('https://telent-computer.onrender.com', {
+      const socket = io('http://localhost:5000', {
         transports: ['polling', 'websocket'],
         withCredentials: true,
         timeout: 20000,
@@ -64,14 +64,7 @@ function App() {
         console.error('🔌 Socket.IO error event:', error);
       });
 
-      // Listen for WhatsApp events
-      socket.on('whatsapp-ready', (data) => {
-        console.log('🎉 WhatsApp ready event received in App.jsx:', data);
-      });
-
-      socket.on('whatsapp-status', (data) => {
-        console.log('📱 WhatsApp status event received in App.jsx:', data);
-      });
+      // WhatsApp removed
 
       // Test Socket.IO connection with a simple event
       socket.emit('test-connection', { message: 'Frontend connected', timestamp: new Date().toISOString() });

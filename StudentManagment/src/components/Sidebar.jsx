@@ -14,7 +14,7 @@ import {
   FaUserCog,
   FaRupeeSign,
   FaUser,
-  FaWhatsapp
+  
 } from "react-icons/fa";
 
 const navItems = [

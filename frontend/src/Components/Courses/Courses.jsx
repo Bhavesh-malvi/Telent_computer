@@ -68,7 +68,7 @@ const Courses = () => {
         ))}
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
-        <Link href="/courses"><button className="view-more-courses-btn">View More Courses</button></Link>
+        <Link to="/courses"><button className="view-more-courses-btn">View More Courses</button></Link>
       </div>
     </section>
     )}

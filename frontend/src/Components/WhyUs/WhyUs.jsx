@@ -38,7 +38,7 @@ const WhyUs = () => (
           ))}
         </ul>
       </div>
-      <Link href="/why-choose-us"><button className="whyus-btn">LEARN MORE</button></Link>
+      <Link to="/why-choose-us"><button className="whyus-btn">LEARN MORE</button></Link>
     </div>
   </section>
 );

@@ -2,7 +2,6 @@ import Navbar from './Components/Navbar/Navbar'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Home from './Pages/Home/Home'
 import Program from './Pages/Program/Program';
-import Footer from './Components/Footer/Footer';
 import Reason from './Pages/Reason/Reason';
 import React, { useEffect } from 'react';
 import AboutUs from './Pages/AboutUs/AboutUs';
@@ -27,7 +26,7 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter basename="/new">
+    <BrowserRouter>
       <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>

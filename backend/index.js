@@ -67,8 +67,8 @@ const io = new SocketIOServer(httpServer, {
         'http://localhost:5174',
         'https://telent-computer-gyx6.vercel.app',
         'https://telent-computer.vercel.app',
-        'https://telent-computer-36xj.vercel.app',
-        'https://telent-computer-admin.vercel.app'
+        "https://talentcomputeracademy.in",
+        "https://talentcomputeracademy.in/new"
       ];
       
       // Check if the origin is in our allowedOrigins array

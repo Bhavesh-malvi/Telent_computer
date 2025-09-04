@@ -27,7 +27,7 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/new">
       <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>

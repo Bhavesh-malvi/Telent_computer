@@ -147,40 +147,30 @@ function StudentDashboard() {
     return name.toLowerCase().trim();
   };
 
-  // Group courses by normalized name and sum enrollments
-  const courseDataMap = new Map();
-  
-  courseData.forEach(item => {
+  // First filter raw API data by selected year/month, then group by course
+  const filteredRawCourses = courseData.filter(item => {
+    const yearMatch = item.year === filters.selectedYear;
+    const monthMatch = filters.selectedMonth === 'All' ||
+      (filters.selectedMonth !== 'All' && item.month === parseInt(filters.selectedMonth));
+    return yearMatch && monthMatch;
+  });
+
+  const groupedCourseMap = new Map();
+  filteredRawCourses.forEach(item => {
     const normalizedName = normalizeCourseName(item.courseName);
     const displayName = item.courseName || 'Unknown Course';
-    
-    if (courseDataMap.has(normalizedName)) {
-      // Add to existing course
-      const existing = courseDataMap.get(normalizedName);
+    if (groupedCourseMap.has(normalizedName)) {
+      const existing = groupedCourseMap.get(normalizedName);
       existing.enrollments += item.count || 0;
     } else {
-      // Create new course entry
-      courseDataMap.set(normalizedName, {
+      groupedCourseMap.set(normalizedName, {
         courseName: displayName,
-        enrollments: item.count || 0,
-        year: item.year,
-        month: item.month
+        enrollments: item.count || 0
       });
     }
   });
 
-  const mappedCourseData = Array.from(courseDataMap.values());
-  
-
-  
-  
-  const filteredCourseData = mappedCourseData.filter(item => {
-    const yearMatch = item.year === filters.selectedYear;
-    const monthMatch = filters.selectedMonth === 'All' ||
-      (filters.selectedMonth !== 'All' && item.month === parseInt(filters.selectedMonth));
-    
-    return yearMatch && monthMatch;
-  });
+  const filteredCourseData = Array.from(groupedCourseMap.values());
 
 
   const mappedFeeData = feeData.map(item => ({

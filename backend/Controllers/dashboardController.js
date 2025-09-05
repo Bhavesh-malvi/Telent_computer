@@ -110,7 +110,7 @@ const dashboardController = {
     try {
       const { year, month } = req.query;
       const matchStages = [];
-      // AddFields to parse admission date
+      // Parse admission date
       matchStages.push({
         $addFields: {
           admissionDateObj: {
@@ -122,21 +122,22 @@ const dashboardController = {
           }
         }
       });
+      // Filter valid dates and Admission only
+      matchStages.push({ 
+        $match: { 
+          admissionDateObj: { $ne: null },
+          enquiryType: "Admission"
+        } 
+      });
       // Year filter
       if (year && year !== 'All') {
-        matchStages.push({ $match: { "admissionDateObj": { $ne: null }, $expr: { $eq: [ { $year: "$admissionDateObj" }, parseInt(year) ] } } });
+        matchStages.push({ $match: { $expr: { $eq: [ { $year: "$admissionDateObj" }, parseInt(year) ] } } });
       }
       // Month filter
       if (month && month !== 'All') {
         matchStages.push({ $match: { $expr: { $eq: [ { $month: "$admissionDateObj" }, parseInt(month) ] } } });
       }
-      // Remove null dates and filter for Admission students only
-      matchStages.push({ 
-        $match: { 
-          admissionDateObj: { $ne: null },
-          enquiryType: "Admission" // Only show Admission students, not Enquiry
-        } 
-      });
+
       const courseDemand = await Student.aggregate([
         ...matchStages,
         { $unwind: "$selectedCourses" },
@@ -149,19 +150,16 @@ const dashboardController = {
           }
         },
         { $unwind: "$courseDetails" },
-        // Normalize course names to avoid duplicates due to case/spacing differences
         {
           $addFields: {
             normalizedCourseName: {
-              $toLower: {
-                $trim: { input: "$courseDetails.name" }
-              }
+              $toLower: { $trim: { input: "$courseDetails.name" } }
             },
             nameLen: { $strLenCP: "$courseDetails.name" }
           }
         },
-        // Sort by name length so we can pick the longest, most descriptive display name
         { $sort: { nameLen: -1 } },
+        // Group by course + year + month so frontend can filter months accurately
         {
           $group: {
             _id: {
@@ -173,30 +171,17 @@ const dashboardController = {
             displayName: { $first: "$courseDetails.name" }
           }
         },
-        // Additional grouping to merge similar course names across months
-        {
-          $group: {
-            _id: {
-              courseNameNorm: "$_id.courseNameNorm",
-              year: "$_id.year"
-            },
-            totalCount: { $sum: "$count" },
-            displayName: { $first: "$displayName" },
-            months: { $push: { month: "$_id.month", count: "$count" } }
-          }
-        },
         {
           $project: {
             _id: 0,
             courseName: "$displayName",
             year: "$_id.year",
-            count: "$totalCount"
+            month: "$_id.month",
+            count: "$count"
           }
         },
-        { $sort: { count: -1 } }
+        { $sort: { year: 1, month: 1, count: -1 } }
       ]);
-
-
 
       res.json(courseDemand);
     } catch (err) {

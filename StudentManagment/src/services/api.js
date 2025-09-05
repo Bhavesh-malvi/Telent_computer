@@ -8,7 +8,7 @@ const API_URL = `${API_CONFIG.BASE_URL}/api`;
 // Auto logout configuration (increased for production)
 const INACTIVITY_TIMEOUT = import.meta.env.VITE_INACTIVITY_TIMEOUT 
   ? parseInt(import.meta.env.VITE_INACTIVITY_TIMEOUT) 
-  : (import.meta.env.PROD ? 30 * 60 * 1000 : 2 * 60 * 1000); // 30 min in production, 2 min in dev
+  : (2 * 60 * 1000); // Default 2 minutes
 
 // Enable auto logout based on environment variable
 const ENABLE_AUTO_LOGOUT = import.meta.env.VITE_ENABLE_AUTO_LOGOUT !== 'false';
@@ -22,6 +22,42 @@ console.log('🔧 Auto Logout Config:', {
 
 let inactivityTimer = null;
 let isLoggedIn = false;
+let heartbeatInterval = null;
+
+// Heartbeat utilities to keep staff online presence up-to-date
+const sendHeartbeat = async () => {
+  try {
+    await api.post('/staff/heartbeat');
+  } catch {}
+};
+
+const startHeartbeat = () => {
+  // Avoid duplicate intervals
+  if (heartbeatInterval) clearInterval(heartbeatInterval);
+  // Immediate heartbeat on start
+  sendHeartbeat();
+  heartbeatInterval = setInterval(sendHeartbeat, 15000); // every 15s
+  // Also heartbeat on key user actions
+  const activity = () => { sendHeartbeat(); };
+  window.addEventListener('click', activity, true);
+  window.addEventListener('keypress', activity, true);
+  // Save remover for stop
+  startHeartbeat._removeActivity = () => {
+    window.removeEventListener('click', activity, true);
+    window.removeEventListener('keypress', activity, true);
+  };
+};
+
+const stopHeartbeat = () => {
+  if (heartbeatInterval) {
+    clearInterval(heartbeatInterval);
+    heartbeatInterval = null;
+  }
+  if (startHeartbeat._removeActivity) {
+    startHeartbeat._removeActivity();
+    startHeartbeat._removeActivity = null;
+  }
+};
 
 // Logout utility function
 export const performLogout = async () => {
@@ -42,6 +78,7 @@ export const performLogout = async () => {
   }
   
   // Clear all stored data
+  stopHeartbeat();
   localStorage.removeItem('token');
   localStorage.removeItem('user');
   localStorage.removeItem('theme'); // Clean theme data
@@ -97,7 +134,7 @@ const resetInactivityTimer = () => {
 };
 
 // Track user activity events (optimized to prevent excessive resets)
-const activityEvents = ['click', 'keypress']; // Removed sensitive events like mousemove, scroll
+const activityEvents = ['click', 'keypress', 'mousemove', 'scroll', 'touchstart'];
 
 // Initialize activity monitoring
 export const initializeActivityMonitoring = async () => {
@@ -201,8 +238,10 @@ export const setLoginStatus = async (status) => {
   isLoggedIn = status;
   if (status) {
     await initializeActivityMonitoring();
+    startHeartbeat();
   } else {
     stopActivityMonitoring();
+    stopHeartbeat();
   }
 };
 

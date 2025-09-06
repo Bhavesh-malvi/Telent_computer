@@ -1,0 +1,58 @@
+.fs-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.fs-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.9rem;
+}
+
+.fs-trigger.fs-open {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.fs-caret {
+  font-size: 0.9rem;
+  color: #60748b;
+}
+
+.fs-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  max-height: 220px;
+  overflow: auto;
+  z-index: 50;
+}
+
+.fs-option {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.fs-option:hover {
+  background: #f1f5f9;
+}
+
+.fs-option.fs-selected {
+  background: #eef2ff;
+}

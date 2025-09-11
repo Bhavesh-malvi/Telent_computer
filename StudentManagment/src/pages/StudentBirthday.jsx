@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { Gift, Star, Heart, Calendar, Phone, Mail, CheckCircle, XCircle, Clock } from "react-feather";
+import Avatar from "../components/Avatar";
 
 const birthdayWishTemplate = "🎉 Happy Birthday {name}! 🎂 Wishing you a fantastic day filled with joy, laughter, and all your favorite things! May this new year bring you amazing adventures, endless happiness, and continued success in your studies. You're such an incredible student and we're so proud of you! Have a wonderful celebration! 🎈✨";
 
@@ -142,10 +143,11 @@ const StudentBirthday = () => {
               <div className="relative bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 px-6 py-8">
                 <div className="text-center">
                   <div className="relative inline-block mb-4">
-                    <img
-                      src={student.image || 'https://via.placeholder.com/96x96?text=Student'}
-                      alt={student.name}
-                      className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover"
+                    <Avatar
+                      src={student.image}
+                      name={student.name}
+                      size="2xl"
+                      className="border-4 border-white shadow-lg"
                     />
                     <div className="absolute -top-1 -right-1 bg-yellow-400 rounded-full p-1.5 shadow-lg animate-pulse">
                       <Star className="text-yellow-700" size={14} />

@@ -4,6 +4,7 @@ import axios from '../../api/axios';
 import './StudentDashboard.css';
 import { User, HelpCircle, LogOut, Hash, Mail, BookOpen, Eye } from 'react-feather';
 import axiosInstance from '../../api/axios';
+import Avatar from '../../Components/Avatar/Avatar';
 
 export default function StudentDashboard() {
   const [student, setStudent] = useState(null);
@@ -350,21 +351,15 @@ export default function StudentDashboard() {
           </h2>
           <div className="sd-student-info-flex" style={{ gap: '16px', padding: '0' }}>
             <div className="sd-student-info-img-wrap" style={{ flexShrink: 0 }}>
-              <div className="sd-student-info-img-outer"
-                onMouseEnter={e => e.currentTarget.classList.add('sd-navbar-avatar-hover')}
-                onMouseLeave={e => e.currentTarget.classList.remove('sd-navbar-avatar-hover')}
-              >
-                <img
-                  src={student.image}
-                  alt={student.name}
-                  className="sd-student-info-img"
-                  onClick={() => setIsImageDialogOpen(true)}
-                  style={{ cursor: 'pointer' }}
-                />
-                <div className="sd-student-info-img-overlay" onClick={() => setIsImageDialogOpen(true)}>
-                  Edit
-                </div>
-              </div>
+              <Avatar
+                src={student.image}
+                name={student.name}
+                size="3xl"
+                onClick={() => setIsImageDialogOpen(true)}
+                showEditOverlay={true}
+                editText="Edit"
+                className="shadow-lg"
+              />
             </div>
             <div className="sd-student-info-details" style={{ padding: '8px 16px', gap: '12px' }}>
               <div className="sd-student-info-detail sd-student-info-id" style={{ 

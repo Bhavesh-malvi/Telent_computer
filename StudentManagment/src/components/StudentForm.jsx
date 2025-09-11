@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Select from 'react-select';
+import Avatar from './Avatar';
 import './StudentForm.css';
 
 function calculateInstallments(total, count = 3) {
@@ -736,13 +737,12 @@ const StudentForm = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Student Photo</label>
                   <div className="flex items-center space-x-4">
                     {/* Image Preview or Default Icon */}
-                {imagePreview ? (
-                      <img src={imagePreview} alt="Student Photo" className="w-14 h-14 rounded-full object-cover border-2 border-gray-300" crossOrigin="anonymous" />
-                ) : (
-                      <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-300">
-                        <svg className="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  </div>
-                )}
+                <Avatar
+                  src={imagePreview}
+                  name={form.name}
+                  size="lg"
+                  className="border-2 border-gray-300"
+                />
                 {/* Upload Button */}
                     <div>
                 <input
@@ -1469,17 +1469,15 @@ const StudentForm = () => {
               </div>
               <div className="mb-4 relative mt-4">
                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-14">Inquiry Form</h2>
-                {imagePreview && (
-                  <div className="absolute top-0 right-0 flex flex-col items-center pr-[20px]">
-                    <span className="text-xs font-semibold mb-1">Student Photo</span>
-                    <img
-                      src={imagePreview}
-                      alt="Student Photo"
-                      className="w-24 h-24 object-cover border print-photo"
-                      crossOrigin="anonymous"
-                    />
-                  </div>
-                )}
+                <div className="absolute top-0 right-0 flex flex-col items-center pr-[20px]">
+                  <span className="text-xs font-semibold mb-1">Student Photo</span>
+                  <Avatar
+                    src={imagePreview}
+                    name={form.name}
+                    size="2xl"
+                    className="border print-photo"
+                  />
+                </div>
               </div>
             </div>
             <div className="print-summary-box">

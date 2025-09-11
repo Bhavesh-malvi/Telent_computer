@@ -5,8 +5,8 @@ import { User, Mail, Lock, Upload, UserCheck, Save, Edit, Trash2, Plus, X } from
 import { createStaff, getStaff, updateStaff as updateStaffApi, deleteStaff as deleteStaffApi } from '../services/api';
 import api from '../services/api';
 import API_CONFIG from '../config/apiConfig.js';
+import Avatar from '../components/Avatar';
 
-const DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='24' r='14' fill='%23e5e7eb'/><path d='M8 58c0-11 10-20 24-20s24 9 24 20' fill='%23e5e7eb'/></svg>";
 
 function AssignStaff() {
   const [formData, setFormData] = useState({
@@ -367,7 +367,11 @@ function AssignStaff() {
                   {filteredStaff.map((s) => (
                     <tr key={s._id}>
                       <td className="px-4 py-2">
-                        <img src={s.image || DEFAULT_AVATAR} alt={s.username} className="w-10 h-10 rounded-full object-cover" />
+                        <Avatar
+                          src={s.image}
+                          name={s.username}
+                          size="md"
+                        />
                       </td>
                       <td className="px-4 py-2 text-sm text-gray-800">{s.username}</td>
                       <td className="px-4 py-2 text-sm text-gray-600">{s.email}</td>
@@ -456,10 +460,11 @@ function AssignStaff() {
             </label>
             <div className="flex items-center space-x-6">
               <div className="relative">
-                  <img
-                        src={imagePreview || DEFAULT_AVATAR}
-                    alt="Profile preview"
-                        className="w-20 h-20 rounded-full object-cover border-4 border-indigo-200 shadow-lg"
+                  <Avatar
+                    src={imagePreview}
+                    name={formData.username}
+                    size="xl"
+                    className="border-4 border-indigo-200 shadow-lg"
                   />
               </div>
               <div className="flex-1">

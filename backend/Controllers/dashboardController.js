@@ -71,32 +71,100 @@ const dashboardController = {
         }
       ]);
 
-      // Calculate cumulative total students for the filtered period only
+      // Calculate cumulative total students correctly
       let cumulativeTotal = 0;
-      const result = enrollments.map(item => {
-        cumulativeTotal += item.newEnrollments;
-        return {
-          _id: item._id,
-          newEnrollments: item.newEnrollments,
-          totalStudents: cumulativeTotal
-        };
-      });
+      
+      // If filtering by specific month, we need to calculate cumulative from start of year
+      if (month && month !== 'All') {
+        // Get all enrollments from start of year to calculate proper cumulative
+        const yearStartEnrollments = await Student.aggregate([
+          {
+            $match: { 
+              date: { $exists: true, $ne: null, $ne: "" },
+              enquiryType: "Admission"
+            }
+          },
+          {
+            $addFields: {
+              admissionDateObj: {
+                $dateFromString: {
+                  dateString: "$date",
+                  onError: null,
+                  onNull: null
+                }
+              }
+            }
+          },
+          {
+            $match: { 
+              admissionDateObj: { $ne: null },
+              $expr: { $eq: [{ $year: "$admissionDateObj" }, parseInt(year)] }
+            }
+          },
+          {
+            $group: {
+              _id: {
+                year: { $year: "$admissionDateObj" },
+                month: { $month: "$admissionDateObj" }
+              },
+              newEnrollments: { $sum: 1 }
+            }
+          },
+          {
+            $sort: { "_id.year": 1, "_id.month": 1 }
+          }
+        ]);
 
-      // Get overall total students (all time) for the Total Students card
-      const overallTotalStudents = await Student.countDocuments({ 
-        enquiryType: "Admission"
-      });
+        // Calculate cumulative for the specific month
+        let tempCumulative = 0;
+        const result = yearStartEnrollments.map(item => {
+          tempCumulative += item.newEnrollments;
+          return {
+            _id: item._id,
+            newEnrollments: item.newEnrollments,
+            totalStudents: tempCumulative
+          };
+        });
 
+        // Filter to only include the selected month
+        const filteredResult = result.filter(item => item._id.month === parseInt(month));
+        
+        // Get overall total students (all time) for the Total Students card
+        const overallTotalStudents = await Student.countDocuments({ 
+          enquiryType: "Admission"
+        });
 
+        // Add overall total to each result item for frontend use
+        const resultWithOverallTotal = filteredResult.map(item => ({
+          ...item,
+          overallTotalStudents: overallTotalStudents
+        }));
 
-      // Add overall total to each result item for frontend use
-      const resultWithOverallTotal = result.map(item => ({
-        ...item,
-        overallTotalStudents: overallTotalStudents
-      }));
+        res.json(resultWithOverallTotal);
+      } else {
+        // For "All Months" view, use original logic
+        const result = enrollments.map(item => {
+          cumulativeTotal += item.newEnrollments;
+          return {
+            _id: item._id,
+            newEnrollments: item.newEnrollments,
+            totalStudents: cumulativeTotal
+          };
+        });
 
+        // Get overall total students (all time) for the Total Students card
+        const overallTotalStudents = await Student.countDocuments({ 
+          enquiryType: "Admission"
+        });
 
-      res.json(resultWithOverallTotal);
+        // Add overall total to each result item for frontend use
+        const resultWithOverallTotal = result.map(item => ({
+          ...item,
+          overallTotalStudents: overallTotalStudents
+        }));
+
+        res.json(resultWithOverallTotal);
+      }
     } catch (err) {
       console.error("Error in getMonthlyEnrollments:", err);
       res.status(500).json({ message: "Error fetching monthly enrollments", error: err.message });

@@ -88,6 +88,13 @@ const API_CONFIG = {
       GET_BY_ID: (id) => `/api/courses/${id}`,
       UPLOAD_IMAGE: '/api/courses/upload-image'
     }
+    ,
+    // Question Bank endpoints
+    QUESTIONS: {
+      TEMPLATE: '/api/questions/template',
+      IMPORT: '/api/questions/import',
+      LIST: (params) => `/api/questions?courseId=${params.courseId}&page=${params.page||1}&limit=${params.limit||20}${params.search?`&search=${encodeURIComponent(params.search)}`:''}`
+    }
   }
 };
 

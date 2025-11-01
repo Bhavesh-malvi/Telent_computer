@@ -17,6 +17,7 @@ import dashboardRoutes from './Routes/dashboardRoutes.js';
 import staffRoutes from './Routes/staffRoutes.js';
 // Removed WhatsApp-related routes
 import reminderSettingsRoutes from './Routes/reminderSettingsRoutes.js';
+import questionRoutes from './Routes/questionRoutes.js';
 
 import mongoose from 'mongoose';
 
@@ -52,6 +53,7 @@ const io = new SocketIOServer(httpServer, {
       
       const allowedOrigins = [
         'http://localhost:3000', 
+        'http://localhost:3001', 
         'http://localhost:5173', 
         'http://localhost:5174',
         'https://telent-computer-gyx6.vercel.app',
@@ -170,6 +172,7 @@ app.use('/api/issues', issueRoutes);
 app.use('/api/chapters', chapterRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/staff', staffRoutes);
+app.use('/api/questions', questionRoutes);
 
 // Reminder settings routes
 app.use('/api/reminder-settings', reminderSettingsRoutes);

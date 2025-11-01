@@ -25,7 +25,7 @@ const StudentCourseChapter = () => {
         courseData.chapters = chaptersRes.data || [];
         courseData.totalChapters = courseData.chapters.length;
         setCourse(courseData);
-      } catch (err) {
+      } catch{
         setError('Failed to fetch course or chapters');
       } finally {
         setLoading(false);

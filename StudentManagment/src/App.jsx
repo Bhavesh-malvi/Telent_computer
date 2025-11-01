@@ -10,6 +10,7 @@ import CourseForm from "./components/CourseForm";
 import StudentFee from "./pages/StudentFee";
 import IssuesPage from "./pages/IssuesPage";
 import Settings from "./pages/Settings";
+import QuestionBank from "./pages/QuestionBank";
 // import "./styles/Sidebar.css"; // Commented out for compatibility
 import "./styles/MainContent.css";
 import "./styles/CourseForm.css";
@@ -177,12 +178,13 @@ function App() {
           <Route path="/*" element={
             <ProtectedRoute>
               <Routes>
-                                <Route path="/" element={<StudentDashboard />} />
+                <Route path="/" element={<StudentDashboard />} />
                 <Route path="/register" element={<StudentForm />} />
                 <Route path="/students" element={<StudentList />} />
                 <Route path="/enquiries" element={<StudentEnquiry />} />
                 <Route path="/issues" element={<IssuesPage />} />
                 <Route path="/courses" element={<CourseManager />} />
+                <Route path="/question-bank" element={<QuestionBank />} />
                 <Route path="/addcourse" element={<CourseForm />} />
                 <Route path="/birthday" element={<BirthdayPage />} />
                 <Route path="/dashboard/:id" element={<StudentDashboard />} />

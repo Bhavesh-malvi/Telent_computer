@@ -14,6 +14,7 @@ import {
   FaUserCog,
   FaRupeeSign,
   FaUser,
+  FaQuestionCircle,
   
 } from "react-icons/fa";
 
@@ -52,6 +53,11 @@ const navItems = [
     to: "/courses",
     label: "Course Manager",
     icon: <FaBook className="text-blue-600" size={20} />,
+  },
+  {
+    to: "/question-bank",
+    label: "Question Bank",
+    icon: <FaQuestionCircle className="text-blue-600" size={20} />,
   },
   {
     to: "/birthday",

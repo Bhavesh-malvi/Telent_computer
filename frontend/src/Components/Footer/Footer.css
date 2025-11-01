@@ -162,7 +162,6 @@
 @media (max-width: 900px) {
   .footer-top-bg {
     width: 92vw;
-    margin: 0 auto;
     box-sizing: border-box;
     border-radius: 14px 14px 0 0;
     padding-left: 0;

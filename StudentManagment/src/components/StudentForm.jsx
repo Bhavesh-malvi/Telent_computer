@@ -844,12 +844,12 @@ const StudentForm = () => {
                   <input type="text" name="name" value={form.name} onChange={handleChange} className="w-full px-4 py-3 rounded-md bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled={readOnly} readOnly={readOnly} style={readOnly ? { cursor: 'not-allowed' } : {}} />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Surname</label>
-                  <input type="text" name="surname" value={form.surname || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-md bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled={readOnly} readOnly={readOnly} style={readOnly ? { cursor: 'not-allowed' } : {}} />
-                </div>
-                <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Father/Husband Name</label>
                   <input type="text" name="fatherHusbandName" value={form.fatherHusbandName || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-md bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled={readOnly} readOnly={readOnly} style={readOnly ? { cursor: 'not-allowed' } : {}} />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Surname</label>
+                  <input type="text" name="surname" value={form.surname || ''} onChange={handleChange} className="w-full px-4 py-3 rounded-md bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled={readOnly} readOnly={readOnly} style={readOnly ? { cursor: 'not-allowed' } : {}} />
                 </div>
               </div>
               {/* Row 2: Birth Date, Gender, Education Level */}

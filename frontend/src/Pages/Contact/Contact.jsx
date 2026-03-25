@@ -96,7 +96,7 @@ const ContactOnCampus = () => {
 };
 
 const ContactForm = () => {
-  const [form, setForm] = React.useState({ name: '', email: '', message: '' });
+  const [form, setForm] = React.useState({ name: '', email: '', phone: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
@@ -119,7 +119,7 @@ const ContactForm = () => {
           name: form.name,
           email: form.email,
           message: form.message,
-          phone: '-',
+          phone: form.phone,
           course: '-'
         },
         'xFAJ7RxNAxCU6M4u5'
@@ -138,7 +138,7 @@ const ContactForm = () => {
 
       if (response.ok) {
         setSubmitMessage("Message sent successfully! We'll get back to you soon.");
-        setForm({ name: '', email: '', message: '' });
+        setForm({ name: '', email: '', phone: '', message: '' });
       } else {
         setSubmitMessage(data.message || "Failed to send message. Please try again.");
       }
@@ -155,6 +155,8 @@ const ContactForm = () => {
       <input name="name" value={form.name} onChange={handleChange} required />
       <label>Email</label>
       <input name="email" type="email" value={form.email} onChange={handleChange} required />
+      <label>Phone Number</label>
+      <input name="phone" type="tel" value={form.phone} onChange={handleChange} required />
       <label>Message</label>
       <textarea name="message" value={form.message} onChange={handleChange} rows={6} required />
       <button type="submit" disabled={isSubmitting}>

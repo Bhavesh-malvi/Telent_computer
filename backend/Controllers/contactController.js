@@ -4,11 +4,12 @@ import { sendAdminEmail } from '../utils/sendEmail.js';
 // POST - Create new contact message
 export const createContact = async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, phone, message } = req.body;
     
     const newContact = new Contact({
       name,
       email,
+      phone,
       message
     });
 

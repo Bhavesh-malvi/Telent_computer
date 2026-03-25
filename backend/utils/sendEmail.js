@@ -15,7 +15,9 @@ export const sendAdminEmail = async (subject, htmlContent) => {
 
     // Create transporter
     const transporter = nodemailer.createTransport({
-      service: 'gmail', // You can change this if not using gmail
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // upgrade later with STARTTLS
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS.replace(/\s+/g, '') // remove spaces from app password just in case

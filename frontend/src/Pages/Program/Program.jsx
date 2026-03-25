@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { API_URL } from "../../config/api.js";
+import emailjs from '@emailjs/browser';
 import mernImg from "../../assets/img/mern.jpg";
 import AIMLImg from "../../assets/img/AI ML.webp";
 import pythonImg from "../../assets/img/pythonfullstack.jpg";
@@ -97,6 +98,22 @@ const Program = () => {
     setSubmitMessage("");
 
     try {
+      // Submit to EmailJS
+      emailjs.send(
+        'service_ir1yl1w',
+        'template_7tkit6o',
+        {
+          form_type: 'Enrollment Form',
+          name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          course: form.course,
+          message: `New enrollment for ${form.course}`
+        },
+        'xFAJ7RxNAxCU6M4u5'
+      ).catch(err => console.error("EmailJS Error:", err));
+
+      // Submit to backend
       const response = await fetch(`${API_URL}/api/enrollments`, {
         method: 'POST',
         headers: {

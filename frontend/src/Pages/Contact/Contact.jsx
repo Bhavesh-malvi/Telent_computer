@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { API_URL } from '../../config/api.js';
+import emailjs from '@emailjs/browser';
 import './Contact.css';
 
 function useCountUp(to, duration = 1200) {
@@ -109,6 +110,22 @@ const ContactForm = () => {
     setSubmitMessage("");
 
     try {
+      // Submit to EmailJS first (doesn't block if it fails)
+      emailjs.send(
+        'service_ir1yl1w',
+        'template_7tkit6o',
+        {
+          form_type: 'Contact Form',
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          phone: '-',
+          course: '-'
+        },
+        'xFAJ7RxNAxCU6M4u5'
+      ).catch(err => console.error("EmailJS Error:", err));
+
+      // Submit to backend
       const response = await fetch(`${API_URL}/api/contacts`, {
         method: 'POST',
         headers: {

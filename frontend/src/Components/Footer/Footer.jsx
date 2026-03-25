@@ -1,6 +1,6 @@
 import React from "react";
 import './Footer.css';
-import navLogo from '../../assets/img/TCIT Logo png.png';
+import FooterLogo from '../../assets/img/TCIT Logo White.png';
 import footerTopBg from '../../assets/img/footer-top-bg.png';
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
@@ -11,20 +11,20 @@ const Footer = () => (
     {/* Top Blue Section */}
     <div className="footer-top-bg" style={{ backgroundImage: `url(${footerTopBg})` }}>
       <div className="footer-top-content">
-        <h2 className="footer-top-title">Start your new life today!</h2>
+        <h2 className="footer-top-title">Start Your New Life Today!</h2>
         <p className="footer-top-desc">
-          Are you ready to be one of the thousands of graduates thriving in IT careers across the country?<br />
-          Take your first step toward this exciting future and talk with an education advisor today!
+          Are you ready to join thousands of graduates thriving in IT careers across the country?<br />
+          Take your first step toward an exciting future-speak with an education advisor today!
         </p>
-        <Link to="/admissions"><button className="footer-top-btn">Take the First Step</button></Link>
+        <Link to="/admissions"><button className="footer-top-btn">TAKE THE FIRST STEP</button></Link>
       </div>
     </div>
     {/* Main Footer Section */}
     <div className="footer-main">
       <div className="footer-section about">
-        <img src={navLogo} alt="TCIT Logo" className="footer-nav-logo" />
+        <img src={FooterLogo} alt="TCIT Logo" className="footer-nav-logo" />
         <p>
-          Talent Computer provides training in different language like C, C++, Python, Php, React, Angular, Web design, DBMS & other Technologies. Talent Computer Training institute offers students an innovative way to learn Technology.
+          Talent Computer provides training in multiple languages like C, C++, Python, PHP, React, Angular, Web design, DBMS & other Technologies. Talent Computer Training institute offers students an innovative way to learn Technology.
         </p>
         <div className="footer-social">
           <a href="https://www.facebook.com/talentcomputeracademy.ahd" aria-label="Facebook"><FaFacebookF /></a>
@@ -51,7 +51,7 @@ const Footer = () => (
       </div>
     </div>
     <div className="footer-bottom">
-      <span>Copyright ©2025 All rights reserved </span>
+      <span>Copyright ©{new Date().getFullYear()} All rights reserved </span>
       <span>BenchMark Websoft Solutions</span>
     </div>
   </footer>

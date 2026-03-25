@@ -11,8 +11,8 @@ const ITReadySection = () => (
   <section className="AdmissionsITReady">
     <div className="AdmissionsITReady__text">
       <h2>Are You IT-Ready?</h2>
-      <p>Stuck in a rut? Ready for a vibrant career change that promises growth, fulfillment, and stability? Talent Computer Institute welcomes both IT novices and veterans alike. Your spark of ambition is the only prerequisite. With just a High School diploma, GED, or equivalent, you can open doors to a realm of opportunities.</p>
-      <p>Our mission? To empower YOU. We bring you more than just theoretical knowledge; we pave your path to tangible success in the dynamic realm of Information Technology. Your potential, combined with our dedicated education and support, is the perfect recipe for success.</p>
+      <p>Feeling stuck? Ready for a vibrant career change that offers <span style={{fontWeight: 700}}>growth, fulfillment, and stability</span>? Talent Computer Institute welcomes both IT novices and experienced professionals. Your spark of ambition is the only prerequisite. With just a <span style={{fontWeight:700}}>High School diploma, GED, or equivalent,</span> you can unlock a world of opportunities.</p>
+      <p>Our mission? To <span style={{fontWeight:700}}>empower YOU</span>. We providing more than theoretical knowledge; we guid you toward tangible success in the dynamic world of Information Technology. Your potential, combined with our dedicated training and support, creates the perfect recipe for success.</p>
     </div>
     <div className="AdmissionsITReady__img-wrap">
       <img src={myCCImg} alt="Students learning IT" className="AdmissionsITReady__img" />
@@ -44,7 +44,7 @@ const Admissions = () => {
         <div className="AdmissionsBanner__overlay">
           <div className="AdmissionsBanner__content">
             <h1>Start Your IT Journey with Us</h1>
-            <p>Admissions are open! Take the first step toward a rewarding career in technology.</p>
+            <p>Admissions are now open! Take the first step toward a <span style={{fontWeight: 700}}>rewarding career in technology.</span></p>
           </div>
         </div>
       </div>

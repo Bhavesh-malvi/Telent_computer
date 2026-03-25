@@ -31,7 +31,7 @@ const AddTopicDialog = ({ chapterId, onClose, onTopicAdded, editData, editIdx })
       setLoading(false);
       if (onTopicAdded) onTopicAdded();
       onClose();
-    } catch (err) {
+    } catch{
       setError('Failed to save topic');
       setLoading(false);
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import mernImg from "../../assets/img/mern.jpg";
-import javaImg from "../../assets/img/javafullstack.webp";
+import AIMLImg from "../../assets/img/AI ML.webp";
 import pythonImg from "../../assets/img/pythonfullstack.jpg";
 import "./PopularCourses.css";
 
@@ -9,21 +9,21 @@ const courses = [
   {
     id: "mern",
     title: "MERN Stack",
-            img: mernImg,
-    desc: "Master MongoDB, Express.js, React, and Node.js to build robust full-stack web applications."
-  },
-  {
-    id: "java",
-    title: "Java Full Stack",
-            img: javaImg,
-    desc: "Become a Java Full Stack Developer by learning front-end and back-end technologies with Java."
+    img: mernImg,
+    desc: "Master MongoDB, Express.js, React, and Node.js to build robust full-stack web applications.",
   },
   {
     id: "python",
     title: "Python Full Stack",
-            img: pythonImg,
-    desc: "Learn Python for both front-end and back-end development, including Django and modern JS frameworks."
-  }
+    img: pythonImg,
+    desc: "Learn Python for both front-end and back-end development, including Django and modern JS frameworks.",
+  },
+  {
+    id: "aiml",
+    title: "AI & ML ",
+    img: AIMLImg,
+    desc: "Building intelligent, data-driven applications by integrating deep learning models into scalable Django frameworks for real-world AI deployment.",
+  },
 ];
 
 const PopularCourses = () => {
@@ -34,7 +34,6 @@ const PopularCourses = () => {
   return (
     <section className="popular-courses-section">
       <div className="popular-courses-header">
-        <span className="popular-courses-blog">OUR BLOG</span>
         <h2 className="popular-courses-title">Popular Courses</h2>
         <p className="popular-courses-desc">From career insights to industry trends, we've got you covered.</p>
       </div>

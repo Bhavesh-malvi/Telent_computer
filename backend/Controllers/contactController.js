@@ -1,4 +1,5 @@
 import Contact from '../Model/Contact.js';
+import { sendAdminEmail } from '../utils/sendEmail.js';
 
 // POST - Create new contact message
 export const createContact = async (req, res) => {
@@ -12,6 +13,16 @@ export const createContact = async (req, res) => {
     });
 
     const savedContact = await newContact.save();
+    
+    // Send email to admin
+    const emailSubject = `New Contact Form Submission from ${name}`;
+    const emailHtml = `
+      <h3>New Contact Message Received</h3>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `;
+    sendAdminEmail(emailSubject, emailHtml);
     
     res.status(201).json({
       success: true,

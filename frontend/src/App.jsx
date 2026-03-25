@@ -15,6 +15,7 @@ import StudentLayout from './StudentData/StudentLayout';
 import ProtectedRoute from './StudentData/ProtectedRoute';
 import StudentSelectedCourse from './StudentData/StudentSelectedCourse';
 import StudentCourseChapter from './StudentData/StudentCourseChapter';
+import StudentExam from './StudentData/StudentExam/StudentExam';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -43,6 +44,11 @@ function App() {
           <Route path="/student-dashboard" element={
             <ProtectedRoute>
               <StudentDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/student-exam/:attemptId" element={
+            <ProtectedRoute>
+              <StudentExam />
             </ProtectedRoute>
           } />
           <Route path="/student-course/:courseId" element={

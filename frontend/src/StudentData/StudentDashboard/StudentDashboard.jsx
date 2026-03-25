@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import './StudentDashboard.css';
-import { User, HelpCircle, LogOut, Hash, Mail, BookOpen, Eye } from 'react-feather';
+import { User, HelpCircle, LogOut, Hash, Mail, BookOpen, Eye, Play, Lock } from 'react-feather';
 import axiosInstance from '../../api/axios';
 import Avatar from '../../Components/Avatar/Avatar';
 
@@ -22,6 +22,12 @@ export default function StudentDashboard() {
   const [imageError, setImageError] = useState('');
   const [chapterCounts, setChapterCounts] = useState({});
   const navigate = useNavigate();
+  const [examModalOpen, setExamModalOpen] = useState(false);
+  const [eligible, setEligible] = useState([]);
+  const [hasEligible, setHasEligible] = useState(false);
+  const [pwdModal, setPwdModal] = useState({ open: false, courseId: null, courseName: '', password: '' });
+  const [examLoading, setExamLoading] = useState(false);
+  const [showPwd, setShowPwd] = useState(false);
   
   // Refs to prevent unnecessary re-fetching
   const dataFetched = useRef(false);
@@ -111,6 +117,54 @@ export default function StudentDashboard() {
     };
     fetchChapterCounts();
   }, [student]);
+
+  // Preload eligible exams to decide button visibility
+  useEffect(() => {
+    const fetchEligible = async () => {
+      try {
+        if (!student) return;
+        const { data } = await axiosInstance.get('/exams/eligible-courses');
+        const list = data.items || [];
+        setEligible(list);
+        setHasEligible(list.length > 0);
+      } catch {
+        setHasEligible(false);
+      }
+    };
+    fetchEligible();
+  }, [student]);
+
+  const openExamModal = async () => {
+    try {
+      setExamModalOpen(true);
+      const { data } = await axiosInstance.get('/exams/eligible-courses');
+      setEligible(data.items || []);
+    } catch {
+      setEligible([]);
+    }
+  };
+
+  const promptPassword = (courseId, courseName) => {
+    setPwdModal({ open: true, courseId, courseName, password: '' });
+  };
+
+  const startExam = async () => {
+    if (!pwdModal.password.trim()) return;
+    try {
+      setExamLoading(true);
+      const { data } = await axiosInstance.post('/exams/start', { courseId: pwdModal.courseId, password: pwdModal.password });
+      if (data?.attemptId) {
+        setPwdModal({ open: false, courseId: null, courseName: '', password: '' });
+        setExamModalOpen(false);
+        navigate(`/student-exam/${data.attemptId}`);
+      }
+    } catch (e) {
+      // naive error alert
+      alert(e?.response?.data?.message || 'Failed to start exam');
+    } finally {
+      setExamLoading(false);
+    }
+  };
 
 
 
@@ -252,6 +306,12 @@ export default function StudentDashboard() {
             {/* Remove the welcome/name div entirely */}
           </div>
           <div className="sd-navbar-right">
+            {hasEligible && (
+              <button onClick={openExamModal} className="sd-navbar-btn" title="Attempt Exam">
+                <Play size={20} />
+                <span>Attempt Exam</span>
+              </button>
+            )}
             <button onClick={handleHelpClick} className="sd-navbar-btn sd-navbar-help">
               <HelpCircle size={20} />
               <span>Help</span>
@@ -464,6 +524,100 @@ export default function StudentDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Exam Eligible Modal */}
+      {examModalOpen && (
+        <div className="sd-dialog-overlay">
+          <div className="sd-dialog">
+            <div className="sd-dialog-header">
+              <h3>Eligible Exams</h3>
+              <button onClick={() => setExamModalOpen(false)} className="sd-dialog-close">×</button>
+            </div>
+            <div className="sd-dialog-content" style={{ maxHeight: 360, overflowY: 'auto' }}>
+              {eligible.length === 0 ? (
+                <div style={{ padding: 12, color: '#64748b' }}>No eligible completed courses found.</div>
+              ) : (
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {eligible.map((e) => (
+                    <li key={e.courseId} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #e5e7eb' }}>
+                      <div style={{ fontWeight: 600 }}>{e.courseName}</div>
+                      <div style={{ display: 'flex', gap: 8 }}>
+                        {e.attemptId ? (
+                          <button onClick={() => navigate(`/student-exam/${e.attemptId}`)} className="sd-dialog-submit">Resume</button>
+                        ) : (
+                          <button onClick={() => promptPassword(e.courseId, e.courseName)} className="sd-dialog-submit">Start Exam</button>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Password Prompt Modal */}
+      {pwdModal.open && (
+        <div className="sd-dialog-overlay" style={{ padding: '16px' }}>
+          <div className="sd-dialog" style={{ maxWidth: 480, width: '100%', borderRadius: 12 }}>
+            <div className="sd-dialog-header" style={{ padding: '14px 16px' }}>
+              <h3 style={{ fontWeight: 700 }}>Start Exam: {pwdModal.courseName}</h3>
+              <button onClick={() => setPwdModal({ open: false, courseId: null, courseName: '', password: '' })} className="sd-dialog-close" aria-label="Close">×</button>
+            </div>
+            <div className="sd-dialog-content" style={{ padding: '12px 16px 0 16px' }}>
+              <label style={{ display: 'block', marginBottom: 8, fontWeight: 600, color: '#334155' }}>
+                <Lock size={16} style={{ verticalAlign: 'middle', marginRight: 6 }} />
+                Exam Password
+              </label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={showPwd ? 'text' : 'password'}
+                  value={pwdModal.password}
+                  onChange={e => setPwdModal(p => ({ ...p, password: e.target.value }))}
+                  className="sd-dialog-input"
+                  placeholder="Enter exam password"
+                  style={{
+                    width: '100%',
+                    padding: '12px 44px 12px 14px',
+                    border: '1px solid #CBD5E1',
+                    borderRadius: 10,
+                    outline: 'none'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPwd(v => !v)}
+                  aria-label={showPwd ? 'Hide password' : 'Show password'}
+                  style={{
+                    position: 'absolute',
+                    right: 8,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    padding: 6,
+                    borderRadius: 8,
+                    color: '#64748b',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Eye size={18} />
+                </button>
+              </div>
+              <div style={{ marginTop: 6, fontSize: 12, color: '#64748b' }}>
+                Please enter the password provided by your institute to begin this exam.
+              </div>
+            </div>
+            <div className="sd-dialog-actions" style={{ padding: '12px 16px 16px 16px' }}>
+              <button className="sd-dialog-cancel" onClick={() => setPwdModal({ open: false, courseId: null, courseName: '', password: '' })} disabled={examLoading} style={{ padding: '10px 14px', borderRadius: 10 }}>Cancel</button>
+              <button className="sd-dialog-submit" onClick={startExam} disabled={examLoading || !pwdModal.password.trim()} style={{ padding: '10px 14px', borderRadius: 10 }}>
+                {examLoading ? 'Starting...' : 'Start Exam'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 

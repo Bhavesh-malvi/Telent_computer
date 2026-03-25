@@ -71,7 +71,7 @@
 .program-content-section { flex: 7; padding-right: 40px; }
 .program-main-img { width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; }
 .program-main-title { margin-top: 24px; }
-.program-desc-title { margin-top: 32px; margin-bottom: 8px; }
+.program-desc-title { margin-top: 32px; margin-bottom: 8px; font-size: 25px; font-weight: 500; }
 .program-desc-text { font-size: 18px; line-height: 1.7; }
 .program-form-wrapper {
   flex: 3;
@@ -90,9 +90,12 @@
   gap: 18px;
 }
 .program-form-title { margin-bottom: 16px; font-size: 24px; font-weight: 700; text-align: center; color: #fff; }
-.program-form-input { padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; margin-bottom: 0; }
+.program-form-input { padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; margin-bottom: 0; color: white; outline: none; }
 .program-form-btn { margin-top: 10px; padding: 12px; border-radius: 6px; background: #f26b1d; color: #fff; font-weight: 700; font-size: 18px; border: none; cursor: pointer; }
 .program-form-btn:disabled { background: #ccc; cursor: not-allowed; }
+.select-input option{
+  color: black;
+}
 
 .program-form-message {
   padding: 12px;

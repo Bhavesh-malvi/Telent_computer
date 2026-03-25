@@ -18,6 +18,7 @@ import staffRoutes from './Routes/staffRoutes.js';
 // Removed WhatsApp-related routes
 import reminderSettingsRoutes from './Routes/reminderSettingsRoutes.js';
 import questionRoutes from './Routes/questionRoutes.js';
+import examRoutes from './Routes/examRoutes.js';
 
 import mongoose from 'mongoose';
 
@@ -173,6 +174,7 @@ app.use('/api/chapters', chapterRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/staff', staffRoutes);
 app.use('/api/questions', questionRoutes);
+app.use('/api/exams', examRoutes);
 
 // Reminder settings routes
 app.use('/api/reminder-settings', reminderSettingsRoutes);

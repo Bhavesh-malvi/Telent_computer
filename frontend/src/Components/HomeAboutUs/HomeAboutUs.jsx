@@ -1,7 +1,6 @@
 import React from "react";
 import "./HomeAboutUs.css";
 import programmersImg from "../../assets/img/programmers.jpg";
-import logoImg from "../../assets/img/logo.png";
 import { Link } from "react-router-dom";
 
 const HomeAboutUs = () => (
@@ -16,9 +15,6 @@ const HomeAboutUs = () => (
       </div>
       <div className="aboutus-cta-image-wrap">
         <img src={programmersImg} alt="Programmers working together" className="aboutus-cta-image" />
-        <div className="aboutus-cta-logo-overlay">
-            <img src={logoImg} alt="Logo" className="aboutus-cta-logo" />
-        </div>
       </div>
     </div>
   </section>

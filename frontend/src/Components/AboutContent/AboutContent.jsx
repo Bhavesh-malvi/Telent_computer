@@ -7,19 +7,19 @@ import './AboutContent.css';
 
 const aboutData = [
   {
-            img: ourStoryImg,
+    img: ourStoryImg,
     title: 'Our Stories',
-    desc: `TCIT offers Administrative & Software Development courses based on today's hottest technologies, including PHP, Python, JAVA, .NET, Wordpress, Magento, Tally, D.T.P and many more Technologies.`
+    desc: `TCIT offers Administrative & Software Development courses based on today's most in-demand technologies, including PHP, Python, JAVA, .NET, WordPress, Magento, Tally, D.T.P and many more.`
   },
   {
-            img: missionImg,
+    img: missionImg,
     title: 'Our Mission',
-    desc: `To nurture talent in vibrant minds and to provide conducive environment for faculty and students and turn them in to dynamic & result oriented professionals of global stature.`
+    desc: `To nurture talent in vibrant minds by provide conducive environment for both faculty and students and to transform them into dynamic, result-oriented professionals of global stature.`
   },
   {
             img: visionImg,
     title: 'Our Vision',
-    desc: `To be widely recognized as one of the best and most innovative center of relevant and high quality Information Technology and Business programs.`
+    desc: `To be widely recognized as one of the best and most innovative center of relevant high-quality Information Technology and Business programs.`
   }
 ];
 
@@ -64,7 +64,7 @@ export default function AboutContent() {
     <section className="about-content-section">
       <h2 className="about-content-title">Welcome To TCIT</h2>
       <p className="about-content-intro">
-        Talent Computer journey started in the year 2015. In this long time span, we have gained a tremendous experience in the field of programming and engineering. We are a team of qualified trainers with a vast experience in fields like Web Development, Web designing, Accounting Training etc. TCIT is specialized in computer-related training. The organization goes out of the way to groom the trainees into industry ready professional by enriching their knowledge in specific domains as well as with full module of soft skill training
+        <span style={{fontWeight: 700}}>Talent Computer Institute</span> began its journey in the 2015. Over the years, we have gained a extensive experience in the field of programming and engineering. We are a team of qualified trainers with a vast experience in fields like Web Development, Web designing, Accounting Training etc. TCIT is specialized in computer-related training. The organization goes out of the way to transform trainees into industry-ready professional by enriching their knowledge in specific domains as well as with full module of soft skill training
       </p>
       <div className="about-content-cards">
         {aboutData.map((item, idx) => (

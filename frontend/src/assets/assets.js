@@ -23,7 +23,7 @@ export const cards = [
     {
         img: img3,
         icon: icon1,
-        title: "Bright Your Future",
+        title: "Brighten Your Future",
         desc: "We empower you for a brighter tomorrow by building your skills and confidence. Our support goes beyond the classroom, guiding you toward real-world success and helping you achieve your dream IT career.",
         anim: "slide-in-diag-reverse"
     }
@@ -46,7 +46,7 @@ export const reasons = [
     },
     {
         title: "Find Your Perfect IT Career with Our Unwavering Support",
-        description: "Are you searching for your ideal IT career path? Look no further. Our dedicated Career Services team is here to provide lifelong placement and support services, ensuring you land the perfect job as your skills progress. We're committed to helping you achieve your professional aspirations, making your IT career dreams a reality.",
+        description: "Are you searching for your ideal IT career path? Look no further. Our dedicated Career Services team is here to deliver lifelong placement and support services, ensuring you land the perfect job as your skills progress. We're committed to helping you achieve your professional aspirations, making your IT career dreams a reality.",
         image: reason2,
     },
     {
@@ -76,7 +76,7 @@ export const reasons = [
     },
     {
         title: "Outstanding Training and Instruction",
-        description: "Whether you're learning on campus or through our live online programs, our industry expert instructors provide comprehensive education. Our lab simulation approach prepares you not only for certification tests but also for the real-world skills you'll need in your future workplace.",
+        description: "Whether you're learning on campus or through our live online programs, our industry expert instructors provide comprehensive education. Our lab simulation approach prepares you not only for certification exams but also for the real-world skills you'll need in your future workplace.",
         image: reason8,
     }
 ];
@@ -111,3 +111,169 @@ export const Steps = [
         desc: "As a Title IV accredited institution various forms of public and private financial aid are available to our students. Let's see what you qualify for and get you started stress, and hassle free. For those who qualify. Accredited by the Accrediting Council for Continuing Education & Training (ACCET)."
     }
 ];
+
+
+
+export const StudentData = [
+    
+    {
+        "id": 1,
+        "name": "Web Designing",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756377823/courses/d1ed4lv6od5fyfwv6qae.jpg",
+        "fees": 20000,
+        "duration": "6",
+        "badge": "Creative Web Designer",
+        "category": "IT",
+        "description": "Learn to design attractive, responsive, and user-friendly websites using HTML, CSS, JavaScript, and UI/UX principles."
+    },
+    {
+        "id": 2,
+        "name": "Tally",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756377900/courses/tlyyy9aqookpyj1ckrgl.jpg",
+        "fees": 6000,
+        "duration": "2",
+        "badge": "Tally Accountant",
+        "category": "Basic",
+        "description": "Learn computerized accounting using Tally software including GST, voucher entries, ledger creation and reports."
+    },
+    {
+        "id": 3,
+        "name": "Web Development",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756384206/courses/vbvnuabuvmvbu2zvlxda.jpg",
+        "fees": 19999,
+        "duration": "6",
+        "badge": "Full-Stack Web Developer",
+        "category": "IT",
+        "description": "Full-stack development including HTML, CSS, JS, Node.js, PHP and Databases with deployment."
+    },
+    {
+        "id": 4,
+        "name": "MERN Stack",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900752/courses/wbo3hdqlebns76zkiceo.webp",
+        "fees": 20000,
+        "duration": "6-8",
+        "badge": "MERN Developer",
+        "category": "IT",
+        "description": "Learn MongoDB, Express.js, React.js, and Node.js for full MERN apps with authentication and deployment."
+    },
+    {
+        "id": 5,
+        "name": "C / C++",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900440/courses/dq3lhzwneuthspmv7frk.webp",
+        "fees": 12000,
+        "duration": "4",
+        "badge": "C/C++ Programmer",
+        "category": "IT",
+        "description": "Learn programming basics, loops, arrays, pointers, OOP, memory management for logic building."
+    },
+    {
+        "id": 6,
+        "name": "Java",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900728/courses/geztgdmza7g1tc9ymt8t.webp",
+        "fees": 8001,
+        "duration": "3",
+        "badge": "Java Developer",
+        "category": "IT",
+        "description": "Core Java, OOP, collections, multithreading, JDBC and basics of Android."
+    },
+    {
+        "id": 7,
+        "name": "DBMS",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900636/courses/ascqzagsbeybn0yqywjw.webp",
+        "fees": 11999,
+        "duration": "2",
+        "badge": "Database Manager",
+        "category": "IT",
+        "description": "Learn SQL, joins, normalization, database design and relational database management."
+    },
+    {
+        "id": 8,
+        "name": "Python",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900769/courses/rnilnqawzbrhdgksxaea.webp",
+        "fees": 8001,
+        "duration": "3",
+        "badge": "Python Coder",
+        "category": "IT",
+        "description": "Python basics, OOP, automation, APIs, ML/AI basics, data handling with Pandas and NumPy."
+    },
+    {
+        "id": 9,
+        "name": "AI / ML",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900410/courses/mpkumcnz8uralif0u1xx.webp",
+        "fees": 24999,
+        "duration": "8",
+        "badge": "AI/ML Specialist",
+        "category": "IT",
+        "description": "Learn regression, classification, neural networks and ML using Python, TensorFlow and Scikit-learn."
+    },
+    {
+        "id": 10,
+        "name": "Data Science",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900613/courses/zahmrm2stzr485c05rfb.webp",
+        "fees": 11999,
+        "duration": "12",
+        "badge": "Data Scientist",
+        "category": "IT",
+        "description": "Statistics, ML models, data visualization, Python tools like Pandas, NumPy, Matplotlib."
+    },
+    {
+        "id": 11,
+        "name": "Data Analytics",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900482/courses/ayfm13cud3ecs3zdmg6c.webp",
+        "fees": 13999,
+        "duration": "6-8",
+        "badge": "Data Analyst",
+        "category": "IT",
+        "description": "Data cleaning, Excel, SQL, Power BI, Tableau for business analytics."
+    },
+    {
+        "id": 12,
+        "name": "Backend Development",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900425/courses/hrt9l3sabapzuewyaqas.webp",
+        "fees": 22990,
+        "duration": "6",
+        "badge": "Backend Engineer",
+        "category": "IT",
+        "description": "Node.js, Express.js, REST APIs, security, JWT auth, MongoDB and deployment."
+    },
+    {
+        "id": 13,
+        "name": "Frontend Development",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900707/courses/kdn3z51t4hge1bjdttq8.webp",
+        "fees": 5999,
+        "duration": "4",
+        "badge": "Frontend Developer",
+        "category": "IT",
+        "description": "Frontend UI development using HTML, CSS, JavaScript and React basics."
+    },
+    {
+        "id": 14,
+        "name": "React",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900844/courses/umx0h7n96f92gtvf9pxn.webp",
+        "fees": 4000,
+        "duration": "3",
+        "badge": "React Developer",
+        "category": "IT",
+        "description": "React components, props, hooks, routing, API calls, state management."
+    },
+    {
+        "id": 15,
+        "name": "DSA",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900660/courses/ahtvtkh21gcqwwfxuxwm.webp",
+        "fees": 6000,
+        "duration": "6-8",
+        "badge": "DSA Master",
+        "category": "IT",
+        "description": "Arrays, linked lists, stacks, queues, recursion, trees, graphs, heaps for interview prep."
+    },
+    {
+        "id": 16,
+        "name": "CCC (Basic Computer Course)",
+        "image": "https://res.cloudinary.com/do98lw5ja/image/upload/v1756900463/courses/loezlxdddgxvkszo8kf7.webp",
+        "fees": 12000,
+        "duration": "2",
+        "badge": "Digital Beginner",
+        "category": "Basic",
+        "description": "This beginner-friendly course introduces you to computers. You will learn MS Word, Excel, PowerPoint, safe internet usage, email handling, and online transactions."
+    },
+]

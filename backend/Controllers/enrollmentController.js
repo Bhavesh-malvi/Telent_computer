@@ -1,4 +1,5 @@
 import Enrollment from '../Model/Enrollment.js';
+import { sendAdminEmail } from '../utils/sendEmail.js';
 
 // Validation helper
 const validateEnrollment = (data) => {
@@ -62,6 +63,17 @@ export const createEnrollment = async (req, res) => {
     });
 
     const savedEnrollment = await newEnrollment.save();
+    
+    // Send email to admin
+    const emailSubject = `New Course Enrollment: ${course} by ${fullName}`;
+    const emailHtml = `
+      <h3>New Enrollment Received</h3>
+      <p><strong>Full Name:</strong> ${fullName}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Course:</strong> ${course}</p>
+    `;
+    sendAdminEmail(emailSubject, emailHtml);
     
     res.status(201).json({
       success: true,

@@ -155,25 +155,25 @@ const Reviews = ({
           );
         })}
       </div>
-             <div className="review-summary-score-block">
-         <div className="review-summary-score">
-           {reviewStats.averageRating}
-         </div>
-         <div className="review-summary-stars">
-           {[...Array(5)].map((_, i) => (
-             <StarFilledIcon 
-               key={i} 
-               style={{
-                 color: i < Math.floor(reviewStats.averageRating) ? '#ffc107' : '#eee', 
-                 fontSize: '1.2rem'
-               }} 
-             />
-           ))}
-         </div>
-         <div className="review-summary-count">
-           {reviewStats.totalReviews} reviews
-         </div>
-       </div>
+        <div className="review-summary-score-block">
+          <div className="review-summary-score">
+            {reviewStats.averageRating}
+          </div>
+        <div className="review-summary-stars">
+            {[...Array(5)].map((_, i) => (
+              <StarFilledIcon 
+                key={i} 
+                style={{
+                  color: i < Math.floor(reviewStats.averageRating) ? '#ffc107' : '#eee', 
+                  fontSize: '1.2rem'
+                }} 
+              />
+            ))}
+          </div>
+          <div className="review-summary-count">
+            {reviewStats.totalReviews} reviews
+          </div>
+        </div>
     </div>
   );
 

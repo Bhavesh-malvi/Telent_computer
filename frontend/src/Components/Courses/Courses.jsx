@@ -4,27 +4,50 @@ import { API_URL } from "../../config/api";
 import axios from "axios";
 import fallbackImg from "../../assets/img/course1.jpeg";
 import { Link } from "react-router-dom";
+import { StudentData } from "../../assets/assets";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchCourses = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/api/studentcourses`);
-      // Map backend fields to match old UI usage
-      const mappedCourses = (res.data || []).map(course => ({
-        ...course,
-        title: course.name, // for UI compatibility
-        desc: course.description, // for UI compatibility
-      }));
-      setCourses(mappedCourses);
-    } catch (err) {
-      console.error('Error fetching courses:', err);
-      setCourses([]);
-    } finally {
-      setLoading(false);
-    }
+  setLoading(true);
+  scrollTo(0,0)
+
+  // Creates a promise that rejects after 2 seconds
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error("Request Timeout")), 2000)
+  );
+
+  try {
+    // Race between API request & timeout
+    const res = await Promise.race([
+      axios.get(`${API_URL}/api/studentcourses`),
+      timeoutPromise
+    ]);
+
+    const mappedCourses = (res.data || []).map(course => ({
+      ...course,
+      title: course.name,
+      desc: course.description,
+    }));
+
+    setCourses(mappedCourses);
+    console.log("✔ Live API running");
+
+  } catch (err) {
+    console.warn("⚠ Live API slow/failed, use fallback static data...", err);
+
+    const mappedFallback = (StudentData || []).map(course => ({
+      ...course,
+      title: course.name,
+      desc: course.description,
+    }));
+
+    setCourses(mappedFallback);
+  }finally {
+    setLoading(false);
+  }
   };
 
   useEffect(() => {
@@ -41,7 +64,7 @@ const Courses = () => {
         <div className="courses-subtitle">OUR PROGRAMS</div>
         <h2 className="courses-title">IT Training & Courses</h2>
         <p className="courses-desc">
-          Whether you're learning on campus or through our live online programs, our industry-expert instructors provide a comprehensive education. Our lab-based approach prepares you for certification tests and real-world skills you'll need in your future workplace.
+          Whether you're starting fresh or pivoting mid-career, our comprehensive training programs open the door to the dynamic world of Information Technology.
         </p>
       </div>
       <div className="courses-grid">

@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Select from 'react-select';
 import Avatar from './Avatar';
 import './StudentForm.css';
+import { Lock } from 'react-feather';
 
 function calculateInstallments(total, count = 3) {
   count = Math.max(1, Math.min(count, 12));
@@ -124,6 +125,7 @@ const StudentForm = () => {
   const [feeDetails, setFeeDetails] = useState(null);
   const [isFormDirty, setIsFormDirty] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
+  const [examPwdModal, setExamPwdModal] = useState({ open: false, courseId: null, courseName: '', password: '', loading: false });
   const formatDateOnly = (value) => {
     if (!value) return '';
     if (typeof value === 'string') {
@@ -809,6 +811,10 @@ const StudentForm = () => {
                                           courseProgress: newProgress,
                                           courseStatus: allCompleted ? 'completed' : 'padding'
                                         }));
+                                        // If just marked completed, prompt for exam password
+                                        if (e.target.checked) {
+                                          setExamPwdModal({ open: true, courseId: course._id, courseName: course.name, password: '', loading: false });
+                                        }
                                       }}
                                       className="sr-only"
                                     />
@@ -1587,6 +1593,74 @@ const StudentForm = () => {
                   className="w-full h-full"
                 />
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Exam Password Modal */}
+      {examPwdModal.open && editingStudent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl border border-gray-200 w-full max-w-md p-5">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold">Set Exam Password</h3>
+              <button className="text-gray-500 hover:text-gray-700" onClick={() => setExamPwdModal({ open: false, courseId: null, courseName: '', password: '', loading: false })}>×</button>
+            </div>
+            <div className="space-y-3">
+              <div className="text-sm text-gray-700">
+                Course: <b>{examPwdModal.courseName}</b>
+              </div>
+              <label className="block text-sm font-medium text-gray-700 mb-1"><Lock size={14} className="inline mr-1" /> Exam Password</label>
+              <input
+                type="text"
+                value={examPwdModal.password}
+                onChange={e => setExamPwdModal(prev => ({ ...prev, password: e.target.value }))}
+                className="w-full px-3 py-2 border rounded"
+                placeholder="Enter or generate a password"
+              />
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  className="px-3 py-2 border rounded"
+                  onClick={() => {
+                    const pwd = Math.random().toString(36).slice(-8);
+                    setExamPwdModal(prev => ({ ...prev, password: pwd }));
+                  }}
+                >
+                  Generate
+                </button>
+                <button
+                  type="button"
+                  className="px-3 py-2 border rounded"
+                  onClick={() => navigator.clipboard && examPwdModal.password && navigator.clipboard.writeText(examPwdModal.password)}
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+            <div className="mt-5 flex items-center justify-end gap-2">
+              <button className="px-4 py-2 border rounded" onClick={() => setExamPwdModal({ open: false, courseId: null, courseName: '', password: '', loading: false })}>Skip</button>
+              <button
+                className="px-4 py-2 rounded bg-blue-600 text-white disabled:opacity-60"
+                disabled={!examPwdModal.password || examPwdModal.loading}
+                onClick={async () => {
+                  try {
+                    setExamPwdModal(prev => ({ ...prev, loading: true }));
+                    await api.post('/exams/admin/set-password', {
+                      studentId: editingStudent._id,
+                      courseId: examPwdModal.courseId,
+                      password: examPwdModal.password
+                    });
+                    toast.success('Exam password set');
+                    setExamPwdModal({ open: false, courseId: null, courseName: '', password: '', loading: false });
+                  } catch (e) {
+                    toast.error(e?.response?.data?.message || 'Failed to set exam password');
+                    setExamPwdModal(prev => ({ ...prev, loading: false }));
+                  }
+                }}
+              >
+                Save
+              </button>
             </div>
           </div>
         </div>

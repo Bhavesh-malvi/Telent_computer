@@ -7,6 +7,7 @@ import axios from 'axios';
 import { API_URL } from '../../config/api';
 import fallbackImg from '../../assets/img/course1.jpeg';
 import FilterSelect from '../../Components/UI/FilterSelect';
+import { StudentData } from '../../assets/assets';
 
 const CoursesMain = () => {
   const [courses, setCourses] = useState([]);
@@ -15,21 +16,43 @@ const CoursesMain = () => {
   const [selectedTitle, setSelectedTitle] = useState('All');
 
   const fetchCourses = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/api/studentcourses`);
-      // Map backend fields to match old UI usage
-      const mappedCourses = (res.data || []).map(course => ({
-        ...course,
-        title: course.name, // for UI compatibility
-        desc: course.description, // for UI compatibility
-      }));
-      setCourses(mappedCourses);
-    } catch (err) {
-      console.error('Error fetching courses:', err);
-      setCourses([]);
-    } finally {
-      setLoading(false);
-    }
+  setLoading(true);
+  scrollTo(0,0)
+
+  // Creates a promise that rejects after 2 seconds
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error("Request Timeout")), 2000)
+  );
+
+  try {
+    // Race between API request & timeout
+    const res = await Promise.race([
+      axios.get(`${API_URL}/api/studentcourses`),
+      timeoutPromise
+    ]);
+
+    const mappedCourses = (res.data || []).map(course => ({
+      ...course,
+      title: course.name,
+      desc: course.description,
+    }));
+
+    setCourses(mappedCourses);
+    console.log("✔ Live API running");
+
+  } catch (err) {
+    console.warn("⚠ Live API slow/failed, use fallback static data...", err);
+
+    const mappedFallback = (StudentData || []).map(course => ({
+      ...course,
+      title: course.name,
+      desc: course.description,
+    }));
+
+    setCourses(mappedFallback);
+  }finally {
+    setLoading(false);
+  }
   };
 
   useEffect(() => {
@@ -64,7 +87,7 @@ const CoursesMain = () => {
       <div>Loading...</div>
     ) : (
       <>
-      <div className="CoursesMainBanner">
+      <div className="CoursesMainBanner" >
         <div className="CoursesMainBanner__overlay">
           <div className="CoursesMainBanner__content">
             <h1>Powerful IT Courses & Programs</h1>

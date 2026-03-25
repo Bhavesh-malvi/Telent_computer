@@ -188,7 +188,7 @@ const Contact = () => {
         <div className="ContactBanner__overlay">
           <div className="ContactBanner__content">
             <h1>Explore Our Campuses</h1>
-            <p>We've strategically placed our campuses in nine bustling metropolitan areas across the U.S. Each location offers many opportunities for aspiring IT professionals, surrounded by thriving tech industries and vibrant communities.</p>
+            <p>Our campuses are strategically placed our campuses in nine bustling metropolitan areas across the U.S. Each location offers many opportunities for aspiring IT professionals, surrounded by thriving tech industries and vibrant communities.</p>
           </div>
         </div>
       </div>

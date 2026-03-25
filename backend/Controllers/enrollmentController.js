@@ -63,6 +63,8 @@ export const createEnrollment = async (req, res) => {
     });
 
     const savedEnrollment = await newEnrollment.save();
+
+    console.log(`[Enrollment Form] Entry saved for ${fullName}. Attempting to send Admin Email...`);
     
     // Send email to admin
     const emailSubject = `New Course Enrollment: ${course} by ${fullName}`;

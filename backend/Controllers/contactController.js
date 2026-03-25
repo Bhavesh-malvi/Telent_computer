@@ -13,6 +13,8 @@ export const createContact = async (req, res) => {
     });
 
     const savedContact = await newContact.save();
+
+    console.log(`[Contact Form] Entry saved for ${name}. Attempting to send Admin Email...`);
     
     // Send email to admin
     const emailSubject = `New Contact Form Submission from ${name}`;

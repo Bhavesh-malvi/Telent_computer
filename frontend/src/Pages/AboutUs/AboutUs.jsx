@@ -1,8 +1,15 @@
 import React from 'react'
 import './AboutUs.css'
 import AboutContent from '../../Components/AboutContent/AboutContent'
+import { useSEO } from '../../hooks/useSEO'
 
 const AboutUs = () => {
+  useSEO({
+    title: "About Us | Talent Computer Institute of Technology",
+    description: "Learn about our history, mission to empower students with industry-relevant IT skills, and why we are a trusted software academy in Vastral, Ahmedabad.",
+    keywords: "about tcit, talent computer institute history, software academy vastral"
+  });
+
   return (
     <>
       <div className="AboutUsBanner">

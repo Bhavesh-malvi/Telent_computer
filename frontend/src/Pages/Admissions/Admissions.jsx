@@ -2,6 +2,8 @@ import React from 'react';
 import './Admissions.css';
 import { Steps } from '../../assets/assets';
 import myCCImg from '../../assets/img/MyCC.png';
+import { useSEO } from '../../hooks/useSEO';
+
 
 // Define Steps array directly in the component
 
@@ -38,6 +40,12 @@ const AdmissionsSteps = () => (
 );
 
 const Admissions = () => {
+  useSEO({
+    title: "Admissions Open | Talent Computer Institute",
+    description: "Start your IT career journey today. Check our simple enrollment steps, course options and eligibility criteria for coding classes at TCIT.",
+    keywords: "tcit admissions, computer courses entry, join coding institute vastral"
+  });
+
   return (
     <>
       <div className="AdmissionsBanner">

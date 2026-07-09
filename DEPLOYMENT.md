@@ -65,3 +65,11 @@ After deployment:
 - Check browser console for CORS errors
 - Verify `VITE_API_URL` is set correctly
 - Ensure backend is running and accessible
+
+
+form Submit: {{form_type}}
+Naam: {{name}}
+Email: {{email}}
+Phone: {{phone}}
+Course: {{course}}
+Message: {{message}}

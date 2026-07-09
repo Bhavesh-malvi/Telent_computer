@@ -6,6 +6,8 @@ import mernImg from "../../assets/img/mern.jpg";
 import AIMLImg from "../../assets/img/AI ML.webp";
 import pythonImg from "../../assets/img/pythonfullstack.jpg";
 import "./Program.css";
+import { useSEO } from "../../hooks/useSEO";
+
 
 const programDetails = {
   mern: {
@@ -83,6 +85,15 @@ const Program = () => {
   const [form, setForm] = useState({ fullName: "", email: "", phone: "", course: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
+
+  const courseTitle = details?.title || "IT Training Course";
+  const firstDesc = details?.descriptions?.[0] || "Explore our IT course syllabus and career details.";
+
+  useSEO({
+    title: `${courseTitle} Training in Vastral | Talent Computer Institute`,
+    description: firstDesc.length > 157 ? firstDesc.substring(0, 157) + "..." : firstDesc,
+    keywords: `${courseTitle}, ${courseTitle} training, ${courseTitle} course vastral, tcit`
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

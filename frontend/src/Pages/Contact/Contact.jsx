@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { API_URL } from '../../config/api.js';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
+import { useSEO } from '../../hooks/useSEO';
+
 
 function useCountUp(to, duration = 1200) {
   const [count, setCount] = useState(0);
@@ -201,6 +203,12 @@ const ContactInfo = () => (
 );
 
 const Contact = () => {
+  useSEO({
+    title: "Contact Us | Talent Computer Institute Vastral",
+    description: "Visit our Vastral branch or head office in Ahmedabad. Get in touch for fee details, batch timings, or to book your free demo class at TCIT.",
+    keywords: "contact tcit, computer classes vastral contact, register free demo class"
+  });
+
   return (
     <>
       <div className="ContactBanner">

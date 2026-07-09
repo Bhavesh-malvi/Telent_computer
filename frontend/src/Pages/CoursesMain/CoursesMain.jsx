@@ -8,8 +8,15 @@ import { API_URL } from '../../config/api';
 import fallbackImg from '../../assets/img/course1.jpeg';
 import FilterSelect from '../../Components/UI/FilterSelect';
 import { StudentData } from '../../assets/assets';
+import { useSEO } from '../../hooks/useSEO';
 
 const CoursesMain = () => {
+  useSEO({
+    title: "IT & Coding Courses in Vastral | Talent Computer Institute",
+    description: "Explore our industry-demanded programming courses including Python Full Stack, MERN Stack web development, C, C++, Tally, and coding for kids.",
+    keywords: "it courses vastral, computer coding classes, software courses ahmedabad"
+  });
+
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
